@@ -55,7 +55,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Extellect.Utilities\Extellect.Utilities.csproj">
       <Project>{6B520D2B-C9E7-41CF-8E95-6CAD913592BD}</Project>
-      <Name>Extelligent.Utilities</Name>
+      <Name>Extellect.Utilities</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
