@@ -7,7 +7,7 @@ namespace Extellect.Utilities.Leasing
 {
     public class Lease : ILease
     {
-        private readonly ILog log = LogManager.GetLogger(typeof(Lease));
+        //private readonly ILog log = LogManager.GetLogger(typeof(Lease));
         private DateTime expires;
 
         public Lease()
