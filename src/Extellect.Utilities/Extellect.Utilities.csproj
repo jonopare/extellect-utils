@@ -50,9 +50,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Collections\BlockingQueue.cs" />
     <Compile Include="Collections\Dictionary2.cs" />
     <Compile Include="Diagnostics\MiniDump.cs" />
     <Compile Include="Diagnostics\MINIDUMP_TYPE.cs" />
+    <Compile Include="Sequencing\Identity.cs" />
     <Compile Include="Leasing\ILease.cs" />
     <Compile Include="Leasing\Leasable.cs" />
     <Compile Include="Leasing\Lease.cs" />
