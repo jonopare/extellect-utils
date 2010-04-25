@@ -7,7 +7,7 @@ using System.Threading;
 namespace Extellect.Utilities.Collections
 {
     /// <summary>
-    /// Implements a thread safe queue that blocks when attempting to read when 
+    /// Implements a thread safe queue that blocks if attempting to read when 
     /// empty or write when full.
     /// </summary>
     public class BlockingQueue<T>
@@ -35,7 +35,7 @@ namespace Extellect.Utilities.Collections
         }
 
         /// <summary>
-        /// Reads an item off the queue. If there are no items on the queue, this
+        /// Writes an item onto the queue. If the queue has reached capacity, this
         /// operation will block.
         /// </summary>
         public void Enqueue(T item)
@@ -55,7 +55,7 @@ namespace Extellect.Utilities.Collections
         }
 
         /// <summary>
-        /// Writes an item onto the queue. If the queue has reached capacity, this
+        /// Reads an item off the queue. If there are no items on the queue, this
         /// operation will block.
         /// </summary>
         public T Dequeue()
