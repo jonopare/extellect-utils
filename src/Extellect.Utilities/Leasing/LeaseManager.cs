@@ -26,7 +26,7 @@ namespace Extellect.Utilities.Leasing
             Add(key, value, null);
         }
 
-        public void Add(TKey key, TValue value, ExpiryAction<TValue> expiry)
+        public void Add(TKey key, TValue value, Action<TValue> expiry)
         {
             lock (items)
             {
