@@ -54,6 +54,8 @@
     <Compile Include="Collections\Dictionary2.cs" />
     <Compile Include="Diagnostics\MiniDump.cs" />
     <Compile Include="Diagnostics\MINIDUMP_TYPE.cs" />
+    <Compile Include="Execution\QueuedCallback.cs" />
+    <Compile Include="Execution\QueuedCallbackCommand.cs" />
     <Compile Include="Instrumentation\FailSafePerformanceCounter.cs" />
     <Compile Include="Instrumentation\FailSafePerformanceCounterFactory.cs" />
     <Compile Include="Instrumentation\IPerformanceCounter.cs" />
