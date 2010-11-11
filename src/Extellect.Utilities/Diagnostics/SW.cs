@@ -67,7 +67,7 @@ namespace Extellect.Utilities.Diagnostics
         {
             Items.Clear();
         }
-        public static string ToString()
+        public new static string ToString()
         {
             System.Text.StringBuilder temp = new System.Text.StringBuilder();
             foreach (var pair in Items)
