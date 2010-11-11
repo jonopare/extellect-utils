@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="Collections\BlockingQueue.cs" />
     <Compile Include="Collections\Dictionary2.cs" />
+    <Compile Include="Concurrency\Arbiter.cs" />
     <Compile Include="Diagnostics\MiniDump.cs" />
     <Compile Include="Diagnostics\MINIDUMP_TYPE.cs" />
     <Compile Include="Diagnostics\SW.cs" />
