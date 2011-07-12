@@ -52,7 +52,9 @@
   <ItemGroup>
     <Compile Include="Collections\BlockingQueue.cs" />
     <Compile Include="Collections\Dictionary2.cs" />
+    <Compile Include="Collections\Permutation.cs" />
     <Compile Include="Concurrency\Arbiter.cs" />
+    <Compile Include="Data\DataRecordExtensions.cs" />
     <Compile Include="Diagnostics\MiniDump.cs" />
     <Compile Include="Diagnostics\MINIDUMP_TYPE.cs" />
     <Compile Include="Diagnostics\SW.cs" />
@@ -62,6 +64,8 @@
     <Compile Include="Instrumentation\FailSafePerformanceCounterFactory.cs" />
     <Compile Include="Instrumentation\IPerformanceCounter.cs" />
     <Compile Include="Instrumentation\IPerformanceCounterFactory.cs" />
+    <Compile Include="IO\TemporaryFile.cs" />
+    <Compile Include="Remoting\Streamable.cs" />
     <Compile Include="Sequencing\Identity.cs" />
     <Compile Include="Leasing\ILease.cs" />
     <Compile Include="Leasing\Leasable.cs" />
