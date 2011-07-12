@@ -21,7 +21,7 @@ namespace Extellect.Utils.IO
             );
         }
 
-        protected void IDisposable.Dispose()
+        void IDisposable.Dispose()
         {
             File.Delete(path);
         }
