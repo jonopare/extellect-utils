@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="Collections\BlockingQueue.cs" />
     <Compile Include="Collections\Dictionary2.cs" />
+    <Compile Include="Collections\EnumerableExtensions.cs" />
     <Compile Include="Collections\Permutation.cs" />
     <Compile Include="Concurrency\Arbiter.cs" />
     <Compile Include="Data\DataRecordExtensions.cs" />
