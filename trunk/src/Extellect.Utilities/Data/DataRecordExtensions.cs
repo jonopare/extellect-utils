@@ -1,4 +1,5 @@
-﻿using System;
+﻿#pragma warning disable 1591
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -35,16 +36,34 @@ namespace Extellect.Utilities.Data
         #endregion
 
         #region Boolean
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dataRecord"></param>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public static bool GetBoolean(this IDataRecord dataRecord, string name)
         {
             return dataRecord.GetBoolean(dataRecord.GetOrdinal(name));
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dataRecord"></param>
+        /// <param name="i"></param>
+        /// <returns></returns>
         public static bool? GetBooleanNullable(this IDataRecord dataRecord, int i)
         {
             return dataRecord.IsDBNull(i) ? (bool?)null : dataRecord.GetBoolean(i);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dataRecord"></param>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public static bool? GetBooleanNullable(this IDataRecord dataRecord, string name)
         {
             return dataRecord.GetBooleanNullable(dataRecord.GetOrdinal(name));

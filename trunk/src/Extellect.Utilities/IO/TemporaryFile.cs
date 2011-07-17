@@ -9,10 +9,17 @@ using System.IO;
 
 namespace Extellect.Utils.IO
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class TemporaryFile : IDisposable
     {
         private readonly string path;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
         public TemporaryFile(string name)
         {
             path = Path.Combine(
@@ -21,11 +28,17 @@ namespace Extellect.Utils.IO
             );
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         void IDisposable.Dispose()
         {
             File.Delete(path);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public string FullName
         {
             get { return path; }
