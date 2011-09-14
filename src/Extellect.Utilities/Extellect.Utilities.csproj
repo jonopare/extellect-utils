@@ -55,6 +55,7 @@
     <Compile Include="Collections\EnumerableExtensions.cs" />
     <Compile Include="Collections\ImmutableBinaryTree.cs" />
     <Compile Include="Collections\Permutation.cs" />
+    <Compile Include="Collections\PriorityQueue.cs" />
     <Compile Include="Collections\Windowing.cs" />
     <Compile Include="Concurrency\Arbiter.cs" />
     <Compile Include="Data\DataRecordExtensions.cs" />

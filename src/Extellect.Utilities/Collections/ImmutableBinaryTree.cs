@@ -75,7 +75,7 @@ namespace Extellect.Utilities.Collections
         /// <summary>
         /// Creates a new balanced tree from a list of items.
         /// </summary>
-        public static ImmutableBinaryTree<T> CreateBalancedFrom<T>(List<T> items)
+        public static ImmutableBinaryTree<T> CreateBalancedFrom(List<T> items)
         {
             return CreateBalancedFrom(items, 0, items.Count - 1);
         }
@@ -83,7 +83,7 @@ namespace Extellect.Utilities.Collections
         /// <summary>
         /// Creates a new balanced subtree from a list of items.
         /// </summary>
-        private static ImmutableBinaryTree<T> CreateBalancedFrom<T>(List<T> items, int left, int right)
+        private static ImmutableBinaryTree<T> CreateBalancedFrom(List<T> items, int left, int right)
         {
             if (left > right)
             {
