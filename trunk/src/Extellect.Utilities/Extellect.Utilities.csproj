@@ -16,6 +16,8 @@
     </FileUpgradeFlags>
     <OldToolsVersion>3.5</OldToolsVersion>
     <UpgradeBackupLocation />
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkProfile />
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -28,10 +30,8 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -79,7 +79,10 @@
     <Compile Include="Collections\BlockingQueue.cs" />
     <Compile Include="Collections\Dictionary2.cs" />
     <Compile Include="Collections\EnumerableExtensions.cs" />
+    <Compile Include="Collections\IIndex.cs" />
     <Compile Include="Collections\ImmutableBinaryTree.cs" />
+    <Compile Include="Collections\UniqueSortedIndex.cs" />
+    <Compile Include="Collections\Indexable.cs" />
     <Compile Include="Collections\Permutation.cs" />
     <Compile Include="Collections\PriorityQueue.cs" />
     <Compile Include="Collections\Windowing.cs" />
