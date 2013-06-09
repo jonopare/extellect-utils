@@ -1,17 +1,17 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extellect.Utilities", "Extellect.Utilities\Extellect.Utilities.csproj", "{6B520D2B-C9E7-41CF-8E95-6CAD913592BD}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extellect.Utilities.Tests", "Extellect.Utilities.Tests\Extellect.Utilities.Tests.csproj", "{5912E216-7F5F-4B70-9853-E4209B8C445F}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extellect.Utilities.Tests.Unit", "Extellect.Utilities.Tests.Unit\Extellect.Utilities.Tests.Unit.csproj", "{14F65921-9AA4-4A56-B44E-03B8CED09492}"
-EndProject
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AB3BEB54-D0B7-4591-A8B6-B8E628DFA8B1}"
 	ProjectSection(SolutionItems) = preProject
 		Extellect.Utilities.vsmdi = Extellect.Utilities.vsmdi
 		LocalTestRun.testrunconfig = LocalTestRun.testrunconfig
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extellect.Utilities", "Extellect.Utilities\Extellect.Utilities.csproj", "{6B520D2B-C9E7-41CF-8E95-6CAD913592BD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extellect.Utilities.Tests", "Extellect.Utilities.Tests\Extellect.Utilities.Tests.csproj", "{5912E216-7F5F-4B70-9853-E4209B8C445F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extellect.Utilities.Tests.Unit", "Extellect.Utilities.Tests.Unit\Extellect.Utilities.Tests.Unit.csproj", "{14F65921-9AA4-4A56-B44E-03B8CED09492}"
 EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
