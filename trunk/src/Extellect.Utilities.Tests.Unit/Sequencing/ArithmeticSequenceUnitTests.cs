@@ -1,15 +1,16 @@
 ﻿using System;
+using System.Text;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Extellect.Utilities.Sequencing;
 
-namespace Extellect.Utilities.Sequencing
+namespace Extellect.Utilities.Tests.Unit.Sequencing
 {
-    [TestFixture]
+    [TestClass]
     public class ArithmeticSequenceTests
     {
-        [Test]
+       [TestMethod]
         public void PositiveAscendingInclusive()
         {
             int counter = 0;
@@ -21,7 +22,7 @@ namespace Extellect.Utilities.Sequencing
             Assert.AreEqual(5, counter);
         }
 
-        [Test]
+       [TestMethod]
         public void NegativeAscendingInclusive()
         {
             int counter = 0;
@@ -33,7 +34,7 @@ namespace Extellect.Utilities.Sequencing
             Assert.AreEqual(5, counter);
         }
 
-        [Test]
+       [TestMethod]
         public void PositiveDescendingInclusive()
         {
             int counter = 0;
@@ -45,7 +46,7 @@ namespace Extellect.Utilities.Sequencing
             Assert.AreEqual(5, counter);
         }
 
-        [Test]
+       [TestMethod]
         public void NegativeDecendingInclusive()
         {
             int counter = 0;

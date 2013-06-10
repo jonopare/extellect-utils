@@ -18,14 +18,27 @@ namespace Extellect.Utilities.Tests.Unit.Collections
         }
 
         [TestMethod]
-        public void TestMethod1()
+        public void CreateUniqueIndex_DistinctValues_AllowsRetrieval()
         {
             Indexable<TestItem> items = new Indexable<TestItem>();
             var byId = items.CreateUniqueIndex<int>(i => i.Id);
             var byCode = items.CreateUniqueIndex<string>(i => i.Code);
             items.Add(new TestItem { Id = 1, Code = "One", Description = "First" });
             items.Add(new TestItem { Id = 2, Code = "Two", Description = "Second" });
-            Console.WriteLine(byCode["One"].Description);
+            Assert.AreEqual("One", byId[1].Code);
+            Assert.AreEqual("Two", byId[2].Code);
+        }
+
+        [ExpectedException(typeof(ArgumentException))]
+        [TestMethod]
+        public void CreateUniqueIndex_NonDistinctValues_FailsAtInsertion()
+        {
+            Indexable<TestItem> items = new Indexable<TestItem>();
+            var byId = items.CreateUniqueIndex<int>(i => i.Id);
+            var byCode = items.CreateUniqueIndex<string>(i => i.Code);
+            items.Add(new TestItem { Id = 1, Code = "One", Description = "First" });
+            items.Add(new TestItem { Id = 2, Code = "One", Description = "Duplicate of first" });
+            // ^^ should fail at above line with message: "An entry with the same key already exists."
         }
     }
 }

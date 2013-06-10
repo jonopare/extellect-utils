@@ -69,6 +69,7 @@
     <Compile Include="Concurrency\ArbiterTests.cs" />
     <Compile Include="Polling\BackOffTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sequencing\ArithmeticSequenceUnitTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Extellect.Utilities\Extellect.Utilities.csproj">
