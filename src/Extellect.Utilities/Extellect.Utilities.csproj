@@ -81,6 +81,7 @@
     <Compile Include="Collections\EnumerableExtensions.cs" />
     <Compile Include="Collections\IIndex.cs" />
     <Compile Include="Collections\ImmutableBinaryTree.cs" />
+    <Compile Include="Collections\Pool.cs" />
     <Compile Include="Collections\UniqueSortedIndex.cs" />
     <Compile Include="Collections\Indexable.cs" />
     <Compile Include="Collections\Permutation.cs" />
