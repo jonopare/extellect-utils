@@ -62,6 +62,7 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -88,10 +89,13 @@
     <Compile Include="Collections\PriorityQueue.cs" />
     <Compile Include="Collections\Windowing.cs" />
     <Compile Include="Concurrency\Arbiter.cs" />
+    <Compile Include="Data\Csv.cs" />
     <Compile Include="Data\DataRecordExtensions.cs" />
     <Compile Include="Diagnostics\MiniDump.cs" />
     <Compile Include="Diagnostics\MINIDUMP_TYPE.cs" />
     <Compile Include="Diagnostics\SW.cs" />
+    <Compile Include="Drawing\Imaging\Ironbow.cs" />
+    <Compile Include="Drawing\Imaging\Rainbow.cs" />
     <Compile Include="Execution\QueuedCallback.cs" />
     <Compile Include="Execution\QueuedCallbackCommand.cs" />
     <Compile Include="Instrumentation\FailSafePerformanceCounter.cs" />
@@ -115,6 +119,7 @@
     <Compile Include="Sequencing\NextInSequence.cs" />
     <Compile Include="Streaming\IStreamServer.cs" />
     <Compile Include="Streaming\SimpleStreamServer.cs" />
+    <Compile Include="TimeServer.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
