@@ -63,6 +63,7 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Drawing" />
+    <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -117,6 +118,11 @@
     <Compile Include="Sequencing\ISequenceGenerator.cs" />
     <Compile Include="Sequencing\ListComprehension.cs" />
     <Compile Include="Sequencing\NextInSequence.cs" />
+    <Compile Include="Services\DebuggableService.cs" />
+    <Compile Include="Services\IService.cs" />
+    <Compile Include="Services\WindowsServiceAdaptor.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Streaming\IStreamServer.cs" />
     <Compile Include="Streaming\SimpleStreamServer.cs" />
     <Compile Include="TimeServer.cs" />
