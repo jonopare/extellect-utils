@@ -11,9 +11,14 @@ namespace Extellect.Utilities.Data
     /// </summary>
     public abstract class Csv
     {
+        private const char Separator = ',';
+        private const char Quote = '"';
+        private const char CarriageReturn = '\r';
+        private const char NewLine = '\n';
+
         private readonly char[] buffer;
         private int count;
-        
+
         /// <summary>
         /// Gets the string value of the current field.
         /// </summary>
@@ -95,12 +100,12 @@ namespace Extellect.Utilities.Data
             c = next();
             switch (c)
             {
-                case ',':
+                case Csv.Separator:
                     DoEndOfField();
                     count = 0;
                     Column++;
                     goto Separator;
-                case '"':
+                case Csv.Quote:
                     goto QuotedField;
                 case -1:
                     DoEndOfField();
@@ -109,14 +114,14 @@ namespace Extellect.Utilities.Data
                     Column = 0;
                     Row++;
                     goto Exit;
-                case '\n':
+                case Csv.NewLine:
                     DoEndOfField();
                     count = 0;
                     DoEndOfLine();
                     Column = 0;
                     Row++;
                     goto Separator;
-                case '\r':
+                case Csv.CarriageReturn:
                     goto CarriageReturn;
                 default:
                     buffer[count++] = (char)c;
@@ -126,7 +131,7 @@ namespace Extellect.Utilities.Data
             c = next();
             switch (c)
             {
-                case ',':
+                case Csv.Separator:
                     DoEndOfField();
                     count = 0;
                     Column++;
@@ -138,14 +143,14 @@ namespace Extellect.Utilities.Data
                     Column = 0;
                     Row++;
                     goto Exit;
-                case '\n':
+                case Csv.NewLine:
                     DoEndOfField();
                     count = 0;
                     DoEndOfLine();
                     Column = 0;
                     Row++;
                     goto Separator;
-                case '\r':
+                case Csv.CarriageReturn:
                     goto CarriageReturn;
                 default:
                     buffer[count++] = (char)c;
@@ -155,7 +160,7 @@ namespace Extellect.Utilities.Data
             c = next();
             switch (c)
             {
-                case '"':
+                case Csv.Quote:
                     goto QuoteInQuotedField;
                 case -1:
                     throw new FormatException("Found EOF inside quoted field");
@@ -167,10 +172,10 @@ namespace Extellect.Utilities.Data
             c = next();
             switch (c)
             {
-                case '"':
+                case Csv.Quote:
                     buffer[count++] = (char)c;
                     goto QuotedField;
-                case ',':
+                case Csv.Separator:
                     DoEndOfField();
                     count = 0;
                     Column++;
@@ -182,21 +187,21 @@ namespace Extellect.Utilities.Data
                     Column = 0;
                     Row++;
                     goto Exit;
-                case '\n':
+                case Csv.NewLine:
                     DoEndOfField();
                     count = 0;
                     DoEndOfLine();
                     Column = 0;
                     Row++;
                     goto Separator;
-                case '\r':
+                case Csv.CarriageReturn:
                     goto CarriageReturn;
                 default:
                     throw new FormatException(string.Format("Found unexpected character '\\u{0:x4}' after quote in quoted field at position {1}. Only allowed characters are another quote, comma, EOL or EOF.", c, Position));
             }
         CarriageReturn:
             c = next();
-            if (c != '\n')
+            if (c != Csv.NewLine)
             {
                 throw new FormatException(string.Format("Found unexpected character '\\u{0:x4}' after carriage return at position {1}. Only allowed character is line feed.", c, Position));
             }
@@ -219,3 +224,4 @@ namespace Extellect.Utilities.Data
         }
     }
 }
+
