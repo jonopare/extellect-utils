@@ -9,15 +9,15 @@ namespace Extellect.Utilities.Data
     /// Subclasses add behaviour that will be invoked after each field or new line, and could also
     /// add their own buffers to allow random access to fields within a row.
     /// </summary>
-    public abstract class Csv
+    public abstract class CsvBase
     {
         private const char Separator = ',';
         private const char Quote = '"';
         private const char CarriageReturn = '\r';
         private const char NewLine = '\n';
 
-        private readonly char[] buffer;
-        private int count;
+        private readonly char[] outbuf;
+        private int outbufcount;
 
         /// <summary>
         /// Gets the string value of the current field.
@@ -26,7 +26,7 @@ namespace Extellect.Utilities.Data
         {
             get
             {
-                return new string(buffer, 0, count);
+                return new string(outbuf, 0, outbufcount);
             }
         }
 
@@ -53,8 +53,8 @@ namespace Extellect.Utilities.Data
         /// <summary>
         /// Creates a new Csv object with the default maximum single output field capacity.
         /// </summary>
-        public Csv()
-            : this(2 * 1024)
+        public CsvBase()
+            : this(8 * 1024)
         {
         }
 
@@ -62,151 +62,176 @@ namespace Extellect.Utilities.Data
         /// Creates a new Csv object.
         /// </summary>
         /// <param name="fieldCapacity">The maximum size of a single output field in the CSV.</param>
-        public Csv(int fieldCapacity)
+        public CsvBase(int fieldCapacity)
         {
-            this.buffer = new char[fieldCapacity];
+            this.outbuf = new char[fieldCapacity];
         }
 
         /// <summary>
-        /// Processes the input entirely.
+        /// Reads the specified CSV stream. The abstract methods DoEndOfField and DoEndOfLine
+        /// are invoked at the appropriate points in the stream. You should override these two 
+        /// methods in a derived class to make use of the CSV reader.
         /// </summary>
-        /// <param name="csv"></param>
-        public void Read(IEnumerable<char> csv)
-        {
-            count = Row = Column = 0;
-            var e = csv.GetEnumerator();
-            Process(() => e.MoveNext() ? e.Current : -1);
-        }
-
-        /// <summary>
-        /// Processes the input entirely.
-        /// </summary>
-        /// <param name="csv"></param>
-        public void Read(TextReader csv)
-        {
-            count = Row = Column = 0;
-            Process(csv.Read);
-        }
-
-        /// <summary>
+        /// <remarks>
         /// Implementation of CSV state machine that uses aggressive inlining and jumps between
         /// goto statements for performance reasons.
-        /// </summary>
-        /// <param name="next">A function that returns the next character or -1 at the end of the stream.</param>
-        private void Process(Func<int> next)
+        /// </remarks>
+        /// <param name="csv">A TextReader that contains CSV formatted data.</param>
+        public void Read(TextReader csv)
         {
-            int c;
+            outbufcount = Row = Column = 0;
+            var inbuf = new char[8 * 1024];
+            var inbufcount = -1;
+            var inbufpos = 0;
+            char c;
         Separator:
-            c = next();
-            switch (c)
+            if (inbufpos >= inbufcount)
             {
-                case Csv.Separator:
+                inbufcount = csv.Read(inbuf, 0, inbuf.Length);
+                if (inbufcount == 0)
+                {
                     DoEndOfField();
-                    count = 0;
-                    Column++;
-                    goto Separator;
-                case Csv.Quote:
-                    goto QuotedField;
-                case -1:
-                    DoEndOfField();
-                    count = 0;
+                    outbufcount = 0;
                     DoEndOfLine();
                     Column = 0;
                     Row++;
                     goto Exit;
-                case Csv.NewLine:
+                }
+                inbufpos = 0;
+            }
+            c = inbuf[inbufpos++];
+            switch (c)
+            {
+                case CsvBase.Separator:
                     DoEndOfField();
-                    count = 0;
+                    outbufcount = 0;
+                    Column++;
+                    goto Separator;
+                case CsvBase.Quote:
+                    goto QuotedField;
+                case CsvBase.NewLine:
+                    DoEndOfField();
+                    outbufcount = 0;
                     DoEndOfLine();
                     Column = 0;
                     Row++;
                     goto Separator;
-                case Csv.CarriageReturn:
+                case CsvBase.CarriageReturn:
                     goto CarriageReturn;
                 default:
-                    buffer[count++] = (char)c;
+                    outbuf[outbufcount++] = c;
                     goto Field;
             }
         Field:
-            c = next();
-            switch (c)
+            if (inbufpos >= inbufcount)
             {
-                case Csv.Separator:
+                inbufcount = csv.Read(inbuf, 0, inbuf.Length);
+                if (inbufcount == 0)
+                {
                     DoEndOfField();
-                    count = 0;
-                    Column++;
-                    goto Separator;
-                case -1:
-                    DoEndOfField();
-                    count = 0;
+                    outbufcount = 0;
                     DoEndOfLine();
                     Column = 0;
                     Row++;
                     goto Exit;
-                case Csv.NewLine:
+                }
+                inbufpos = 0;
+            }
+            c = inbuf[inbufpos++];
+            switch (c)
+            {
+                case CsvBase.Separator:
                     DoEndOfField();
-                    count = 0;
+                    outbufcount = 0;
+                    Column++;
+                    goto Separator;
+                case CsvBase.NewLine:
+                    DoEndOfField();
+                    outbufcount = 0;
                     DoEndOfLine();
                     Column = 0;
                     Row++;
                     goto Separator;
-                case Csv.CarriageReturn:
+                case CsvBase.CarriageReturn:
                     goto CarriageReturn;
                 default:
-                    buffer[count++] = (char)c;
+                    outbuf[outbufcount++] = c;
                     goto Field;
             }
         QuotedField:
-            c = next();
+            if (inbufpos >= inbufcount)
+            {
+                inbufcount = csv.Read(inbuf, 0, inbuf.Length);
+                if (inbufcount == 0)
+                {
+                    throw new FormatException("Found EOF inside quoted field");
+                }
+                inbufpos = 0;
+            }
+            c = inbuf[inbufpos++];
             switch (c)
             {
-                case Csv.Quote:
+                case CsvBase.Quote:
                     goto QuoteInQuotedField;
-                case -1:
-                    throw new FormatException("Found EOF inside quoted field");
                 default:
-                    buffer[count++] = (char)c;
+                    outbuf[outbufcount++] = c;
                     goto QuotedField;
             }
         QuoteInQuotedField:
-            c = next();
-            switch (c)
+            if (inbufpos >= inbufcount)
             {
-                case Csv.Quote:
-                    buffer[count++] = (char)c;
-                    goto QuotedField;
-                case Csv.Separator:
+                inbufcount = csv.Read(inbuf, 0, inbuf.Length);
+                if (inbufcount == 0)
+                {
                     DoEndOfField();
-                    count = 0;
-                    Column++;
-                    goto Separator;
-                case -1:
-                    DoEndOfField();
-                    count = 0;
+                    outbufcount = 0;
                     DoEndOfLine();
                     Column = 0;
                     Row++;
                     goto Exit;
-                case Csv.NewLine:
+                }
+                inbufpos = 0;
+            }
+            c = inbuf[inbufpos++];
+            switch (c)
+            {
+                case CsvBase.Quote:
+                    outbuf[outbufcount++] = c;
+                    goto QuotedField;
+                case CsvBase.Separator:
                     DoEndOfField();
-                    count = 0;
+                    outbufcount = 0;
+                    Column++;
+                    goto Separator;
+                case CsvBase.NewLine:
+                    DoEndOfField();
+                    outbufcount = 0;
                     DoEndOfLine();
                     Column = 0;
                     Row++;
                     goto Separator;
-                case Csv.CarriageReturn:
+                case CsvBase.CarriageReturn:
                     goto CarriageReturn;
                 default:
                     throw new FormatException(string.Format("Found unexpected character '\\u{0:x4}' after quote in quoted field at position {1}. Only allowed characters are another quote, comma, EOL or EOF.", c, Position));
             }
         CarriageReturn:
-            c = next();
-            if (c != Csv.NewLine)
+            if (inbufpos >= inbufcount)
+            {
+                inbufcount = csv.Read(inbuf, 0, inbuf.Length);
+                if (inbufcount == 0)
+                {
+                    throw new FormatException("Found EOF after carriage return.");
+                }
+                inbufpos = 0;
+            }
+            c = inbuf[inbufpos++];
+            if (c != CsvBase.NewLine)
             {
                 throw new FormatException(string.Format("Found unexpected character '\\u{0:x4}' after carriage return at position {1}. Only allowed character is line feed.", c, Position));
             }
             DoEndOfField();
-            count = 0;
+            outbufcount = 0;
             DoEndOfLine();
             Column = 0;
             Row++;
