@@ -90,7 +90,8 @@
     <Compile Include="Collections\PriorityQueue.cs" />
     <Compile Include="Collections\Windowing.cs" />
     <Compile Include="Concurrency\Arbiter.cs" />
-    <Compile Include="Data\Csv.cs" />
+    <Compile Include="Data\CsvBase.cs" />
+    <Compile Include="Data\CsvReader.cs" />
     <Compile Include="Data\DataRecordExtensions.cs" />
     <Compile Include="Diagnostics\MiniDump.cs" />
     <Compile Include="Diagnostics\MINIDUMP_TYPE.cs" />
@@ -118,9 +119,8 @@
     <Compile Include="Sequencing\ISequenceGenerator.cs" />
     <Compile Include="Sequencing\ListComprehension.cs" />
     <Compile Include="Sequencing\NextInSequence.cs" />
-    <Compile Include="Services\DebuggableService.cs" />
-    <Compile Include="Services\IService.cs" />
-    <Compile Include="Services\WindowsServiceAdaptor.cs">
+    <Compile Include="Services\AdditionalTimeEventArgs.cs" />
+    <Compile Include="Services\ConsoleServiceBase.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Streaming\IStreamServer.cs" />
