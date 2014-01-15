@@ -93,6 +93,7 @@
     <Compile Include="Data\CsvBase.cs" />
     <Compile Include="Data\CsvReader.cs" />
     <Compile Include="Data\DataRecordExtensions.cs" />
+    <Compile Include="Data\IdentityJoinBase.cs" />
     <Compile Include="Diagnostics\MiniDump.cs" />
     <Compile Include="Diagnostics\MINIDUMP_TYPE.cs" />
     <Compile Include="Diagnostics\SW.cs" />
