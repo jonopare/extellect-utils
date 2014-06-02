@@ -26,6 +26,9 @@ namespace Extellect.Utilities.Collections
 
         private int available;
 
+        /// <summary>
+        /// Constructs a new pool.
+        /// </summary>
         public Pool(Func<T> activate, Action<T> passivate, int capacity, TimeSpan keepAlive)
         {
             this.activate = activate;
@@ -39,16 +42,17 @@ namespace Extellect.Utilities.Collections
             available = capacity;
         }
 
+        /// <summary>
+        /// Gets the potential maximum size of this pool.
+        /// </summary>
         public int Capacity
         {
             get { return capacity; }
         }
 
         /// <summary>
+        /// Attempts to acquire an object from the pool within the specified time limit.
         /// </summary>
-        /// <param name="timeout"></param>
-        /// <param name="item"></param>
-        /// <returns></returns>
         public bool TryAcquire(TimeSpan timeout, out T item)
         {
             DateTime end = DateTime.UtcNow + timeout;
@@ -98,6 +102,9 @@ namespace Extellect.Utilities.Collections
             }
         }
 
+        /// <summary>
+        /// Releases an item previously acquired from the pool.
+        /// </summary>
         public void Release(T item)
         {
             lock (leases)
@@ -128,7 +135,12 @@ namespace Extellect.Utilities.Collections
             }
         }
 
-        public void Dispose()
+        void IDisposable.Dispose()
+        {
+            Dispose(true);
+        }
+
+        private void Dispose(bool disposing)
         {
             lock (leases)
             {

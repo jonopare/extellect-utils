@@ -7,6 +7,9 @@ using System.Drawing;
 
 namespace Extellect.Utilities.Drawing.Imaging
 {
+    /// <summary>
+    /// Collection of colors from a Rainbow palette (similar to some infrared cameras)
+    /// </summary>
     public static class Rainbow
     {
         private readonly static Color[] colors = new Color[]
@@ -269,6 +272,9 @@ namespace Extellect.Utilities.Drawing.Imaging
             Color.FromArgb(255,255,255),
         };
 
+        /// <summary>
+        /// Loads a color palette with these entries.
+        /// </summary>
         public static void Load(ColorPalette colorPalette)
         {
             for (int i = 0; i < colors.Length; i++)
@@ -277,6 +283,9 @@ namespace Extellect.Utilities.Drawing.Imaging
             }
         }
 
+        /// <summary>
+        /// Gets the color at the specified index
+        /// </summary>
         public static Color GetColorAt(byte index)
         {
             return colors[index];

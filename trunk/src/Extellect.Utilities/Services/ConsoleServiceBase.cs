@@ -1,4 +1,5 @@
-﻿using System;
+﻿#pragma warning disable 1591
+using System;
 using System.ServiceProcess;
 using System.ComponentModel;
 
@@ -82,8 +83,14 @@ namespace Extellect.Utilities.Services
         #endregion
 
         #region Implementation of members from System.ServiceProcess.ServiceBase
+        /// <summary>
+        /// The maximum length of a service name is 80 characters
+        /// </summary>
         public const int MaxNameLength = 80;
 
+        /// <summary>
+        /// Gets or sets the name of this service.
+        /// </summary>
         public string ServiceName { get; set; }
 
         public bool AutoLog { get; set; }
@@ -114,6 +121,9 @@ namespace Extellect.Utilities.Services
 
         protected virtual void OnStop() { }
 
+        /// <summary>
+        /// Raises an event to all subscribers that additional time (usually to stop) has been requested.
+        /// </summary>
         public void RequestAdditionalTime(int milliseconds)
         {
             var additionalTimeRequested = AdditionalTimeRequested;
