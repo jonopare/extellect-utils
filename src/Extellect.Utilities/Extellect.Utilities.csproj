@@ -43,6 +43,7 @@
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Debug\Extellect.Utilities.xml</DocumentationFile>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -77,7 +78,9 @@
     <Compile Include="CLI\ArgumentAttribute.cs" />
     <Compile Include="CLI\ArgumentParser.cs" />
     <Compile Include="CLI\Arguments.cs" />
+    <Compile Include="CLI\ArgumentValidationException.cs" />
     <Compile Include="CLI\IArguments.cs" />
+    <Compile Include="Clock.cs" />
     <Compile Include="Collections\BlockingQueue.cs" />
     <Compile Include="Collections\Dictionary2.cs" />
     <Compile Include="Collections\EnumerableExtensions.cs" />
@@ -101,6 +104,7 @@
     <Compile Include="Drawing\Imaging\Rainbow.cs" />
     <Compile Include="Execution\QueuedCallback.cs" />
     <Compile Include="Execution\QueuedCallbackCommand.cs" />
+    <Compile Include="IClock.cs" />
     <Compile Include="Instrumentation\FailSafePerformanceCounter.cs" />
     <Compile Include="Instrumentation\FailSafePerformanceCounterFactory.cs" />
     <Compile Include="Instrumentation\IPerformanceCounter.cs" />
@@ -126,7 +130,6 @@
     </Compile>
     <Compile Include="Streaming\IStreamServer.cs" />
     <Compile Include="Streaming\SimpleStreamServer.cs" />
-    <Compile Include="TimeServer.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

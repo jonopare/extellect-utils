@@ -52,11 +52,6 @@ namespace Extellect.Utilities.Data
         protected abstract void DoEndOfField();
 
         /// <summary>
-        /// Allows derived classes to provide behaviour that will be invoked at the end of each line.
-        /// </summary>
-        //protected abstract void DoEndOfLine();
-
-        /// <summary>
         /// Creates a new Csv object with the default maximum single output field capacity.
         /// </summary>
         public CsvReader(TextReader csv)
@@ -67,7 +62,6 @@ namespace Extellect.Utilities.Data
         /// <summary>
         /// Creates a new Csv object.
         /// </summary>
-        /// <param name="fieldCapacity">The maximum size of a single output field in the CSV.</param>
         public CsvReader(TextReader csv, int fieldCapacity)
         {
             this.csv = csv;
@@ -89,7 +83,6 @@ namespace Extellect.Utilities.Data
         /// Implementation of CSV state machine that uses aggressive inlining and jumps between
         /// goto statements for performance reasons.
         /// </remarks>
-        /// <param name="csv">A TextReader that contains CSV formatted data.</param>
         public bool Read()
         {
             Column = 0;
@@ -240,7 +233,7 @@ namespace Extellect.Utilities.Data
             }
         }
 
-        public void Dispose()
+        void IDisposable.Dispose()
         {
             if (csv != null)
             {

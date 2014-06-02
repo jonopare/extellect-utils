@@ -5,7 +5,7 @@ using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Extellect.Utilities.Collections;
 
-namespace Extellect.Utilities.Tests.Unit.Collections
+namespace Extellect.Utilities.Collections
 {
     /// <summary>
     /// Summary description for PriorityQueueTests

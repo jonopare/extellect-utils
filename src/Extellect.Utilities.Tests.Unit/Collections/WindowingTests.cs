@@ -6,7 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Extellect.Utilities.Collections;
 using System.IO;
 
-namespace Extellect.Utilities.Tests.Unit.Collections
+namespace Extellect.Utilities.Collections
 {
     [TestClass]
     public class WindowingTests
