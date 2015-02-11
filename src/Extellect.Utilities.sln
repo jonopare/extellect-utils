@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extellect.Utilities", "Exte
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extellect.Utilities.UnitTests", "Extellect.Utilities.Tests.Unit\Extellect.Utilities.UnitTests.csproj", "{14F65921-9AA4-4A56-B44E-03B8CED09492}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extellect.Utilities.Sql", "Extellect.Utilities.Sql\Extellect.Utilities.Sql.csproj", "{66526CFC-EE8B-47BE-B676-AB42F047F009}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{14F65921-9AA4-4A56-B44E-03B8CED09492}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{14F65921-9AA4-4A56-B44E-03B8CED09492}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{14F65921-9AA4-4A56-B44E-03B8CED09492}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66526CFC-EE8B-47BE-B676-AB42F047F009}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66526CFC-EE8B-47BE-B676-AB42F047F009}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66526CFC-EE8B-47BE-B676-AB42F047F009}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66526CFC-EE8B-47BE-B676-AB42F047F009}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
