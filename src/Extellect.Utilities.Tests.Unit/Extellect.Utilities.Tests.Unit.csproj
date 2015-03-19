@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{14F65921-9AA4-4A56-B44E-03B8CED09492}</ProjectGuid>
+    <ProjectGuid>{C4E29619-E574-4125-8328-466F03D3216A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Extellect.Utilities.Tests.Unit</RootNamespace>
