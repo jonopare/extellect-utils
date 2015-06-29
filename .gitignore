@@ -1,1 +1,7 @@
 *.trx
+*.suo
+*.user
+bin
+obj
+packages
+TestResults
