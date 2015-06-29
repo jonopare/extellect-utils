@@ -79,7 +79,12 @@
     <Compile Include="CLI\ArgumentParser.cs" />
     <Compile Include="CLI\Arguments.cs" />
     <Compile Include="CLI\ArgumentValidationException.cs" />
+    <Compile Include="CLI\ConsoleControl.cs" />
+    <Compile Include="CLI\ConsoleCtrlHandler.cs" />
+    <Compile Include="CLI\ControlEventArgs.cs" />
+    <Compile Include="CLI\CtrlTypes.cs" />
     <Compile Include="CLI\IArguments.cs" />
+    <Compile Include="CLI\IConsoleControl.cs" />
     <Compile Include="Clock.cs" />
     <Compile Include="Collections\BlockingQueue.cs" />
     <Compile Include="Collections\Dictionary2.cs" />
@@ -110,6 +115,11 @@
     <Compile Include="Instrumentation\IPerformanceCounter.cs" />
     <Compile Include="Instrumentation\IPerformanceCounterFactory.cs" />
     <Compile Include="IO\TemporaryFile.cs" />
+    <Compile Include="Logging\LogHelper.cs" />
+    <Compile Include="NativeMethods.cs" />
+    <Compile Include="Net\CookieAwareWebClient.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Remoting\Streamable.cs" />
     <Compile Include="Sequencing\Identity.cs" />
     <Compile Include="Leasing\ILease.cs" />

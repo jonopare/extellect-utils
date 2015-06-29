@@ -7,7 +7,7 @@ using System.Diagnostics;
 using System.IO.Compression;
 using System.IO;
 
-namespace Extellect.Utils.IO
+namespace Extellect.Utilities.IO
 {
     /// <summary>
     /// 

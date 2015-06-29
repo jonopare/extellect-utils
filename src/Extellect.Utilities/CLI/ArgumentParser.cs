@@ -131,20 +131,15 @@ namespace Extellect.Utilities.CLI
             foreach (var arg in args.Select(a => Parse(a, validationErrorCallback)).Where(p => p.Key != null))
             {
                 Tuple<PropertyInfo, ArgumentAttribute, bool> found;
-                if (!lookup.TryGetValue(arg.Key, out found))
+                if (!lookup.TryGetValue(arg.Key, out found) && !arguments.IgnoreUnknown)
                 {
-                    if (!arguments.IgnoreUnknown)
-                    {
-                        Unknown(validationErrorCallback, arg.Key, arg.Value);
-                    }
+                    Unknown(validationErrorCallback, arg.Key, arg.Value);
                 }
-                else
+                ConvertAndSetValue(arguments, found.Item1, arg.Value);
+
+                if (required.ContainsKey(arg.Key))
                 {
-                    ConvertAndSetValue(arguments, found.Item1, arg.Value);
-                    if (required.ContainsKey(arg.Key))
-                    {
-                        required.Remove(arg.Key);
-                    }
+                    required.Remove(arg.Key);
                 }
             }
 
