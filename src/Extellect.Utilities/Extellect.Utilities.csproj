@@ -105,6 +105,7 @@
     <Compile Include="Data\CsvBase.cs" />
     <Compile Include="Data\CsvReader.cs" />
     <Compile Include="Data\DataRecordExtensions.cs" />
+    <Compile Include="Data\EPPlusExtensions.cs" />
     <Compile Include="Data\ExcelLoader.cs" />
     <Compile Include="Data\IdentityJoinBase.cs" />
     <Compile Include="Data\ILoader.cs" />
