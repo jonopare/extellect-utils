@@ -107,6 +107,7 @@
     <Compile Include="Data\DataRecordExtensions.cs" />
     <Compile Include="Data\EPPlusExtensions.cs" />
     <Compile Include="Data\ExcelLoader.cs" />
+    <Compile Include="Data\FileDataReader.cs" />
     <Compile Include="Data\IdentityJoinBase.cs" />
     <Compile Include="Data\ILoader.cs" />
     <Compile Include="Diagnostics\MiniDump.cs" />
