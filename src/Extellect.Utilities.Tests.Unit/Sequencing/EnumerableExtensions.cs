@@ -25,7 +25,7 @@ namespace Extellect.Utilities.Sequencing
         /// </summary>
         public static double StandardDeviation(this IEnumerable<double> items)
         {
-            return Math.Sqrt(items.Variance());
+            return System.Math.Sqrt(items.Variance());
         }
 
         /// <summary>

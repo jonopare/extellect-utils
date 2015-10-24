@@ -101,6 +101,7 @@
     <Compile Include="Collections\EnumerableExtensions.cs" />
     <Compile Include="Collections\IIndex.cs" />
     <Compile Include="Collections\ImmutableBinaryTree.cs" />
+    <Compile Include="Collections\Plane.cs" />
     <Compile Include="Collections\Pool.cs" />
     <Compile Include="Collections\UniqueSortedIndex.cs" />
     <Compile Include="Collections\Indexable.cs" />
@@ -132,6 +133,8 @@
     <Compile Include="Instrumentation\IPerformanceCounterFactory.cs" />
     <Compile Include="IO\TemporaryFile.cs" />
     <Compile Include="Logging\LogHelper.cs" />
+    <Compile Include="Math\LinearEquation.cs" />
+    <Compile Include="Math\Matrix.cs" />
     <Compile Include="NativeMethods.cs" />
     <Compile Include="Net\CookieAwareWebClient.cs">
       <SubType>Component</SubType>

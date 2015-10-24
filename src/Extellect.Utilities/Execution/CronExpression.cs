@@ -365,13 +365,13 @@ namespace Extellect.Utilities
             var minuteIndex = Array.BinarySearch(_expandedMinutes, start.Minute);
             if (minuteIndex < 0)
             {
-                minuteIndex = Math.Min(~minuteIndex, _expandedMinutes.Length - 1);
+                minuteIndex = System.Math.Min(~minuteIndex, _expandedMinutes.Length - 1);
             }
 
             var hourIndex = Array.BinarySearch(_expandedHours, start.Hour);
             if (hourIndex < 0)
             {
-                hourIndex = Math.Min(~hourIndex, _expandedHours.Length - 1); 
+                hourIndex = System.Math.Min(~hourIndex, _expandedHours.Length - 1); 
             }
 
             // TODO: some kind of efficiency with days too?
@@ -379,7 +379,7 @@ namespace Extellect.Utilities
             var monthIndex = Array.BinarySearch(_expandedMonths, start.Month);
             if (monthIndex < 0)
             {
-                monthIndex = Math.Min(~monthIndex, _expandedHours.Length - 1);
+                monthIndex = System.Math.Min(~monthIndex, _expandedHours.Length - 1);
             }
 
             // start at the first firing of the year

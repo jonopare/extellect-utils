@@ -29,7 +29,7 @@ namespace Extellect.Utilities.Streaming
             {
                 stream.Seek(position, SeekOrigin.Begin);
             }
-            byte[] buffer = new byte[Math.Min(length, 64 * 1024)];
+            byte[] buffer = new byte[System.Math.Min(length, 64 * 1024)];
             Array.Resize(ref buffer, stream.Read(buffer, 0, buffer.Length));
             return buffer;
         }
