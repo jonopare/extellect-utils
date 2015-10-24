@@ -12,7 +12,7 @@ namespace Extellect.Utilities.Data
     /// </summary>
     public class FileDataReader : IDataReader
     {
-        private IEnumerator<string> enumerator;
+        private IEnumerator<string[]> csvReader;
         private int fieldCount;
         private string[] textFields;
         private object[] fields;
@@ -25,13 +25,12 @@ namespace Extellect.Utilities.Data
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="path"></param>
+        /// <param name="csvReader"></param>
         /// <param name="fileOrdinals">A map of column names to ordinal position in the CSV input</param>
         /// <param name="other">A map of column names to functions that can execute and return data that is not from any of the CSV fields</param>
-        public FileDataReader(string path, Dictionary<string, int> fileOrdinals, Dictionary<string, Func<object>> other)
+        public FileDataReader(IEnumerable<string[]> csvReader, Dictionary<string, int> fileOrdinals, Dictionary<string, Func<object>> other)
         {
-            enumerator = File.ReadLines(path).GetEnumerator();
-
+            this.csvReader = csvReader.GetEnumerator();
 
             this.fileOrdinals = fileOrdinals;
             this.other = other;
@@ -39,10 +38,6 @@ namespace Extellect.Utilities.Data
             firstFunctionOrdinal = fileOrdinals.Max(x => x.Value) + 1;
 
             this.fieldCount = firstFunctionOrdinal + other.Count;
-
-            //Func<string, int> getOrdinal, Func<int, object> getValue
-            //this.getOrdinal = getOrdinal;
-            //this.getValue = getValue;
         }
 
         /// <summary>
@@ -93,10 +88,10 @@ namespace Extellect.Utilities.Data
         /// <returns></returns>
         public bool Read()
         {
-            var result = enumerator.MoveNext();
+            var result = csvReader.MoveNext();
             if (result)
             {
-                textFields = enumerator.Current.Split(',').Select(x => x.Trim()).ToArray();
+                fields = csvReader.Current;
             }
             else
             {
@@ -119,7 +114,7 @@ namespace Extellect.Utilities.Data
         /// </summary>
         public void Dispose()
         {
-            enumerator.Dispose();
+            //csvReader.Dispose();
         }
 
         /// <summary>

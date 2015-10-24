@@ -8,6 +8,9 @@ namespace Extellect.Utilities.Data
     /// Encapsulates the logic required to read comma separated values in a forward-only direction.
     /// Subclasses add behaviour that will be invoked after each field or new line, and could also
     /// add their own buffers to allow random access to fields within a row.
+    /// It's take the firehose approach and invokes callbacks at the appropriate points in the stream.
+    /// A different approach might be required to maintain a state machine that could progress through 
+    /// a stream at the caller's pace.
     /// </summary>
     public abstract class CsvBase
     {

@@ -22,7 +22,7 @@ namespace Extellect.Utilities.Polling
     /// </summary>
     public class BackOff
     {
-        private readonly Action<TimeSpan> wait;
+        private readonly IBlockable waiter;
         private readonly TimeSpan initialWait;
         private readonly TimeSpan maxWait;
         private TimeSpan currentWait;
@@ -31,7 +31,7 @@ namespace Extellect.Utilities.Polling
         /// Constructs a new BackOff object.
         /// </summary>
         public BackOff(TimeSpan initialWait, TimeSpan maxWait)
-            : this (initialWait, maxWait, currentWait => Thread.Sleep(currentWait))
+            : this(initialWait, maxWait, new ThreadSleepBlock())
         {   
         }
 
@@ -41,11 +41,11 @@ namespace Extellect.Utilities.Polling
         /// be useful if you don't want to use Thread.Sleep, which is the default 
         /// implementation.
         /// </summary>
-        public BackOff(TimeSpan initialWait, TimeSpan maxWait, Action<TimeSpan> wait)
+        public BackOff(TimeSpan initialWait, TimeSpan maxWait, IBlockable waiter)
         {
             this.initialWait = initialWait;
             this.maxWait = maxWait;
-            this.wait = wait;
+            this.waiter = waiter;
             Reset();
         }
 
@@ -62,7 +62,7 @@ namespace Extellect.Utilities.Polling
         /// </summary>
         public void Wait()
         {
-            wait(currentWait);
+            waiter.Block(currentWait);
             if (currentWait < maxWait)
             {
                 currentWait += currentWait;

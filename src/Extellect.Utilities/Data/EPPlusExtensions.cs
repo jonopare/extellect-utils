@@ -20,7 +20,7 @@ namespace Extellect.Utilities.Data
         /// <param name="address"></param>
         /// <param name="transpose"></param>
         /// <returns></returns>
-        public static IEnumerable<T> Load<T>(this ExcelWorksheet sheet, string address, bool transpose = false) where T : new()
+        public static IEnumerable<T> Load<T>(this ExcelWorksheet sheet, string address = null, bool transpose = false) where T : new()
         {
             var range = address == null ? sheet.Dimension : new ExcelAddress(address);
 

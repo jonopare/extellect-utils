@@ -59,9 +59,9 @@
       <HintPath>..\packages\EPPlus.4.0.4\lib\net20\EPPlus.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\log4net\log4net.dll</HintPath>
+    <Reference Include="log4net, Version=1.2.13.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
@@ -79,6 +79,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\SolutionInfo.cs">
+      <Link>Properties\SolutionInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\SolutionVersionInfo.cs">
+      <Link>Properties\SolutionVersionInfo.cs</Link>
+    </Compile>
     <Compile Include="CLI\ArgumentAttribute.cs" />
     <Compile Include="CLI\ArgumentParser.cs" />
     <Compile Include="CLI\Arguments.cs" />
@@ -110,6 +116,7 @@
     <Compile Include="Data\FileDataReader.cs" />
     <Compile Include="Data\IdentityJoinBase.cs" />
     <Compile Include="Data\ILoader.cs" />
+    <Compile Include="Data\ObjectDataReader.cs" />
     <Compile Include="Diagnostics\MiniDump.cs" />
     <Compile Include="Diagnostics\MINIDUMP_TYPE.cs" />
     <Compile Include="Diagnostics\SW.cs" />
@@ -129,7 +136,11 @@
     <Compile Include="Net\CookieAwareWebClient.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Polling\IBlockable.cs" />
+    <Compile Include="Polling\ThreadSleepBlock.cs" />
+    <Compile Include="Polling\ManyBlock.cs" />
     <Compile Include="Remoting\Streamable.cs" />
+    <Compile Include="Sequencing\EnumerableExtensions.cs" />
     <Compile Include="Sequencing\Identity.cs" />
     <Compile Include="Leasing\ILease.cs" />
     <Compile Include="Leasing\Leasable.cs" />
@@ -142,6 +153,7 @@
     <Compile Include="Sequencing\GenericSequenceGenerator.cs" />
     <Compile Include="Sequencing\ISequenceGenerator.cs" />
     <Compile Include="Sequencing\ListComprehension.cs" />
+    <Compile Include="Sequencing\MultiDimensionCounter.cs" />
     <Compile Include="Sequencing\NextInSequence.cs" />
     <Compile Include="Services\AdditionalTimeEventArgs.cs" />
     <Compile Include="Services\ConsoleServiceBase.cs">

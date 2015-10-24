@@ -37,7 +37,7 @@ namespace Extellect.Utilities.Data
                 package = new ExcelPackage(stream);
                 try
                 {
-                    index = package.Workbook.Worksheets["Index"].Load<Index>("A1", false).ToDictionary(x => x.TableName, x => x.SheetName);
+                    index = package.Workbook.Worksheets["Index"].Load<Index>().ToDictionary(x => x.TableName, x => x.SheetName);
                 }
                 catch
                 {
@@ -61,7 +61,7 @@ namespace Extellect.Utilities.Data
         /// <param name="startAddress"></param>
         /// <param name="transpose"></param>
         /// <returns></returns>
-        public ICollection<T> Load<T>(string tableName = null, string startAddress = "A1", bool transpose = false) where T : new()
+        public ICollection<T> Load<T>(string tableName = null, string startAddress = null, bool transpose = false) where T : new()
         {
             return package.Workbook.Worksheets[index[tableName ?? typeof(T).Name]].Load<T>(startAddress, transpose).ToArray();
         }

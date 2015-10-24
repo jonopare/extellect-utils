@@ -11,6 +11,16 @@ namespace Extellect.Utilities.Net
         private readonly CookieContainer m_container = new CookieContainer();
 
         /// <summary>
+        /// Gets or sets the timeout for getting the response or the request stream.
+        /// </summary>
+        public TimeSpan? RequestTimeout { get; set; }
+
+        /// <summary>
+        /// Gets or sets the timeout for reading from (or writing to) a stream.
+        /// </summary>
+        public TimeSpan? RequestReadWriteTimeout { get; set; }
+
+        /// <summary>
         /// Not called by your code... it's internal to the class
         /// </summary>
         protected override WebRequest GetWebRequest(Uri address)
@@ -20,6 +30,14 @@ namespace Extellect.Utilities.Net
             if (webRequest != null)
             {
                 webRequest.CookieContainer = m_container;
+                if (RequestTimeout.HasValue)
+                {
+                    webRequest.Timeout = (int)RequestTimeout.Value.TotalMilliseconds;
+                }
+                if (RequestReadWriteTimeout.HasValue)
+                {
+                    webRequest.ReadWriteTimeout = (int)RequestReadWriteTimeout.Value.TotalMilliseconds;
+                }
             }
             return request;
         }
