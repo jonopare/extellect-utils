@@ -73,6 +73,88 @@ namespace Extellect.Utilities.Math
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        public double Determinant
+        {
+            get
+            {
+                if (M != N)
+                    throw new InvalidOperationException();
+                if (M == 2)
+                    return data[0, 0] * data[1, 1] - data[0, 1] * data[1, 0];
+                else if (M == 3)
+                    return data[0, 0] * Minor(0, 0).Determinant
+                        - data[0, 1] * Minor(0, 1).Determinant
+                        + data[0, 2] * Minor(0, 2).Determinant;
+                else
+                    throw new NotSupportedException();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Matrix Minor(int i, int j)
+        {
+            if (i < 0 || i >= M)
+                throw new ArgumentOutOfRangeException("i");
+            if (j < 0 || j >= N)
+                throw new ArgumentOutOfRangeException("j");
+
+            var data = new double[M - 1, N - 1];
+
+            for (var m = 0; m < M - 1; m++)
+            {
+                for (var n = 0; n < N - 1; n++)
+                {
+                    data[m, n] = this.data[m + (m >= i ? 1 : 0), n + (n >= j ? 1 : 0)];
+                }
+            }
+
+            return new Matrix(data, false);
+        }
+
+        /// <summary>
+        /// Gets the transpose of this matrix
+        /// </summary>
+        public Matrix Transpose()
+        {
+            var data = new double[N, M];
+            for (var m = 0; m < M; m++)
+            {
+                for (var n = 0; n < N; n++)
+                {
+                    data[n, m] = this.data[m, n];
+                }
+            }
+
+            return new Matrix(data, false);
+        }
+
+        /// <summary>
+        /// Adds another matrix to this matrix. Both matrices must have the same dimensions.
+        /// </summary>
+        public bool TryAdd(Matrix other, out Matrix matrix)
+        {
+            matrix = null;
+            if (M != other.M || N != other.N)
+                return false;
+
+            matrix = new Matrix(this.data, true);
+
+            for (var m = 0; m < M; m++)
+            {
+                for (var n = 0; n < N; n++)
+                {
+                    matrix[m, n] += other[m, n];
+                }
+            }
+
+            return true;
+        }
+
+        /// <summary>
         /// Tries to multiply two matrices. Returns true if the matrices can be multiplied; otherwise false.
         /// </summary>
         public bool TryMultiply(Matrix other, out Matrix matrix)
