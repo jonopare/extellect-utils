@@ -126,6 +126,7 @@
     <Compile Include="Execution\CronExpression.cs" />
     <Compile Include="Execution\QueuedCallback.cs" />
     <Compile Include="Execution\QueuedCallbackCommand.cs" />
+    <Compile Include="Execution\Retryable.cs" />
     <Compile Include="IClock.cs" />
     <Compile Include="Instrumentation\FailSafePerformanceCounter.cs" />
     <Compile Include="Instrumentation\FailSafePerformanceCounterFactory.cs" />
