@@ -66,7 +66,7 @@ namespace Extellect.Utilities.Polling
             expectedWaits.Add(maxWait);
             backOff.Wait();
 
-            Assertion.AreSequenceEqual(fakeBlock.ActualWaits, expectedWaits).Assert();
+            AssertionHelper.AreSequenceEqual(fakeBlock.ActualWaits, expectedWaits);
         }
     }
 }

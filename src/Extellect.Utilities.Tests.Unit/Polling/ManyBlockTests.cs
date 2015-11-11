@@ -21,7 +21,7 @@ namespace Extellect.Utilities.Polling
 
             testClock.UtcNow = DateTime.UtcNow;
             many.Block(TimeSpan.FromSeconds(0.5));
-            Assertion.AreSequenceEqual(fake.ActualWaits, new[] { TimeSpan.FromSeconds(0.5) }).Assert();
+            AssertionHelper.AreSequenceEqual(fake.ActualWaits, new[] { TimeSpan.FromSeconds(0.5) });
         }
 
         [TestMethod]
@@ -36,7 +36,7 @@ namespace Extellect.Utilities.Polling
 
             testClock.UtcNow = DateTime.UtcNow;
             many.Block(TimeSpan.FromSeconds(2.5));
-            Assertion.AreSequenceEqual(fake.ActualWaits, new[] { TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(0.5) }).Assert();
+            AssertionHelper.AreSequenceEqual(fake.ActualWaits, new[] { TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(0.5) });
         }
     }
 }

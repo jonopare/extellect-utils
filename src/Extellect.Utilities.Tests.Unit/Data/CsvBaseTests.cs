@@ -54,7 +54,7 @@ namespace Extellect.Utilities.Data
                 CsvEvents.EndOfField /*empty*/, CsvEvents.EndOfLine
             };
 
-            Assertion.AreSequenceEqual(csv.EventHistory, expected).Assert();
+            AssertionHelper.AreSequenceEqual(csv.EventHistory, expected);
         }
     }
 }
