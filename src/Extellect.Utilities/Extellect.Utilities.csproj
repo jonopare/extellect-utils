@@ -140,6 +140,7 @@
     <Compile Include="Drawing\Imaging\Ironbow.cs" />
     <Compile Include="Drawing\Imaging\Rainbow.cs" />
     <Compile Include="Execution\CronExpression.cs" />
+    <Compile Include="Execution\MapReduce.cs" />
     <Compile Include="Execution\QueuedCallback.cs" />
     <Compile Include="Execution\QueuedCallbackCommand.cs" />
     <Compile Include="Execution\Retryable.cs" />

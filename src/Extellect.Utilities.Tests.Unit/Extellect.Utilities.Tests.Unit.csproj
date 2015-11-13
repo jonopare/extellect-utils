@@ -70,6 +70,7 @@
     <Compile Include="Concurrency\ArbiterTests.cs" />
     <Compile Include="Data\CsvBaseTests.cs" />
     <Compile Include="Data\FileDataReaderTests.cs" />
+    <Compile Include="Execution\MapReduceFixture.cs" />
     <Compile Include="Execution\RetryableFixture.cs" />
     <Compile Include="Math\LinearEquationFixture.cs" />
     <Compile Include="Math\MatrixFixture.cs" />
