@@ -79,7 +79,7 @@
     <Compile Include="Polling\ManyBlockTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sequencing\ArithmeticSequenceUnitTests.cs" />
-    <Compile Include="Sequencing\EnumerableExtensions.cs" />
+    <Compile Include="Sequencing\EnumerableExtensionsFixture.cs" />
     <Compile Include="TestClock.cs" />
     <Compile Include="TestData.cs" />
   </ItemGroup>

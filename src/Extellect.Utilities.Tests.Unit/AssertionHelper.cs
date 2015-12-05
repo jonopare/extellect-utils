@@ -8,13 +8,13 @@ namespace Extellect.Utilities
 {
     public class AssertionHelper
     {
-        public static void AreSequenceEqual<T>(IEnumerable<T> actual, IEnumerable<T> expected)
+        public static void AreSequenceEqual<T>(IEnumerable<T> expected, IEnumerable<T> actual)
         {
-            using (var actualEnumerator = actual.GetEnumerator())
             using (var expectedEnumerator = expected.GetEnumerator())
+            using (var actualEnumerator = actual.GetEnumerator())
             {
-                var actualMoveNext = actualEnumerator.MoveNext();
                 var expectedMoveNext = expectedEnumerator.MoveNext();
+                var actualMoveNext = actualEnumerator.MoveNext();
 
                 int i = 0;
 
@@ -25,8 +25,8 @@ namespace Extellect.Utilities
                         Assert.Fail(string.Format("Sequences differ at index {0}. Actual: {1}. Expected: {2}", i, actualEnumerator.Current, expectedEnumerator.Current));
                     }
 
-                    actualMoveNext = actualEnumerator.MoveNext();
                     expectedMoveNext = expectedEnumerator.MoveNext();
+                    actualMoveNext = actualEnumerator.MoveNext();
 
                     i++;
                 }

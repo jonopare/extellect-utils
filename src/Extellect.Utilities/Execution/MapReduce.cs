@@ -27,13 +27,9 @@ namespace Extellect.Utilities.Execution
         /// </summary>
         protected abstract KeyValuePair<TKey, TOutput> Reduce(KeyValuePair<TKey, IEnumerable<TOutput>> intermediate);
 
-        /// <summary>
-        /// TODO: rewrite it to be asynchronous without using C# 5.0
-        /// </summary>
-        public Task Run(IEnumerable<TInput> inputs, Action<KeyValuePair<TKey, TOutput>> result)
+        private Task<IEnumerable<KeyValuePair<TKey, List<TOutput>>>> MapPhase(IEnumerable<TInput> inputs)
         {
-            var mapPhase = new TaskCompletionSource<bool>();
-
+            var mapPhase = new TaskCompletionSource<IEnumerable<KeyValuePair<TKey, List<TOutput>>>>();
             var intermediates = new Dictionary<TKey, List<TOutput>>();
             foreach (var input in inputs)
             {
@@ -47,11 +43,24 @@ namespace Extellect.Utilities.Execution
                     values.Add(intermediate.Value);
                 }
             }
+            mapPhase.SetResult(intermediates);
+            return mapPhase.Task;
+        }
 
-            mapPhase.SetResult(true);
+        //private Task<bool> ReducePhase(Action<KeyValuePair<TKey, TOutput>> result)
+        //{
+            
+        //}
 
-            return mapPhase.Task.ContinueWith(_ =>
+        /// <summary>
+        /// TODO: rewrite it to be asynchronous without using C# 5.0
+        /// </summary>
+        public Task Run(IEnumerable<TInput> inputs, Action<KeyValuePair<TKey, TOutput>> result)
+        {
+            return MapPhase(inputs).ContinueWith(_ =>
             {
+                var intermediates = _.Result;
+
                 var reducePhase = new TaskCompletionSource<bool>();
 
                 foreach (var intermediate in intermediates)
