@@ -81,7 +81,6 @@
     <Compile Include="Sequencing\ArithmeticSequenceUnitTests.cs" />
     <Compile Include="Sequencing\EnumerableExtensionsFixture.cs" />
     <Compile Include="TestClock.cs" />
-    <Compile Include="TestData.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Extellect.Utilities\Extellect.Utilities.csproj">

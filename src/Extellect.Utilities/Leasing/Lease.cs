@@ -23,12 +23,12 @@ namespace Extellect.Utilities.Leasing
 
         public void Renew(TimeSpan amount)
         {
-            expires = DateTime.UtcNow.Add(amount);
+            expires = Clock.UtcNow.Add(amount);
         }
 
         public bool IsExpired
         {
-            get { return expires < DateTime.UtcNow; }
+            get { return expires < Clock.UtcNow; }
         }
     }
 }
