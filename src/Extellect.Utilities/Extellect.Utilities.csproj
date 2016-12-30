@@ -121,12 +121,16 @@
     <Compile Include="Collections\PriorityQueue.cs" />
     <Compile Include="Collections\Windowing.cs" />
     <Compile Include="Concurrency\Arbiter.cs" />
+    <Compile Include="Data\ObjectReader.cs" />
     <Compile Include="Data\CsvBase.cs" />
     <Compile Include="Data\CsvReader.cs" />
     <Compile Include="Data\DataRecordExtensions.cs" />
     <Compile Include="Data\FileDataReader.cs" />
+    <Compile Include="Data\IBinaryReader.cs" />
+    <Compile Include="Data\IBinaryWriter.cs" />
     <Compile Include="Data\IdentityJoinBase.cs" />
     <Compile Include="Data\ObjectDataReader.cs" />
+    <Compile Include="Data\ObjectWriter.cs" />
     <Compile Include="Diagnostics\MiniDump.cs" />
     <Compile Include="Diagnostics\MINIDUMP_TYPE.cs" />
     <Compile Include="Diagnostics\SW.cs" />
@@ -152,6 +156,7 @@
     <Compile Include="Net\CookieAwareWebClient.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Net\SocketExtensions.cs" />
     <Compile Include="Polling\IBlockable.cs" />
     <Compile Include="Polling\ThreadSleepBlock.cs" />
     <Compile Include="Polling\ManyBlock.cs" />
