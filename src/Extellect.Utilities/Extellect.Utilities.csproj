@@ -110,6 +110,7 @@
     <Compile Include="Clock.cs" />
     <Compile Include="Collections\BlockingQueue.cs" />
     <Compile Include="Collections\Dictionary2.cs" />
+    <Compile Include="Collections\DictionaryExtensions.cs" />
     <Compile Include="Collections\EnumerableExtensions.cs" />
     <Compile Include="Collections\IIndex.cs" />
     <Compile Include="Collections\ImmutableBinaryTree.cs" />

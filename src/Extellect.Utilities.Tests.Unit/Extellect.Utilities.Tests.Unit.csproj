@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssertionHelper.cs" />
+    <Compile Include="Collections\DictionaryExtensionsFixture.cs" />
     <Compile Include="Collections\IndexableTests.cs" />
     <Compile Include="Collections\PermutationTests.cs" />
     <Compile Include="Collections\PriorityQueueTests.cs" />
