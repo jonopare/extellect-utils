@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
+using System.Linq;
 
 namespace Extellect.Utilities.Diagnostics
 {
@@ -30,6 +32,7 @@ namespace Extellect.Utilities.Diagnostics
         private class SWMeasure : IDisposable
         {
             private string key;
+
             public SWMeasure(string key)
             {
                 this.key = key;
@@ -55,6 +58,7 @@ namespace Extellect.Utilities.Diagnostics
                 items[key].Start();
             }
         }
+
         public static void Stop(string key)
         {
             var items = Items;
@@ -63,22 +67,15 @@ namespace Extellect.Utilities.Diagnostics
                 items[key].Stop();
             }
         }
+        
         public static void Clear()
         {
             Items.Clear();
         }
-        public new static string ToString()
+
+        public static IEnumerable<string> Write(TextWriter textWriter)
         {
-            System.Text.StringBuilder temp = new System.Text.StringBuilder();
-            foreach (var pair in Items)
-            {
-                if (temp.Length > 0)
-                {
-                    temp.AppendLine();
-                }
-                temp.AppendFormat("{0} took {1} ms", pair.Key, pair.Value.ElapsedMilliseconds);
-            }
-            return temp.ToString();
+            return Items.Select(pair => string.Format("{0} took {1} ms", pair.Key, pair.Value.ElapsedMilliseconds));
         }
     }
 }
