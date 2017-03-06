@@ -7,20 +7,23 @@ using System.Linq;
 
 namespace Extellect.Utilities.Diagnostics
 {
+    /// <summary>
+    /// Thread-safe-(ish?) string-keyed stopwatches for non-interrupting timing. Use the Items iterator once completed to read back the logs.
+    /// </summary>
     public class SW
     {
         [ThreadStatic]
-        private static Dictionary<string, Stopwatch> _items;
+        private static Dictionary<string, Stopwatch> _stopwatchesByKey;
 
-        private static Dictionary<string, Stopwatch> Items
+        private static Dictionary<string, Stopwatch> StopwatchesByKey
         {
             get
             {
-                if (_items == null)
+                if (_stopwatchesByKey == null)
                 {
-                    _items = new Dictionary<string, Stopwatch>();
+                    _stopwatchesByKey = new Dictionary<string, Stopwatch>();
                 }
-                return _items;
+                return _stopwatchesByKey;
             }
         }
 
@@ -31,24 +34,23 @@ namespace Extellect.Utilities.Diagnostics
 
         private class SWMeasure : IDisposable
         {
-            private string key;
+            private readonly string _key;
 
             public SWMeasure(string key)
             {
-                this.key = key;
+                _key = key;
                 Start(key);
             }
 
             public void Dispose()
             {
-                Stop(key);
-                key = null;
+                Stop(_key);
             }
         }
 
         public static void Start(string key)
         {
-            var items = Items;
+            var items = StopwatchesByKey;
             if (!items.ContainsKey(key))
             {
                 items.Add(key, Stopwatch.StartNew());
@@ -61,7 +63,7 @@ namespace Extellect.Utilities.Diagnostics
 
         public static void Stop(string key)
         {
-            var items = Items;
+            var items = StopwatchesByKey;
             if (items.ContainsKey(key))
             {
                 items[key].Stop();
@@ -70,12 +72,9 @@ namespace Extellect.Utilities.Diagnostics
         
         public static void Clear()
         {
-            Items.Clear();
+            StopwatchesByKey.Clear();
         }
 
-        public static IEnumerable<string> Write(TextWriter textWriter)
-        {
-            return Items.Select(pair => string.Format("{0} took {1} ms", pair.Key, pair.Value.ElapsedMilliseconds));
-        }
+        public static IEnumerable<string> Items => StopwatchesByKey.Select(pair => string.Format("{0} took {1:#,##0} ms", pair.Key, pair.Value.ElapsedMilliseconds));
     }
 }
