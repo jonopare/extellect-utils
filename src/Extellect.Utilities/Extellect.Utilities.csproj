@@ -95,6 +95,10 @@
     <Compile Include="..\SolutionVersionInfo.cs">
       <Link>Properties\SolutionVersionInfo.cs</Link>
     </Compile>
+    <Compile Include="Caching\ICacheEntry.cs" />
+    <Compile Include="Caching\CacheEntry.cs" />
+    <Compile Include="Caching\CacheEntryFactory.cs" />
+    <Compile Include="Caching\ICacheEntryFactory.cs" />
     <Compile Include="CLI\ArgumentAttribute.cs" />
     <Compile Include="CLI\ArgumentParser.cs" />
     <Compile Include="CLI\Arguments.cs" />

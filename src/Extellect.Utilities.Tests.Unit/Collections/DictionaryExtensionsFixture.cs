@@ -42,5 +42,25 @@ namespace Extellect.Utilities.Collections
             Assert.AreEqual(3, value);
             Assert.AreEqual(3, _dictionary[key]);
         }
+
+        [TestMethod]
+        public void GetValueOrDefault_KeyFound()
+        {
+            var key = "b";
+
+            var value = _dictionary.GetValueOrDefault(key, () => 5);
+
+            Assert.AreEqual(2, value);
+        }
+
+        [TestMethod]
+        public void GetValueOrDefault_KeyNotFound()
+        {
+            var key = "c";
+
+            var value = _dictionary.GetValueOrDefault(key, () => 5);
+
+            Assert.AreEqual(5, value);
+        }
     }
 }

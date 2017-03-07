@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extellect.Utilities", "Exte
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extellect.Utilities.Tests.Unit", "Extellect.Utilities.Tests.Unit\Extellect.Utilities.Tests.Unit.csproj", "{C4D0AF53-69FE-4B81-ACDA-20D368133845}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{07B12758-D12A-41C6-BE50-4B1FFAD18B23}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,5 +28,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C4D0AF53-69FE-4B81-ACDA-20D368133845} = {07B12758-D12A-41C6-BE50-4B1FFAD18B23}
 	EndGlobalSection
 EndGlobal
