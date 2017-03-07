@@ -33,11 +33,16 @@ namespace Extellect.Utilities.Collections
         public static TValue GetValueOrDefault<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key, Func<TValue> defaultValue)
         {
             TValue value;
-            if (!dictionary.TryGetValue(key, out value))
-            {
-                value = defaultValue();
-            }
-            return value;
+            return dictionary.TryGetValue(key, out value) ? value : defaultValue();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static TValue GetValueOrDefault<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key, TValue defaultValue)
+        {
+            TValue value;
+            return dictionary.TryGetValue(key, out value) ? value : defaultValue;
         }
     }
 }

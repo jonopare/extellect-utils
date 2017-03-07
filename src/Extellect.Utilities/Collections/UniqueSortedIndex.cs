@@ -31,9 +31,7 @@ namespace Extellect.Utilities.Collections
         public bool Contains(TValue item)
         {
             return data.ContainsKey(KeySelector(item));
-        }
-
-        
+        }        
 
         public void CopyTo(TValue[] array, int arrayIndex)
         {

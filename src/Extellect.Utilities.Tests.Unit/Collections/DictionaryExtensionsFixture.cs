@@ -48,17 +48,27 @@ namespace Extellect.Utilities.Collections
         {
             var key = "b";
 
-            var value = _dictionary.GetValueOrDefault(key, () => 5);
+            var value = _dictionary.GetValueOrDefault(key, () => { Assert.Fail(); return 0; });
 
             Assert.AreEqual(2, value);
         }
 
         [TestMethod]
-        public void GetValueOrDefault_KeyNotFound()
+        public void GetValueOrDefault_KeyNotFound_FactoryMethod()
         {
             var key = "c";
 
             var value = _dictionary.GetValueOrDefault(key, () => 5);
+
+            Assert.AreEqual(5, value);
+        }
+
+        [TestMethod]
+        public void GetValueOrDefault_KeyNotFound_Value()
+        {
+            var key = "c";
+
+            var value = _dictionary.GetValueOrDefault(key, 5);
 
             Assert.AreEqual(5, value);
         }
