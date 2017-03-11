@@ -152,6 +152,7 @@
     <Compile Include="Instrumentation\IPerformanceCounterFactory.cs" />
     <Compile Include="IO\TemporaryFile.cs" />
     <Compile Include="IO\ThrottledFileSystemWatcher.cs" />
+    <Compile Include="LambdaEqualityComparer.cs" />
     <Compile Include="Logging\LogHelper.cs" />
     <Compile Include="Math\LinearEquation.cs" />
     <Compile Include="Math\Matrix.cs" />
@@ -205,6 +206,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="SystemTypes\SystemTypes.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>SystemTypes.txt</LastGenOutput>
+    </Content>
+    <Content Include="SystemTypes\SystemTypes.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SystemTypes.tt</DependentUpon>
+    </Content>
+    <Content Include="SystemTypes\SystemTypes.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

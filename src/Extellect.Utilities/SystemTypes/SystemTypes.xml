@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<types>
+  <type name="System.IO.FileInfo">
+    <using namespace="System" />
+    <using namespace="System.IO" />
+  </type>
+  <type name="System.IO.DirectoryInfo">
+    <using namespace="System" />
+    <using namespace="System.IO" />
+  </type>
+  <type name="System.IO.DriveInfo">
+    <using namespace="System" />
+    <using namespace="System.IO" />
+  </type>
+  <type name="System.Diagnostics.PerformanceCounter">
+    <!-- TODO: ensure that Types from Diagnostics can be loaded by T4 -->
+    <using namespace="System" />
+    <using namespace="System.Diagnostics" />
+  </type>
+</types>

@@ -9,6 +9,7 @@ namespace Extellect.Utilities.Polling
     internal class TestBlock : IBlockable
     {
         internal TestClock Clock { get; set; }
+
         public List<TimeSpan> ActualWaits { get; private set; }
 
         public TestBlock()

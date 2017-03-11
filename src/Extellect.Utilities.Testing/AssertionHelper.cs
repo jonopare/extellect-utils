@@ -8,6 +8,24 @@ namespace Extellect.Utilities
 {
     public class AssertionHelper
     {
+        public static void ArePropertiesEqual<T>(T expected, T actual, PropertyComparison<T> propertyComparison)
+        {
+            var result = propertyComparison.AreEqual(expected, actual);
+            if (!result.Success)
+            {
+                Assert.Fail($"Property values differ at {result.PropertyName}. Actual: {result.Actual}. Expected: {result.Expected}");
+            }
+        }
+
+        public static void ArePropertiesNotEqual<T>(T expected, T actual, PropertyComparison<T> propertyComparison)
+        {
+            var result = propertyComparison.AreEqual(expected, actual);
+            if (result.Success)
+            {
+                Assert.Fail($"Property values differ at {result.PropertyName}. Actual: {result.Actual}. Expected: {result.Expected}");
+            }
+        }
+
         public static void AreSequenceEqual<T>(IEnumerable<T> expected, IEnumerable<T> actual)
         {
             using (var expectedEnumerator = expected.GetEnumerator())

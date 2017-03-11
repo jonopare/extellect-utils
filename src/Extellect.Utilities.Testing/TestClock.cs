@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Extellect.Utilities
 {
-    internal class TestClock : IClock
+    public class TestClock : IClock
     {
         public DateTime Now { get { return UtcNow.ToLocalTime(); } }
 
