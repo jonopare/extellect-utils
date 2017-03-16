@@ -8,27 +8,20 @@ namespace Extellect.Utilities
     /// <summary>
     /// Abstracts access to DateTime.Now and DateTime.UtcNow.
     /// Create your own IClock and assign it to Current in order
-    /// to allow an application to use a different clock.
+    /// to allow an application to use a different clock in the
+    /// ambient context (but think about the risks first) or 
+    /// just inject an IClock dependency into classes that
+    /// require one.
     /// </summary>
     public class Clock
     {
-        /// <summary>
-        /// Default type returned by Current
-        /// </summary>
-        private class DateTimeClock : IClock
+        private static IClock _current;
+
+        static Clock()
         {
-            public DateTime Now
-            {
-                get { return DateTime.Now; }
-            }
-
-            public DateTime UtcNow
-            {
-                get { return DateTime.UtcNow; }
-            }
+            Default = new DateTimeClock();
+            Current = Default;
         }
-
-        private static IClock current;
 
         /// <summary>
         /// Current clock stored in ambient context (appdomain). 
@@ -37,7 +30,7 @@ namespace Extellect.Utilities
         {
             get
             {
-                return current;
+                return _current;
             }
             set
             {
@@ -45,14 +38,14 @@ namespace Extellect.Utilities
                 {
                     throw new ArgumentNullException("value");
                 }
-                current = value;
+                _current = value;
             }
         }
 
-        static Clock()
-        {
-            Current = new DateTimeClock();
-        }
+        /// <summary>
+        /// Gets the default clock which is based on the DateTime class.
+        /// </summary>
+        public static IClock Default { get; }
 
         /// <summary>
         /// Gets the current local time.

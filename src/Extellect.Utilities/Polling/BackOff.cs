@@ -22,10 +22,10 @@ namespace Extellect.Utilities.Polling
     /// </summary>
     public class BackOff
     {
-        private readonly IBlockable waiter;
-        private readonly TimeSpan initialWait;
-        private readonly TimeSpan maxWait;
-        private TimeSpan currentWait;
+        private readonly IBlockable _waiter;
+        private readonly TimeSpan _initialWait;
+        private readonly TimeSpan _maxWait;
+        private TimeSpan _currentWait;
 
         /// <summary>
         /// Constructs a new BackOff object.
@@ -43,9 +43,9 @@ namespace Extellect.Utilities.Polling
         /// </summary>
         public BackOff(TimeSpan initialWait, TimeSpan maxWait, IBlockable waiter)
         {
-            this.initialWait = initialWait;
-            this.maxWait = maxWait;
-            this.waiter = waiter;
+            _initialWait = initialWait;
+            _maxWait = maxWait;
+            _waiter = waiter;
             Reset();
         }
 
@@ -54,7 +54,7 @@ namespace Extellect.Utilities.Polling
         /// </summary>
         public void Reset()
         {
-            currentWait = initialWait;
+            _currentWait = _initialWait;
         }
 
         /// <summary>
@@ -62,13 +62,13 @@ namespace Extellect.Utilities.Polling
         /// </summary>
         public void Wait()
         {
-            waiter.Block(currentWait);
-            if (currentWait < maxWait)
+            _waiter.Block(_currentWait);
+            if (_currentWait < _maxWait)
             {
-                currentWait += currentWait;
-                if (currentWait > maxWait)
+                _currentWait += _currentWait;
+                if (_currentWait > _maxWait)
                 {
-                    currentWait = maxWait;
+                    _currentWait = _maxWait;
                 }
             }
         }

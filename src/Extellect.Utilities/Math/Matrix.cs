@@ -11,24 +11,14 @@ namespace Extellect.Utilities.Math
     /// </summary>
     public class Matrix : IEquatable<Matrix>
     {
-        /// <summary>
-        /// The number of columns in the matrix
-        /// </summary>
-        public int M { get { return data.GetLength(0); } }
-
-        /// <summary>
-        /// The number of rows in the matrix
-        /// </summary>
-        public int N { get { return data.GetLength(1); } }
-
-        private double[,] data;
+        private readonly double[,] _data;
 
         /// <summary>
         /// Creates an empty MxN matrix
         /// </summary>
         public Matrix(int m, int n)
         {
-            data = new double[m, n];
+            _data = new double[m, n];
         }
 
         /// <summary>
@@ -47,12 +37,12 @@ namespace Extellect.Utilities.Math
         {
             if (copy)
             {
-                this.data = new double[data.GetLength(0), data.GetLength(1)];
-                Array.Copy(data, 0, this.data, 0, data.Length);
+                _data = new double[data.GetLength(0), data.GetLength(1)];
+                Array.Copy(data, 0, this._data, 0, data.Length);
             }
             else
             {
-                this.data = data;
+                _data = data;
             }
         }
 
@@ -67,10 +57,21 @@ namespace Extellect.Utilities.Math
             var identity = new Matrix(size, size);
             for (var s = 0; s < size; s++)
             {
-                identity.data[s, s] = 1;
+                identity._data[s, s] = 1;
             }
             return identity;
         }
+
+
+        /// <summary>
+        /// The number of columns in the matrix
+        /// </summary>
+        public int M { get { return _data.GetLength(0); } }
+
+        /// <summary>
+        /// The number of rows in the matrix
+        /// </summary>
+        public int N { get { return _data.GetLength(1); } }
 
         /// <summary>
         /// 
@@ -82,11 +83,11 @@ namespace Extellect.Utilities.Math
                 if (M != N)
                     throw new InvalidOperationException();
                 if (M == 2)
-                    return data[0, 0] * data[1, 1] - data[0, 1] * data[1, 0];
+                    return _data[0, 0] * _data[1, 1] - _data[0, 1] * _data[1, 0];
                 else if (M == 3)
-                    return data[0, 0] * Minor(0, 0).Determinant
-                        - data[0, 1] * Minor(0, 1).Determinant
-                        + data[0, 2] * Minor(0, 2).Determinant;
+                    return _data[0, 0] * Minor(0, 0).Determinant
+                        - _data[0, 1] * Minor(0, 1).Determinant
+                        + _data[0, 2] * Minor(0, 2).Determinant;
                 else
                     throw new NotSupportedException();
             }
@@ -108,7 +109,7 @@ namespace Extellect.Utilities.Math
             {
                 for (var n = 0; n < N - 1; n++)
                 {
-                    data[m, n] = this.data[m + (m >= i ? 1 : 0), n + (n >= j ? 1 : 0)];
+                    data[m, n] = this._data[m + (m >= i ? 1 : 0), n + (n >= j ? 1 : 0)];
                 }
             }
 
@@ -125,7 +126,7 @@ namespace Extellect.Utilities.Math
             {
                 for (var n = 0; n < N; n++)
                 {
-                    data[n, m] = this.data[m, n];
+                    data[n, m] = this._data[m, n];
                 }
             }
 
@@ -141,7 +142,7 @@ namespace Extellect.Utilities.Math
             if (M != other.M || N != other.N)
                 return false;
 
-            matrix = new Matrix(this.data, true);
+            matrix = new Matrix(this._data, true);
 
             for (var m = 0; m < M; m++)
             {
@@ -171,7 +172,7 @@ namespace Extellect.Utilities.Math
                 {
                     for (var x = 0; x < N; x++)
                     {
-                        result[m, n] += data[m, x] * other.data[x, n];
+                        result[m, n] += _data[m, x] * other._data[x, n];
                     }
                 }
             }
@@ -193,8 +194,8 @@ namespace Extellect.Utilities.Math
             var temp = new double[M, 2 * N];
             var identity = Identity(M);
 
-            Plane.Write(data, 0, 0, temp, 0, 0, M, N);
-            Plane.Write(identity.data, 0, 0, temp, 0, N, M, N);
+            Plane.Write(_data, 0, 0, temp, 0, 0, M, N);
+            Plane.Write(identity._data, 0, 0, temp, 0, N, M, N);
 
             for (var i = 0; i < M; i++)
             {
@@ -237,11 +238,11 @@ namespace Extellect.Utilities.Math
         {
             get
             {
-                return data[m, n];
+                return _data[m, n];
             }
             set
             {
-                data[m, n] = value;
+                _data[m, n] = value;
             }
         }
 
@@ -263,7 +264,7 @@ namespace Extellect.Utilities.Math
                     {
                         result.Append('\t');
                     }
-                    result.Append(data[m, n]);
+                    result.Append(_data[m, n]);
                 }
             }
             return result.ToString();
@@ -277,7 +278,7 @@ namespace Extellect.Utilities.Math
         {
             if (M != other.M || N != other.N)
                 return false;
-            return data.Cast<double>().SequenceEqual(other.data.Cast<double>());
+            return _data.Cast<double>().SequenceEqual(other._data.Cast<double>());
         }
 
         /// <summary>
@@ -296,7 +297,7 @@ namespace Extellect.Utilities.Math
         /// </summary>
         public override int GetHashCode()
         {
-            return data.Cast<double>().Aggregate(0, (x, y) => x ^ y.GetHashCode());
+            return _data.Cast<double>().Aggregate(0, (x, y) => x ^ y.GetHashCode());
         }
     }
 }

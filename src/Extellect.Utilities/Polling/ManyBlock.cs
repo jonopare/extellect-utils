@@ -11,16 +11,16 @@ namespace Extellect.Utilities.Polling
     /// </summary>
     public class ManyBlock : IBlockable
     {
-        private readonly IBlockable blockable;
-        private readonly TimeSpan maxSleepDuration;
+        private readonly IBlockable _blockable;
+        private readonly TimeSpan _maxSleepDuration;
 
         /// <summary>
         /// Constructs a new instance.
         /// </summary>
         public ManyBlock(IBlockable blockable, TimeSpan maxSleepDuration)
         {
-            this.blockable = blockable;
-            this.maxSleepDuration = maxSleepDuration;
+            _blockable = blockable;
+            _maxSleepDuration = maxSleepDuration;
         }
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace Extellect.Utilities.Polling
             TimeSpan slice;
             while ((slice = awaken - Clock.UtcNow) > TimeSpan.Zero)
             {
-                blockable.Block(Min(slice, maxSleepDuration));
+                _blockable.Block(Min(slice, _maxSleepDuration));
             }
         }
 

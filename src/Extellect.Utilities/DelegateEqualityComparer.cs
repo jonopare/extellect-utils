@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace Extellect.Utilities
 {
-    public class LambdaEqualityComparer<T> : IEqualityComparer<T>
+    public class DelegateEqualityComparer<T> : IEqualityComparer<T>
     {
         private readonly Func<T, T, bool> _equals;
         private readonly Func<T, int> _getHashCode;
 
-        public LambdaEqualityComparer(Func<T, T, bool> equals, Func<T, int> getHashCode)
+        public DelegateEqualityComparer(Func<T, T, bool> equals, Func<T, int> getHashCode)
         {
             _equals = equals;
             _getHashCode = getHashCode;
