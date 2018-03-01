@@ -74,7 +74,27 @@ namespace Extellect.Utilities.Sequencing
         /// </summary>
         public static IEnumerable<IEnumerable<T>> Batch<T>(this IEnumerable<T> items, int batchSize)
         {
-            return items.Select((x, i) => new { Value = x, Batch = i / batchSize }).GroupBy(x => x.Batch, x => x.Value);
+            //return items.Select((x, i) => new { Value = x, Batch = i / batchSize }).GroupBy(x => x.Batch, x => x.Value);
+
+            using (var e = items.GetEnumerator())
+            {
+                while (e.MoveNext()) // check before entering the loop
+                {
+                    yield return BatchOf(e, batchSize);
+                }
+            }
+        }
+
+        private static IEnumerable<T> BatchOf<T>(IEnumerator<T> e, int batchSize)
+        {
+            for (var i = 0; i < batchSize; i++)
+            {
+                if (i > 0 && !e.MoveNext()) // already checked once before entering the loop / so only check on subsequent iterations
+                {
+                    yield break;
+                }
+                yield return e.Current;
+            }
         }
     }
 }

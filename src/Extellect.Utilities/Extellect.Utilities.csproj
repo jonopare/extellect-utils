@@ -116,9 +116,12 @@
     <Compile Include="Collections\BlockingQueue.cs" />
     <Compile Include="Collections\Dictionary2.cs" />
     <Compile Include="Collections\DictionaryExtensions.cs" />
+    <Compile Include="Collections\DictionaryStringInternPool.cs" />
     <Compile Include="Collections\EnumerableExtensions.cs" />
     <Compile Include="Collections\IIndex.cs" />
+    <Compile Include="Collections\IInternPool.cs" />
     <Compile Include="Collections\ImmutableBinaryTree.cs" />
+    <Compile Include="Collections\ListStringInternPool.cs" />
     <Compile Include="Collections\Plane.cs" />
     <Compile Include="Collections\Pool.cs" />
     <Compile Include="Collections\UniqueSortedIndex.cs" />
