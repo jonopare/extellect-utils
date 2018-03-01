@@ -75,6 +75,6 @@ namespace Extellect.Utilities.Diagnostics
             StopwatchesByKey.Clear();
         }
 
-        public static IEnumerable<string> Items => StopwatchesByKey.Select(pair => string.Format("{0} took {1:#,##0} ms", pair.Key, pair.Value.ElapsedMilliseconds));
+        public static IEnumerable<string> Items => StopwatchesByKey.Select(pair => $"{pair.Key} took {1:#,##0} ms");
     }
 }
