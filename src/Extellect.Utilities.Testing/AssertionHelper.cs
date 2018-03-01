@@ -40,7 +40,7 @@ namespace Extellect.Utilities
                 {
                     if (!Object.Equals(actualEnumerator.Current, expectedEnumerator.Current))
                     {
-                        Assert.Fail(string.Format("Sequences differ at index {0}. Actual: {1}. Expected: {2}", i, actualEnumerator.Current, expectedEnumerator.Current));
+                        Assert.Fail($"Sequences differ at index {i}. Actual: {actualEnumerator.Current}. Expected: {expectedEnumerator.Current}");
                     }
 
                     expectedMoveNext = expectedEnumerator.MoveNext();
@@ -50,7 +50,7 @@ namespace Extellect.Utilities
                 }
 
                 if (actualMoveNext != expectedMoveNext)
-                    Assert.Fail(string.Format("Sequences of different length. Unexpected end after {1} element(s). Actual sequence was {0} than expected.", (expectedMoveNext ? "shorter" : "longer"), i));
+                    Assert.Fail($"Sequences of different length. Unexpected end after {i} element(s). Actual sequence was {(expectedMoveNext?"shorter":"longer")} than expected.");
             }
         }
     }

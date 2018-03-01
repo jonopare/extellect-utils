@@ -156,7 +156,7 @@ namespace Extellect.Utilities.CLI
         /// </summary>
         internal static void Unknown(Action<string> validationErrorCallback, string name, string value)
         {
-            validationErrorCallback(string.Format("Unknown argument found: Name = '{0}', Value = '{1}'", name, value));
+            validationErrorCallback($"Unknown argument found: Name = '{name}', Value = '{value}'");
         }
 
         /// <summary>
@@ -164,7 +164,7 @@ namespace Extellect.Utilities.CLI
         /// </summary>
         internal static void Required(Action<string> validationErrorCallback, string name)
         {
-            validationErrorCallback(string.Format("Required argument not found: Name = '{0}'", name));
+            validationErrorCallback($"Required argument not found: Name = '{name}'");
         }
 
         /// <summary>
@@ -215,7 +215,7 @@ namespace Extellect.Utilities.CLI
                     int endIndex = arg.IndexOfAny(new char[] { ':', '=' }, startIndex);
                     if (endIndex < 0)
                     {
-                        validationErrorCallback(string.Format("No separator found: {0}", arg));
+                        validationErrorCallback($"No separator found: {arg}");
                         return default(KeyValuePair<string, string>);
                     }
                     else if (endIndex > startIndex)
@@ -226,13 +226,13 @@ namespace Extellect.Utilities.CLI
                     }
                     else
                     {
-                        validationErrorCallback(string.Format("No name found: {0}", arg));
+                        validationErrorCallback($"No name found: {arg}");
                         return default(KeyValuePair<string, string>);
                     }
                 }
                 else
                 {
-                    validationErrorCallback(string.Format("No name or separator found: {0}", arg));
+                    validationErrorCallback($"No name or separator found: {arg}");
                     return default(KeyValuePair<string, string>);
                 }
             }

@@ -54,7 +54,7 @@ namespace Extellect.Utilities.Logging
             var logConfig = new FileInfo(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, relativePath));
             if (!logConfig.Exists)
             {
-                var message = string.Format("Required configuration file '{0}' is missing. Unable to continue...", logConfig.FullName);
+                var message = $"Required configuration file '{logConfig.FullName}' is missing. Unable to continue...";
                 if (isRequired)
                 {
                     throw new FileNotFoundException(message, logConfig.Name);

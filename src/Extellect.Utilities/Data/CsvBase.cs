@@ -216,7 +216,7 @@ namespace Extellect.Utilities.Data
                 case CsvBase.CarriageReturn:
                     goto CarriageReturn;
                 default:
-                    throw new FormatException(string.Format("Found unexpected character '\\u{0:x4}' after quote in quoted field at position {1}. Only allowed characters are another quote, comma, EOL or EOF.", c, Position));
+                    throw new FormatException($"Found unexpected character '\\u{0:x4}' after quote in quoted field at position {Position}. Only allowed characters are another quote, comma, EOL or EOF.");
             }
         CarriageReturn:
             if (inbufpos >= inbufcount)
@@ -231,7 +231,7 @@ namespace Extellect.Utilities.Data
             c = inbuf[inbufpos++];
             if (c != CsvBase.NewLine)
             {
-                throw new FormatException(string.Format("Found unexpected character '\\u{0:x4}' after carriage return at position {1}. Only allowed character is line feed.", c, Position));
+                throw new FormatException($"Found unexpected character '\\u{0:x4}' after carriage return at position {Position}. Only allowed character is line feed.");
             }
             DoEndOfField();
             outbufcount = 0;
