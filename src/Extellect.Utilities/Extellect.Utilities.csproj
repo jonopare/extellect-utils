@@ -114,6 +114,7 @@
     <Compile Include="CLI\IConsoleControl.cs" />
     <Compile Include="Clock.cs" />
     <Compile Include="Collections\BlockingQueue.cs" />
+    <Compile Include="Collections\Chunk.cs" />
     <Compile Include="Collections\Dictionary2.cs" />
     <Compile Include="Collections\DictionaryExtensions.cs" />
     <Compile Include="Collections\DictionaryStringInternPool.cs" />
