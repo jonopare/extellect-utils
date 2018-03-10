@@ -28,6 +28,16 @@ namespace Extellect.Utilities
 
         public static void AreSequenceEqual<T>(IEnumerable<T> expected, IEnumerable<T> actual)
         {
+            AreSequenceEqual(expected, actual, (e, a) => Equals(e, a));
+        }
+
+        public static void AreSequenceEqual<T>(IEnumerable<T> expected, IEnumerable<T> actual, PropertyComparison<T> propertyComparison)
+        {
+            AreSequenceEqual(expected, actual, (e, a) => propertyComparison.AreEqual(e, a).Success);
+        }
+
+        public static void AreSequenceEqual<T>(IEnumerable<T> expected, IEnumerable<T> actual, Func<T, T, bool> comparison)
+        {
             using (var expectedEnumerator = expected.GetEnumerator())
             using (var actualEnumerator = actual.GetEnumerator())
             {
@@ -38,7 +48,7 @@ namespace Extellect.Utilities
 
                 while (actualMoveNext && actualMoveNext == expectedMoveNext)
                 {
-                    if (!Object.Equals(actualEnumerator.Current, expectedEnumerator.Current))
+                    if (!comparison(actualEnumerator.Current, expectedEnumerator.Current))
                     {
                         Assert.Fail($"Sequences differ at index {i}. Actual: {actualEnumerator.Current}. Expected: {expectedEnumerator.Current}");
                     }
