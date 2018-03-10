@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Extellect.Utilities.Testing;
 
 namespace Extellect.Utilities.Polling
 {
@@ -66,7 +67,7 @@ namespace Extellect.Utilities.Polling
             expectedWaits.Add(maxWait);
             backOff.Wait();
 
-            AssertionHelper.AreSequenceEqual(fakeBlock.ActualWaits, expectedWaits);
+            AssertionHelper.AreSequencesEqual(fakeBlock.ActualWaits, expectedWaits);
         }
     }
 }

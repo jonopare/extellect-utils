@@ -35,12 +35,11 @@ namespace Extellect.Utilities.Collections
         public string Intern(string value)
         {
             string result;
-            if (_values.TryGetValue(value, out result))
+            if (!_values.TryGetValue(value, out result))
             {
-                return result;
+                _values.Add(value, result = value);
             }
-            _values.Add(value, value);
-            return value;
+            return result;
         }
 
         /// <summary>

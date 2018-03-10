@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Extellect.Utilities.Testing;
 
 namespace Extellect.Utilities.Polling
 {
@@ -21,7 +22,7 @@ namespace Extellect.Utilities.Polling
 
             testClock.UtcNow = DateTime.UtcNow;
             many.Block(TimeSpan.FromSeconds(0.5));
-            AssertionHelper.AreSequenceEqual(new[] { TimeSpan.FromSeconds(0.5) }, fake.ActualWaits);
+            AssertionHelper.AreSequencesEqual(new[] { TimeSpan.FromSeconds(0.5) }, fake.ActualWaits);
         }
 
         [TestMethod]
@@ -36,7 +37,7 @@ namespace Extellect.Utilities.Polling
 
             testClock.UtcNow = DateTime.UtcNow;
             many.Block(TimeSpan.FromSeconds(2.5));
-            AssertionHelper.AreSequenceEqual(new[] { TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(0.5) }, fake.ActualWaits);
+            AssertionHelper.AreSequencesEqual(new[] { TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(0.5) }, fake.ActualWaits);
         }
     }
 }

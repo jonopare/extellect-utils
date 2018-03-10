@@ -42,12 +42,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssertionHelper.cs" />
+    <Compile Include="IDifference.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PropertyComparison.cs" />
     <Compile Include="PropertyComparisonBuilder.cs" />
     <Compile Include="PropertyComparisonResult.cs" />
     <Compile Include="PropertyComparisonTests.cs" />
+    <Compile Include="PropertyDifference.cs" />
     <Compile Include="TestClock.cs" />
+    <Compile Include="TypeDifference.cs" />
+    <Compile Include="ValueDifference.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Extellect.Utilities\Extellect.Utilities.csproj">

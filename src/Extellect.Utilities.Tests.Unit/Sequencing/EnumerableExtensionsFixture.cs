@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Extellect.Utilities.Testing;
 
 namespace Extellect.Utilities.Sequencing
 {
@@ -25,7 +26,7 @@ namespace Extellect.Utilities.Sequencing
 
             Assert.AreEqual(count * input.Length, actual.Length);
             foreach (var batch in actual.Batch(input.Length))
-                AssertionHelper.AreSequenceEqual(input, batch);
+                AssertionHelper.AreSequencesEqual(input, batch);
         }
 
         private readonly double _tolerance = 1e-14;
@@ -101,7 +102,7 @@ namespace Extellect.Utilities.Sequencing
 
             Assert.AreEqual(expected.Length, actual.Length);
             for (int i = 0; i < expected.Length; i++ )
-                AssertionHelper.AreSequenceEqual(expected[i], actual[i]);
+                AssertionHelper.AreSequencesEqual(expected[i], actual[i]);
         }
     }
 }

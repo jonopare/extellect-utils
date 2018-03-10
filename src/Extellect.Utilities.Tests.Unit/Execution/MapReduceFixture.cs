@@ -3,6 +3,7 @@ using System.Text;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Extellect.Utilities.Testing;
 
 namespace Extellect.Utilities.Execution
 {
@@ -63,7 +64,7 @@ namespace Extellect.Utilities.Execution
                 actual[letter]++;
             }
 
-            AssertionHelper.AreSequenceEqual(_expected.OrderBy(x => x.Key), actual.OrderBy(x => x.Key));
+            AssertionHelper.AreSequencesEqual(_expected.OrderBy(x => x.Key), actual.OrderBy(x => x.Key));
         }
 
         [TestMethod]
@@ -77,7 +78,7 @@ namespace Extellect.Utilities.Execution
                 x => actual.Add(x.Key, x.Value)
                 ).Wait();
 
-            AssertionHelper.AreSequenceEqual(_expected.OrderBy(x => x.Key), actual.OrderBy(x => x.Key));
+            AssertionHelper.AreSequencesEqual(_expected.OrderBy(x => x.Key), actual.OrderBy(x => x.Key));
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Text;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Extellect.Utilities.Testing;
 using System.IO;
 
 namespace Extellect.Utilities.Data
@@ -54,7 +55,7 @@ namespace Extellect.Utilities.Data
                 CsvEvents.EndOfField /*empty*/, CsvEvents.EndOfLine
             };
 
-            AssertionHelper.AreSequenceEqual(expected, csv.EventHistory);
+            AssertionHelper.AreSequencesEqual(expected, csv.EventHistory);
         }
     }
 }
