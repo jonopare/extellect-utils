@@ -1,10 +1,7 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Extellect.Utilities.Testing;
+﻿using Xunit;
 
-namespace Extellect.Utilities
+namespace Extellect.Utilities.Testing
 {
-    [TestClass]
     public class PropertyComparisonTests
     {
         private class Foo
@@ -13,14 +10,13 @@ namespace Extellect.Utilities
             public int B { get; set; }
         }
 
-
-        [TestMethod]
+        [Fact]
         public void TestMethod1()
         {
             AssertionHelper.ArePropertiesEqual(new Foo { A = 1, B = 2 }, new Foo { A = 1, B = 2 }, new PropertyComparisonBuilder<Foo>().WithPublicInstanceGetProperties().Build());
         }
 
-        [TestMethod]
+        [Fact]
         public void TestMethod2()
         {
             AssertionHelper.ArePropertiesNotEqual(new Foo { A = 1, B = 3 }, new Foo { A = 1, B = 2 }, new PropertyComparisonBuilder<Foo>().WithPublicInstanceGetProperties().Build());

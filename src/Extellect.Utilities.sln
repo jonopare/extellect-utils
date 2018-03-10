@@ -13,6 +13,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{07B12758
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extellect.Utilities.Testing", "Extellect.Utilities.Testing\Extellect.Utilities.Testing.csproj", "{A085AA00-11C2-462C-B7EA-26447B15E3A6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extellect.Utilities.Testing.UnitTests", "Extellect.Utilities.Testing.UnitTests\Extellect.Utilities.Testing.UnitTests.csproj", "{0C1385D3-7EE4-47F8-879E-7C3E463BB3EB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,11 +33,16 @@ Global
 		{A085AA00-11C2-462C-B7EA-26447B15E3A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A085AA00-11C2-462C-B7EA-26447B15E3A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A085AA00-11C2-462C-B7EA-26447B15E3A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C1385D3-7EE4-47F8-879E-7C3E463BB3EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C1385D3-7EE4-47F8-879E-7C3E463BB3EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C1385D3-7EE4-47F8-879E-7C3E463BB3EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C1385D3-7EE4-47F8-879E-7C3E463BB3EB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{C4D0AF53-69FE-4B81-ACDA-20D368133845} = {07B12758-D12A-41C6-BE50-4B1FFAD18B23}
+		{0C1385D3-7EE4-47F8-879E-7C3E463BB3EB} = {07B12758-D12A-41C6-BE50-4B1FFAD18B23}
 	EndGlobalSection
 EndGlobal

@@ -2,12 +2,12 @@
 using System.Text;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 using Extellect.Utilities.Testing;
 
 namespace Extellect.Utilities.Execution
 {
-    [TestClass]
+    
     public class MapReduceFixture
     {
         private class LetterCount : MapReduce<string, char, int>
@@ -55,7 +55,7 @@ namespace Extellect.Utilities.Execution
                 { 'z', 1 },
             };
 
-        [TestMethod]
+        [Fact]
         public void SanityCheck()
         {
             Dictionary<char, int> actual = Enumerable.Range('a', 26).ToDictionary(x => (char)x, x => 0);
@@ -67,7 +67,7 @@ namespace Extellect.Utilities.Execution
             AssertionHelper.AreSequencesEqual(_expected.OrderBy(x => x.Key), actual.OrderBy(x => x.Key));
         }
 
-        [TestMethod]
+        [Fact]
         public void MapReduce_Run_LetterCount()
         {
             var actual = new Dictionary<char, int>();

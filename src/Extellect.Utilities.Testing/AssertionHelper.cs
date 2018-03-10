@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Reflection;
+using Xunit;
 
 namespace Extellect.Utilities.Testing
 {
@@ -14,7 +14,7 @@ namespace Extellect.Utilities.Testing
             var result = propertyComparison.AreEqual(expected, actual);
             if (!result.Success)
             {
-                Assert.Fail($"Property values differ at {result.PropertyName}. Actual: {result.Actual}. Expected: {result.Expected}");
+                Assert.True(false, $"Property values differ at {result.PropertyName}. Actual: {result.Actual}. Expected: {result.Expected}");
             }
         }
 
@@ -23,7 +23,7 @@ namespace Extellect.Utilities.Testing
             var result = propertyComparison.AreEqual(expected, actual);
             if (result.Success)
             {
-                Assert.Fail($"Property values differ at {result.PropertyName}. Actual: {result.Actual}. Expected: {result.Expected}");
+                Assert.True(false, $"Property values differ at {result.PropertyName}. Actual: {result.Actual}. Expected: {result.Expected}");
             }
         }
 
@@ -47,7 +47,7 @@ namespace Extellect.Utilities.Testing
                     var firstDifference = equals(actualEnumerator.Current, expectedEnumerator.Current).FirstOrDefault();
                     if (firstDifference != null)
                     {
-                        Assert.Fail($"Sequences differ at index {i}. Actual: {firstDifference.Actual}. Expected: {firstDifference.Expected}");
+                        Assert.True(false, $"Sequences differ at index {i}. Actual: {firstDifference.Actual}. Expected: {firstDifference.Expected}");
                     }
 
                     actualMoveNext = actualEnumerator.MoveNext();
@@ -58,7 +58,7 @@ namespace Extellect.Utilities.Testing
 
                 if (actualMoveNext != expectedMoveNext)
                 {
-                    Assert.Fail($"Sequences of different length. Unexpected end after {i} element(s). Actual sequence was {(expectedMoveNext ? "shorter" : "longer")} than expected.");
+                    Assert.True(false, $"Sequences of different length. Unexpected end after {i} element(s). Actual sequence was {(expectedMoveNext ? "shorter" : "longer")} than expected.");
                 }
             }
         }
@@ -67,11 +67,11 @@ namespace Extellect.Utilities.Testing
             IEnumerable<T> differences;
             if ((differences = expected.Except(actual)).Any())
             {
-                Assert.Fail($"Sets differ. Expected {differences.First()} but didn't find it.");
+                Assert.True(false, $"Sets differ. Expected {differences.First()} but didn't find it.");
             }
             else if ((differences = actual.Except(expected)).Any())
             {
-                Assert.Fail($"Sets differ. Found {differences.First()} but wasn't expecting it.");
+                Assert.True(false, $"Sets differ. Found {differences.First()} but wasn't expecting it.");
             }
         }
 
@@ -79,7 +79,7 @@ namespace Extellect.Utilities.Testing
         {
             foreach (var actual in actuals)
             {
-                Assert.AreEqual(expected, actual);
+                Assert.Equal(expected, actual);
             }
         }
 

@@ -1,13 +1,13 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 using System.Diagnostics;
 
 namespace Extellect.Utilities.Collections
 {
-    [TestClass]
+    
     public class ListStringInternPoolTests
     {
-        [TestMethod]
+        [Fact]
         public void Intern_EachOf10000Strings_100Times()
         {
             var stopwatch = Stopwatch.StartNew();
@@ -17,7 +17,7 @@ namespace Extellect.Utilities.Collections
                 {
                     sut.Intern($"prefix{i % 100}suffix");
                 }
-                Assert.AreEqual(100, sut.Count);
+                Assert.Equal(100, sut.Count);
             }
             stopwatch.Stop();
             Console.WriteLine(stopwatch.Elapsed);

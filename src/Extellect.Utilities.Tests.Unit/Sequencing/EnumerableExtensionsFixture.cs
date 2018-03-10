@@ -2,21 +2,36 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Extellect.Utilities.Testing;
+using Xunit;
 
 namespace Extellect.Utilities.Sequencing
 {
     /// <summary>
     /// 
     /// </summary>
-    [TestClass]
     public class EnumerableExtensionsFixture
     {
+        private readonly int _precision = 14;
+
+        private readonly double[] _statistics = new[]
+                {
+                    3.29,
+                    2.70,
+                    6.00,
+                    7.05,
+                    4.66,
+                    2.60,
+                    1.21,
+                    2.70,
+                    0.83,
+                    9.08,
+                };
+
         /// <summary>
         /// 
         /// </summary>
-        [TestMethod]
+        [Fact]
         public void Repeat()
         {
             var input = new[] { "need", "more", "coffee" };
@@ -24,71 +39,55 @@ namespace Extellect.Utilities.Sequencing
 
             var actual = input.Repeat(count).ToArray();
 
-            Assert.AreEqual(count * input.Length, actual.Length);
+            Assert.Equal(count * input.Length, actual.Length);
             foreach (var batch in actual.Batch(input.Length))
                 AssertionHelper.AreSequencesEqual(input, batch);
         }
 
-        private readonly double _tolerance = 1e-14;
-
-        private readonly double[] _statistics = new[]
-                {
-                    3.29,
-                    2.70,
-                    6.00,
-                    7.05,	
-                    4.66,	
-                    2.60,
-                    1.21,	
-                    2.70,
-                    0.83,	
-                    9.08,
-                };
-
         /// <summary>
         /// 
         /// </summary>
-        [TestMethod]
+        [Fact]
         public void StandardDeviationPopulation()
         {
             var actual = _statistics.StandardDeviationPopulation();
-            Assert.AreEqual(2.51436194689627, actual, _tolerance);
+            Assert.Equal(2.51436194689627, actual, _precision);
         }
 
         /// <summary>
         /// 
         /// </summary>
-        [TestMethod]
+        [Fact]
         public void StandardDeviationSample()
         {
             var actual = _statistics.StandardDeviationSample();
-            Assert.AreEqual(2.65037020474918, actual, _tolerance);
+            Assert.Equal(2.65037020474918, actual, _precision);
         }
 
         /// <summary>
         /// 
         /// </summary>
-        [TestMethod]
+        [Fact]
         public void VariancePopulation()
         {
             var actual = _statistics.VariancePopulation();
-            Assert.AreEqual(6.322016, actual);
+            Assert.Equal(6.322016, actual);
         }
 
         /// <summary>
         /// 
         /// </summary>
-        [TestMethod]
+        [Fact]
         public void VarianceSample()
         {
             var actual = _statistics.VarianceSample();
-            Assert.AreEqual(7.02446222222222, actual, _tolerance);
+            Assert.Equal(7.02446222222222, actual, _precision);
         }
 
         /// <summary>
         /// 
         /// </summary>
-        [TestMethod]
+        [Fact]
         public void Batch()
         {
             var expected = new int[][]
@@ -100,7 +99,7 @@ namespace Extellect.Utilities.Sequencing
 
             var actual = Enumerable.Range(0, 25).Batch(10).Select(x => x.ToArray()).ToArray();
 
-            Assert.AreEqual(expected.Length, actual.Length);
+            Assert.Equal(expected.Length, actual.Length);
             for (int i = 0; i < expected.Length; i++ )
                 AssertionHelper.AreSequencesEqual(expected[i], actual[i]);
         }

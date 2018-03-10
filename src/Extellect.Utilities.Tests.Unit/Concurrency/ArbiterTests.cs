@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Extellect.Utilities.Concurrency
 {
-    [TestClass]
     public class ArbiterTests
     {
-        [TestMethod]
+        [Fact]
         public void A()
         {
             WaitCallback f1 = delegate(object state)

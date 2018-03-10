@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 using Extellect.Utilities.Testing;
 
 namespace Extellect.Utilities.Polling
 {
-    [TestClass]
+    
     public class ManyBlockTests
     {
-        [TestMethod]
+        [Fact]
         public void Block_DelayLessThanMaxDelay_BlocksOnce()
         {
             var fake = new TestBlock();
@@ -25,7 +25,7 @@ namespace Extellect.Utilities.Polling
             AssertionHelper.AreSequencesEqual(new[] { TimeSpan.FromSeconds(0.5) }, fake.ActualWaits);
         }
 
-        [TestMethod]
+        [Fact]
         public void Block_DelayGreaterThanMaxDelay_BlocksManyTimes()
         {
             var fake = new TestBlock();

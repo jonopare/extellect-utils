@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 using Extellect.Utilities.Testing;
 
 namespace Extellect.Utilities.Polling
 {
-    [TestClass]
+    
     public class BackOffTests
     {
-        [TestMethod]
+        [Fact]
         public void Wait_WithDefaultWaitAction_ActuallyWaits()
         {
             TimeSpan expected = TimeSpan.FromMilliseconds(500);
@@ -20,10 +20,10 @@ namespace Extellect.Utilities.Polling
             backOff.Wait();
             DateTime finish = DateTime.Now;
             
-            Assert.IsTrue(finish - start > expected);
+            Assert.True(finish - start > expected);
         }
 
-        [TestMethod]
+        [Fact]
         public void Wait_WithFakeDelay_Waits()
         {
             TimeSpan expectedWait = TimeSpan.Zero;

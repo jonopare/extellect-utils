@@ -2,17 +2,16 @@
 using System.Text;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Extellect.Utilities.Collections
 {
-    [TestClass]
+    
     public class DictionaryExtensionsFixture
     {
-        Dictionary<string, int> _dictionary;
+        private readonly Dictionary<string, int> _dictionary;
 
-        [TestInitialize]
-        public void Init()
+        public DictionaryExtensionsFixture()
         {
             _dictionary = new Dictionary<string, int>
             {
@@ -21,56 +20,56 @@ namespace Extellect.Utilities.Collections
             };
         }
 
-        [TestMethod]
+        [Fact]
         public void AddOrUpdate_KeyFound()
         {
             var key = "a";
 
             var value = _dictionary.AddOrUpdate(key, 3, x => x + 10);
 
-            Assert.AreEqual(11, value);
-            Assert.AreEqual(11, _dictionary[key]);
+            Assert.Equal(11, value);
+            Assert.Equal(11, _dictionary[key]);
         }
 
-        [TestMethod]
+        [Fact]
         public void AddOrUpdate_KeyNotFound()
         {
             var key = "c";
 
             var value = _dictionary.AddOrUpdate(key, 3, x => x + 10);
 
-            Assert.AreEqual(3, value);
-            Assert.AreEqual(3, _dictionary[key]);
+            Assert.Equal(3, value);
+            Assert.Equal(3, _dictionary[key]);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetValueOrDefault_KeyFound()
         {
             var key = "b";
 
-            var value = _dictionary.GetValueOrDefault(key, () => { Assert.Fail(); return 0; });
+            var value = _dictionary.GetValueOrDefault(key, () => { Assert.True(false); return 0; });
 
-            Assert.AreEqual(2, value);
+            Assert.Equal(2, value);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetValueOrDefault_KeyNotFound_FactoryMethod()
         {
             var key = "c";
 
             var value = _dictionary.GetValueOrDefault(key, () => 5);
 
-            Assert.AreEqual(5, value);
+            Assert.Equal(5, value);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetValueOrDefault_KeyNotFound_Value()
         {
             var key = "c";
 
             var value = _dictionary.GetValueOrDefault(key, 5);
 
-            Assert.AreEqual(5, value);
+            Assert.Equal(5, value);
         }
     }
 }

@@ -2,14 +2,14 @@
 using System.Text;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Extellect.Utilities.Math
 {
-    [TestClass]
+    
     public class LinearEquationFixture
     {
-        [TestMethod]
+        [Fact]
         public void TrySolve_2()
         {
             var abcd = new Matrix(
@@ -27,7 +27,7 @@ namespace Extellect.Utilities.Math
             Matrix result;
             if (!LinearEquation.TrySolve(abcd, ef, out result))
             {
-                Assert.Fail();
+                Assert.True(false);
             }
 
             var expected = new Matrix(
@@ -36,10 +36,10 @@ namespace Extellect.Utilities.Math
                     { 2 }
                 });
 
-            Assert.AreEqual(expected, result);
+            Assert.Equal(expected, result);
         }
 
-        [TestMethod]
+        [Fact]
         public void TrySolve_3()
         {
             var abcd = new Matrix(
@@ -59,7 +59,7 @@ namespace Extellect.Utilities.Math
             Matrix result;
             if (!LinearEquation.TrySolve(abcd, ef, out result))
             {
-                Assert.Fail();
+                Assert.True(false);
             }
 
             var expected = new Matrix(
@@ -69,7 +69,7 @@ namespace Extellect.Utilities.Math
                     { 3 }
                 });
 
-            Assert.AreEqual(expected, result);
+            Assert.Equal(expected, result);
         }
     }
 }

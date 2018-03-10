@@ -2,13 +2,13 @@
 using System.Text;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 using Extellect.Utilities.Testing;
 using System.IO;
 
 namespace Extellect.Utilities.Data
 {
-    [TestClass]
+    
     public class CsvBaseTests
     {
         private enum CsvEvents
@@ -37,7 +37,7 @@ namespace Extellect.Utilities.Data
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void Foo()
         {
             TestCsvBase csv = new TestCsvBase();

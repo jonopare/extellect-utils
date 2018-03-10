@@ -1,12 +1,12 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Extellect.Utilities.Math
 {
-    [TestClass]
+    
     public class MatrixFixture
     {
-        [TestMethod]
+        [Fact]
         public void ToString_2x2_IsPretty()
         {
             var matrix = new Matrix(
@@ -15,10 +15,10 @@ namespace Extellect.Utilities.Math
                     { 3, 4 }
                 });
             var toString = matrix.ToString();
-            Assert.AreEqual("1\t2\r\n3\t4", toString);
+            Assert.Equal("1\t2\r\n3\t4", toString);
         }
 
-        [TestMethod]
+        [Fact]
         public void ToString_3x3_IsPretty()
         {
             var matrix = new Matrix(
@@ -27,10 +27,10 @@ namespace Extellect.Utilities.Math
                     { 4, 5, 6 } 
                 });
             var toString = matrix.ToString();
-            Assert.AreEqual("1\t2\t3\r\n4\t5\t6", toString);
+            Assert.Equal("1\t2\t3\r\n4\t5\t6", toString);
         }
 
-        [TestMethod]
+        [Fact]
         public void Identity_1_LooksOk()
         {
             var matrix = Matrix.Identity(1);
@@ -38,10 +38,10 @@ namespace Extellect.Utilities.Math
                     new double[,] { 
                         { 1 } 
                     });
-            Assert.AreEqual(expected, matrix);
+            Assert.Equal(expected, matrix);
         }
 
-        [TestMethod]
+        [Fact]
         public void Identity_2_LooksOk()
         {
             var matrix = Matrix.Identity(2);
@@ -50,10 +50,10 @@ namespace Extellect.Utilities.Math
                     { 1, 0 }, 
                     { 0, 1 } 
                 });
-            Assert.AreEqual(expected, matrix);
+            Assert.Equal(expected, matrix);
         }
 
-        [TestMethod]
+        [Fact]
         public void Identity_5_LooksOk()
         {
             var matrix = Matrix.Identity(5);
@@ -65,10 +65,10 @@ namespace Extellect.Utilities.Math
                     { 0, 0, 0, 1, 0 }, 
                     { 0, 0, 0, 0, 1 }
                 });
-            Assert.AreEqual(expected, matrix);
+            Assert.Equal(expected, matrix);
         }
 
-        [TestMethod]
+        [Fact]
         public void TryInvert()
         {
             var matrix = new Matrix(
@@ -80,7 +80,7 @@ namespace Extellect.Utilities.Math
             Matrix inverse;
             if (!matrix.TryInvert(out inverse))
             {
-                Assert.Fail();
+                Assert.True(false);
             }
             var expected = new Matrix(
                 new double[,] {
@@ -88,11 +88,11 @@ namespace Extellect.Utilities.Math
                     { -4, 2, 1 }, 
                     { -1, 0, 1 } 
                 });
-            Assert.AreEqual(expected, inverse);
+            Assert.Equal(expected, inverse);
         }
 
-        [TestMethod]
-        public void Equals()
+        [Fact]
+        public void IEquatableEquals()
         {
             var a = new Matrix(
                 new double[,] { 
@@ -104,10 +104,10 @@ namespace Extellect.Utilities.Math
                     { 1, 2 }, 
                     { 3, 4 } 
                 });
-            Assert.AreEqual(a, b);
+            Assert.True(a.Equals(b));
         }
 
-        [TestMethod]
+        [Fact]
         public void OverriddenEquals()
         {
             var a = new Matrix(
@@ -120,10 +120,10 @@ namespace Extellect.Utilities.Math
                     { 1, 2 },
                     { 3, 4 } 
                 });
-            Assert.AreEqual((object)a, (object)b);
+            Assert.Equal((object)a, (object)b);
         }
 
-        [TestMethod]
+        [Fact]
         public void OverriddenGetHashCode()
         {
             var a = new Matrix(
@@ -136,10 +136,10 @@ namespace Extellect.Utilities.Math
                     { 1, 2 },
                     { 3, 4 } 
                 });
-            Assert.AreEqual(a.GetHashCode(), b.GetHashCode());
+            Assert.Equal(a.GetHashCode(), b.GetHashCode());
         }
 
-        [TestMethod]
+        [Fact]
         public void Transpose()
         {
             var matrix = new Matrix(
@@ -153,10 +153,10 @@ namespace Extellect.Utilities.Math
                     { 2, 5 },
                     { 3, 6 }
                 });
-            Assert.AreEqual(expected, matrix.Transpose());
+            Assert.Equal(expected, matrix.Transpose());
         }
 
-        [TestMethod]
+        [Fact]
         public void TryAdd()
         {
             var a = new Matrix(
@@ -172,7 +172,7 @@ namespace Extellect.Utilities.Math
             Matrix result;
             if (!a.TryAdd(b, out result))
             {
-                Assert.Fail();
+                Assert.True(false);
             }
 
             var expected = new Matrix(
@@ -181,10 +181,10 @@ namespace Extellect.Utilities.Math
                     { 7, 7, 7 } 
                 });
 
-            Assert.AreEqual(expected, result);
+            Assert.Equal(expected, result);
         }
 
-        [TestMethod]
+        [Fact]
         public void Minor_i0_j0()
         {
             var a = new Matrix(
@@ -200,10 +200,10 @@ namespace Extellect.Utilities.Math
                     { 8, 9 } 
                 });
 
-            Assert.AreEqual(expected, a.Minor(0, 0));
+            Assert.Equal(expected, a.Minor(0, 0));
         }
 
-        [TestMethod]
+        [Fact]
         public void Minor_i2_j0()
         {
             var a = new Matrix(
@@ -219,10 +219,10 @@ namespace Extellect.Utilities.Math
                     { 5, 6 } 
                 });
 
-            Assert.AreEqual(expected, a.Minor(2, 0));
+            Assert.Equal(expected, a.Minor(2, 0));
         }
 
-        [TestMethod]
+        [Fact]
         public void Minor_i2_j2()
         {
             var a = new Matrix(
@@ -238,10 +238,10 @@ namespace Extellect.Utilities.Math
                     { 4, 5 } 
                 });
 
-            Assert.AreEqual(expected, a.Minor(2, 2));
+            Assert.Equal(expected, a.Minor(2, 2));
         }
 
-        [TestMethod]
+        [Fact]
         public void Minor_i1_j1()
         {
             var a = new Matrix(
@@ -257,18 +257,18 @@ namespace Extellect.Utilities.Math
                     { 7, 9 } 
                 });
 
-            Assert.AreEqual(expected, a.Minor(1, 1));
+            Assert.Equal(expected, a.Minor(1, 1));
         }
 
-        [TestMethod]
+        [Fact]
         public void Determinant_OfIdentityMatrix_IsAlwaysOne()
         {
             var a = Matrix.Identity(3);
             
-            Assert.AreEqual(1, a.Determinant);
+            Assert.Equal(1, a.Determinant);
         }
 
-        [TestMethod]
+        [Fact]
         public void Determinant()
         {
             var a = new Matrix(
@@ -278,7 +278,7 @@ namespace Extellect.Utilities.Math
                     { 2, 0, -1 },
                 });
 
-            Assert.AreEqual(18, a.Determinant);
+            Assert.Equal(18, a.Determinant);
         }
     }
 }

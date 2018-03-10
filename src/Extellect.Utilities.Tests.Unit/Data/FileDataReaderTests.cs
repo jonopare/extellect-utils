@@ -2,15 +2,15 @@
 using System.Text;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 using System.IO;
 
 namespace Extellect.Utilities.Data
 {
-    [TestClass]
+    
     public class FileDataReaderTests
     {
-        [TestMethod]
+        [Fact]
         public void TestMethod1()
         {
             var fileOrdinals = new Dictionary<string, int>
@@ -44,7 +44,7 @@ namespace Extellect.Utilities.Data
             //        var c = fdr.GetValue(ci);
             //        var d = fdr.GetValue(di);
             //    }
-            //    Assert.AreEqual(rowCount, 1);
+            //    Assert.Equal(rowCount, 1);
             //}
         }
     }

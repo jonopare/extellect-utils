@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Extellect.Utilities.Collections;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Extellect.Utilities
 {
-    [TestClass]
+    
     public class PermutationTests
     {
         #region Test support classes
@@ -43,12 +43,12 @@ namespace Extellect.Utilities
         }
         #endregion
 
-        [TestMethod]
+        [Fact]
         public void Object_Abc_NonComparableWithExplicitComparer()
         {
             InnerComparer comparer = new InnerComparer();
             Inner[] xs = new Inner[] { new Inner(6.5), new Inner(4.3), new Inner(2.1) };
-            Assert.IsTrue(
+            Assert.True(
                 xs.Permute(comparer).DeepSequenceEqual(
                     new Inner[][] {
                         new Inner[] { new Inner(2.1), new Inner(4.3), new Inner(6.5) },
@@ -62,10 +62,10 @@ namespace Extellect.Utilities
                 ));
         }
 
-        [TestMethod]
+        [Fact]
         public void Letter_Abc()
         {
-            Assert.IsTrue(
+            Assert.True(
                 "abc".Permute().SequenceEqual(
                     new string[] {
                         "abc",
@@ -78,10 +78,10 @@ namespace Extellect.Utilities
             ));
         }
 
-        [TestMethod]
+        [Fact]
         public void Letter_Aaa()
         {
-            Assert.IsTrue(
+            Assert.True(
                 "aaa".Permute().SequenceEqual(
                     new string[] {
                         "aaa",
@@ -89,10 +89,10 @@ namespace Extellect.Utilities
             ));
         }
 
-        [TestMethod]
+        [Fact]
         public void Letter_Aba()
         {
-            Assert.IsTrue(
+            Assert.True(
                 "aba".Permute().SequenceEqual(
                     new string[] {
                         "aab",
@@ -102,10 +102,10 @@ namespace Extellect.Utilities
             ));
         }
 
-        [TestMethod]
+        [Fact]
         public void Number_Abc()
         {
-            Assert.IsTrue(
+            Assert.True(
                 new int[] { 1, 2, 3 }.Permute().DeepSequenceEqual(
                     new int[][] {
                         new int[] {1, 2, 3},
@@ -118,10 +118,10 @@ namespace Extellect.Utilities
             ));
         }
 
-        [TestMethod]
+        [Fact]
         public void Number_Aaa()
         {
-            Assert.IsTrue(
+            Assert.True(
                 new int[] { 1, 1, 1 }.Permute().DeepSequenceEqual(
                     new int[][] {
                         new int[] {1, 1, 1},
@@ -129,10 +129,10 @@ namespace Extellect.Utilities
             ));
         }       
 
-        [TestMethod]
+        [Fact]
         public void Number_Aba()
         {
-            Assert.IsTrue(
+            Assert.True(
                 new int[] { 1, 2, 1 }.Permute().DeepSequenceEqual(
                     new int[][] {
                         new int[] {1, 1, 2},
