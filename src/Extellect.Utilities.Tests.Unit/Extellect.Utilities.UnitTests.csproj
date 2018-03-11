@@ -100,8 +100,11 @@
     <Compile Include="Concurrency\ArbiterTests.cs" />
     <Compile Include="Data\CsvBaseTests.cs" />
     <Compile Include="Data\FileDataReaderTests.cs" />
+    <Compile Include="Data\LikeTests.cs" />
+    <Compile Include="EnumExtensionsTests.cs" />
     <Compile Include="Execution\MapReduceFixture.cs" />
     <Compile Include="Execution\RetryableFixture.cs" />
+    <Compile Include="MaskTests.cs" />
     <Compile Include="Math\LinearEquationFixture.cs" />
     <Compile Include="Math\MatrixFixture.cs" />
     <Compile Include="Polling\BackOffTests.cs" />

@@ -130,6 +130,7 @@
     <Compile Include="Collections\PriorityQueue.cs" />
     <Compile Include="Collections\Windowing.cs" />
     <Compile Include="Concurrency\Arbiter.cs" />
+    <Compile Include="Data\Like.cs" />
     <Compile Include="Data\ObjectReader.cs" />
     <Compile Include="Data\CsvBase.cs" />
     <Compile Include="Data\CsvReader.cs" />
@@ -140,12 +141,14 @@
     <Compile Include="Data\IdentityJoinBase.cs" />
     <Compile Include="Data\ObjectDataReader.cs" />
     <Compile Include="Data\ObjectWriter.cs" />
+    <Compile Include="DatePart.cs" />
     <Compile Include="DateTimeClock.cs" />
     <Compile Include="Diagnostics\MiniDump.cs" />
     <Compile Include="Diagnostics\MINIDUMP_TYPE.cs" />
     <Compile Include="Diagnostics\SW.cs" />
     <Compile Include="Drawing\Imaging\Ironbow.cs" />
     <Compile Include="Drawing\Imaging\Rainbow.cs" />
+    <Compile Include="EnumExtensions.cs" />
     <Compile Include="EventArgs.cs" />
     <Compile Include="Execution\CronExpression.cs" />
     <Compile Include="Execution\MapReduce.cs" />
@@ -162,6 +165,7 @@
     <Compile Include="IO\ThrottledFileSystemWatcher.cs" />
     <Compile Include="DelegateEqualityComparer.cs" />
     <Compile Include="Logging\LogHelper.cs" />
+    <Compile Include="Mask.cs" />
     <Compile Include="Math\LinearEquation.cs" />
     <Compile Include="Math\Matrix.cs" />
     <Compile Include="NativeMethods.cs" />
@@ -172,6 +176,8 @@
     <Compile Include="Polling\IBlockable.cs" />
     <Compile Include="Polling\ThreadSleepBlock.cs" />
     <Compile Include="Polling\ManyBlock.cs" />
+    <Compile Include="Reflection\PropertyCustomAttribute.cs" />
+    <Compile Include="Reflection\ReflectionExtensions.cs" />
     <Compile Include="Remoting\Streamable.cs" />
     <Compile Include="Sequencing\EnumerableExtensions.cs" />
     <Compile Include="Sequencing\Identity.cs" />
