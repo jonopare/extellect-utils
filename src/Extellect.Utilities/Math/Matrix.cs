@@ -30,6 +30,14 @@ namespace Extellect.Utilities.Math
         }
 
         /// <summary>
+        /// Creates a new Matrix with a copy of the provided Matrix's data
+        /// </summary>
+        public Matrix(Matrix source)
+            : this(source._data, true)
+        {
+        }
+
+        /// <summary>
         /// Internal constructor that allows us to create matrices from 
         /// arrays without the overhead of copying.
         /// </summary>
@@ -38,7 +46,7 @@ namespace Extellect.Utilities.Math
             if (copy)
             {
                 _data = new double[data.GetLength(0), data.GetLength(1)];
-                Array.Copy(data, 0, this._data, 0, data.Length);
+                Array.Copy(data, 0, _data, 0, data.Length);
             }
             else
             {
@@ -251,18 +259,27 @@ namespace Extellect.Utilities.Math
         /// </summary>
         public override string ToString()
         {
+            //return ToString("\t", Environment.NewLine);
+            return ToString(",", ";");
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string ToString(string columnSeparator, string lineSeparator)
+        {
             var result = new StringBuilder();
             for (var m = 0; m < M; m++)
             {
                 if (m != 0)
                 {
-                    result.AppendLine();
+                    result.Append(lineSeparator);
                 }
                 for (var n = 0; n < N; n++)
                 {
                     if (n != 0)
                     {
-                        result.Append('\t');
+                        result.Append(columnSeparator);
                     }
                     result.Append(_data[m, n]);
                 }
@@ -298,6 +315,26 @@ namespace Extellect.Utilities.Math
         public override int GetHashCode()
         {
             return _data.Cast<double>().Aggregate(0, (x, y) => x ^ y.GetHashCode());
+        }
+
+        /// <summary>
+        /// Adds two matrices
+        /// </summary>
+        public static Matrix operator +(Matrix left, Matrix right)
+        {
+            if (!left.TryAdd(right, out Matrix result))
+                throw new InvalidOperationException();
+            return result;
+        }
+
+        /// <summary>
+        /// Multiplies two matrices
+        /// </summary>
+        public static Matrix operator *(Matrix left, Matrix right)
+        {
+            if (!left.TryMultiply(right, out Matrix result))
+                throw new InvalidOperationException();
+            return result;
         }
     }
 }

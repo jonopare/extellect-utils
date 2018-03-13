@@ -15,8 +15,7 @@ namespace Extellect.Utilities.Collections
         /// </summary>
         public static TValue AddOrUpdate<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key, TValue addValue, Func<TValue, TValue> updateValue)
         {
-            TValue foundValue;
-            if (!dictionary.TryGetValue(key, out foundValue))
+            if (!dictionary.TryGetValue(key, out TValue foundValue))
             {
                 dictionary.Add(key, addValue);
             }
@@ -32,8 +31,7 @@ namespace Extellect.Utilities.Collections
         /// </summary>
         public static TValue GetValueOrDefault<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key, Func<TValue> defaultValue)
         {
-            TValue value;
-            return dictionary.TryGetValue(key, out value) ? value : defaultValue();
+            return dictionary.TryGetValue(key, out TValue value) ? value : defaultValue();
         }
 
         /// <summary>
@@ -41,8 +39,15 @@ namespace Extellect.Utilities.Collections
         /// </summary>
         public static TValue GetValueOrDefault<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key, TValue defaultValue)
         {
-            TValue value;
-            return dictionary.TryGetValue(key, out value) ? value : defaultValue;
+            return dictionary.TryGetValue(key, out TValue value) ? value : defaultValue;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static TValue GetValueOrDefault<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key)
+        {
+            return dictionary.TryGetValue(key, out TValue value) ? value : default(TValue);
         }
     }
 }
