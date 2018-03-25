@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>Extellect.Utilities</id>
+    <version>$version$</version>
+    <authors>Jono Pare</authors>
+    <owners>jono.pare</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0</licenseUrl>
+    <description>A free library of helpful classes that (at the time of writing) I feel are missing from the major libraries such as Microsoft's .NET Framework, Spring.NET and log4net. 
+
+These types are intended to increase your productivity by letting you reuse something that somebody else has already written and unit tested</description>
+    <summary>Extellect utility classes</summary>
+    <dependencies>
+      <dependency id="log4net" version="2.0.8" />
+    </dependencies>
+  </metadata>
+</package>

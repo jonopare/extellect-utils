@@ -152,6 +152,16 @@
     <Compile Include="DelegateEqualityComparer.cs" />
     <Compile Include="Logging\LogHelper.cs" />
     <Compile Include="Mask.cs" />
+    <Compile Include="Math\Algebra\Add.cs" />
+    <Compile Include="Math\Algebra\BinaryEvaluable.cs" />
+    <Compile Include="Math\Algebra\Constant.cs" />
+    <Compile Include="Math\Algebra\Div.cs" />
+    <Compile Include="Math\Algebra\Equation.cs" />
+    <Compile Include="Math\Algebra\IEvaluable.cs" />
+    <Compile Include="Math\Algebra\Mul.cs" />
+    <Compile Include="Math\Algebra\Sub.cs" />
+    <Compile Include="Math\Algebra\UnassignedVariableException.cs" />
+    <Compile Include="Math\Algebra\Variable.cs" />
     <Compile Include="Math\LinearEquation.cs" />
     <Compile Include="Math\Matrix.cs" />
     <Compile Include="NativeMethods.cs" />
@@ -220,6 +230,9 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Extellect.Utilities.nuspec">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

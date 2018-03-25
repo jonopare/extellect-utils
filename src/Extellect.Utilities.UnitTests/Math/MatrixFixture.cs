@@ -15,7 +15,7 @@ namespace Extellect.Utilities.Math
                     { 3, 4 }
                 });
             var toString = matrix.ToString();
-            Assert.Equal("1\t2\r\n3\t4", toString);
+            Assert.Equal("1,2;3,4", toString);
         }
 
         [Fact]
@@ -27,7 +27,7 @@ namespace Extellect.Utilities.Math
                     { 4, 5, 6 } 
                 });
             var toString = matrix.ToString();
-            Assert.Equal("1\t2\t3\r\n4\t5\t6", toString);
+            Assert.Equal("1,2,3;4,5,6", toString);
         }
 
         [Fact]
