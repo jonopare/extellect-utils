@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Extellect.Utilities.Math.Algebra
 {
-    public class Add : BinaryEvaluable
+    public class Add : BinaryOperator
     {
         public Add(IEvaluable left, IEvaluable right)
             : base(left, right)
@@ -21,7 +21,7 @@ namespace Extellect.Utilities.Math.Algebra
 
         public override string ToString()
         {
-            return $"({Left} + {Right})";
+            return $"({LeftOperand} + {RightOperand})";
         }
     }
 }

@@ -153,13 +153,14 @@
     <Compile Include="Logging\LogHelper.cs" />
     <Compile Include="Mask.cs" />
     <Compile Include="Math\Algebra\Add.cs" />
-    <Compile Include="Math\Algebra\BinaryEvaluable.cs" />
+    <Compile Include="Math\Algebra\BinaryOperator.cs" />
     <Compile Include="Math\Algebra\Constant.cs" />
-    <Compile Include="Math\Algebra\Div.cs" />
     <Compile Include="Math\Algebra\Equation.cs" />
     <Compile Include="Math\Algebra\IEvaluable.cs" />
     <Compile Include="Math\Algebra\Mul.cs" />
-    <Compile Include="Math\Algebra\Sub.cs" />
+    <Compile Include="Math\Algebra\Inv.cs" />
+    <Compile Include="Math\Algebra\Neg.cs" />
+    <Compile Include="Math\Algebra\UnaryOperator.cs" />
     <Compile Include="Math\Algebra\UnassignedVariableException.cs" />
     <Compile Include="Math\Algebra\Variable.cs" />
     <Compile Include="Math\LinearEquation.cs" />

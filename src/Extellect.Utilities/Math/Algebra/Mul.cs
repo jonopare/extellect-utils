@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Extellect.Utilities.Math.Algebra
 {
-    public class Mul : BinaryEvaluable
+    public class Mul : BinaryOperator
     {
         public Mul(IEvaluable left, IEvaluable right)
             : base(left, right)
@@ -19,7 +19,7 @@ namespace Extellect.Utilities.Math.Algebra
 
         public override string ToString()
         {
-            return $"({Left} * {Right})";
+            return $"({LeftOperand} * {RightOperand})";
         }
     }
 }

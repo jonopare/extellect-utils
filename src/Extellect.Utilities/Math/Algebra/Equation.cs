@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Extellect.Utilities.Math.Algebra
 {
-    public class Equation : BinaryEvaluable
+    public class Equation : BinaryOperator
     {
         public Equation(IEvaluable left, IEvaluable right)
             : base(left, right)
@@ -22,13 +22,13 @@ namespace Extellect.Utilities.Math.Algebra
         }
 
         /// <summary>
-        /// Solves a simple algebraic equation for one of its terms. Ergh... I wouldn't trust the output of this method, it cannot handle solutions for negative terms (among other things)
+        /// Solves a simple algebraic equation for one of its terms.
         /// </summary>
         public Equation SolveFor(Variable target)
         {
             var results = new List<IEvaluable>();
 
-            Func<BinaryEvaluable, IEvaluable, IEvaluable> ob = (be, n) => (be.Left == n || be.Left == target) ? be.Right : be.Left;
+            Func<BinaryOperator, IEvaluable, IEvaluable> ob = (be, n) => (be.LeftOperand == n || be.LeftOperand == target) ? be.RightOperand : be.LeftOperand;
 
             Func<IEvaluable, Action<IList<IEvaluable>>> createFound = otherBranch =>
             {
@@ -40,28 +40,32 @@ namespace Extellect.Utilities.Math.Algebra
                         IEvaluable next = i == 0 ? null : es[i - 1];
                         if (e is Mul mul)
                         {
-                            otherBranch = new Div(otherBranch, ob(mul, next));
-                        }
-                        else if (e is Div div)
-                        {
-                            otherBranch = new Mul(otherBranch, ob(div, next));
+                            otherBranch = new Mul(otherBranch, Inv.Create(ob(mul, next)));
                         }
                         else if (e is Add add)
                         {
-                            otherBranch = new Sub(otherBranch, ob(add, next));
+                            otherBranch = new Add(otherBranch, Neg.Create(ob(add, next)));
                         }
-                        else if (e is Sub sub)
+                        else if (e is Inv inv)
                         {
-                            otherBranch = new Add(otherBranch, ob(sub, next));
+                            otherBranch = Inv.Create(otherBranch);
+                        }
+                        else if (e is Neg neg)
+                        {
+                            otherBranch = Neg.Create(otherBranch);
+                        }
+                        else
+                        {
+                            throw new NotSupportedException();
                         }
                     }
                     results.Add(otherBranch);
                 };
             };
 
-            Find(Left, target, new Stack<IEvaluable>(), createFound(Right));
+            Find(LeftOperand, target, new Stack<IEvaluable>(), createFound(RightOperand));
 
-            Find(Right, target, new Stack<IEvaluable>(), createFound(Left));
+            Find(RightOperand, target, new Stack<IEvaluable>(), createFound(LeftOperand));
 
             return new Equation(target, results.Single());
         }
@@ -76,18 +80,25 @@ namespace Extellect.Utilities.Math.Algebra
                 }
                 else
                 {
-                    // another variable
+                    // terminal node - didn't find what we wanted
                 }
-            }
-            else if (branch is BinaryEvaluable binary)
-            {
-                breadcrumbs.Push(branch);
-                Find(binary.Left, target, breadcrumbs, found);
-                Find(binary.Right, target, breadcrumbs, found);
-                breadcrumbs.Pop();
             }
             else if (branch is Constant)
             {
+                // terminal node - didn't find what we wanted
+            }
+            else if (branch is BinaryOperator binary)
+            {
+                breadcrumbs.Push(branch);
+                Find(binary.LeftOperand, target, breadcrumbs, found);
+                Find(binary.RightOperand, target, breadcrumbs, found);
+                breadcrumbs.Pop();
+            }
+            else if (branch is UnaryOperator unary)
+            {
+                breadcrumbs.Push(branch);
+                Find(unary.Operand, target, breadcrumbs, found);
+                breadcrumbs.Pop();
             }
             else
             {
@@ -97,7 +108,7 @@ namespace Extellect.Utilities.Math.Algebra
 
         public override string ToString()
         {
-            return $"{Left} = {Right}";
+            return $"{LeftOperand} = {RightOperand}";
         }
     }
 }
