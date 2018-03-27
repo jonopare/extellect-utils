@@ -9,33 +9,44 @@ namespace Extellect.Utilities.Math.Algebra
 {
     public class EquationTests
     {
+        private readonly Variable _y;
+        private readonly Variable _m;
+        private readonly Variable _x;
+        private readonly Variable _c;
+        private readonly Dictionary<string, Variable> _variablesByName;
+
+        public EquationTests()
+        {
+            _y = new Variable("y");
+            _m = new Variable("m");
+            _x = new Variable("x");
+            _c = new Variable("c");
+            _variablesByName = new[] { _y, _m, _x, _c }
+                .ToDictionary(v => v.Name);
+        }
+
         [Theory]
         [InlineData(false, false, "((m * x) + c)", "x = ((y + -c) * 1/m)")]
         [InlineData(false, true, "(c + (m * x))", "x = ((y + -c) * 1/m)")]
         [InlineData(true, false, "((x * m) + c)", "x = ((y + -c) * 1/m)")]
         [InlineData(true, true, "(c + (x * m))", "x = ((y + -c) * 1/m)")]
-        public void SolveFor(bool commuteMul, bool commuteAdd, string expRight, string expSol)
+        public void SolveFor_AddMul(bool commuteMul, bool commuteAdd, string expRight, string expSol)
         {
-            var y = new Variable("y");
-            var m = new Variable("m");
-            var x = new Variable("x");
-            var c = new Variable("c");
-
-            var left = y;
-            var mul = commuteMul ? new Mul(x, m) : new Mul(m, x);
-            var right = commuteAdd ? new Add(c, mul) : new Add(mul, c);
+            var left = _y;
+            var mul = commuteMul ? new Mul(_x, _m) : new Mul(_m, _x);
+            var right = commuteAdd ? new Add(_c, mul) : new Add(mul, _c);
             Assert.Equal(expRight, right.ToString());
 
             var eq = new Equation(left, right);
 
-            var sol = eq.SolveFor(x);
+            var sol = eq.SolveFor(_x);
             Assert.Equal(expSol, sol.ToString());
 
-            x.Assign(4);
-            m.Assign(3);
-            c.Assign(2);
+            _x.Assign(4);
+            _m.Assign(3);
+            _c.Assign(2);
 
-            y.Assign(right.Evaluate());
+            _y.Assign(right.Evaluate());
 
             Assert.Equal(left.Evaluate(), right.Evaluate());
             Assert.Equal(sol.LeftOperand.Evaluate(), sol.RightOperand.Evaluate());
@@ -46,35 +57,88 @@ namespace Extellect.Utilities.Math.Algebra
         [InlineData("c", "c = -((x * 1/m) + -y)")]
         [InlineData("m", "m = 1/((y + -c) * 1/x)")]
         [InlineData("x", "x = ((y + -c) * m)")]
-        public void SolveFor_2(string targetName, string expectedSolution)
+        public void SolveFor_AddMulNegInv(string targetName, string expectedSolution)
         {
-            var y = new Variable("y");
-            var m = new Variable("m");
-            var x = new Variable("x");
-            var c = new Variable("c");
-
-            var variables = new[] { y, m, x, c }
-                .ToDictionary(v => v.Name);
-
-            var left = new Add(y, Neg.Create(c));
-            var right = new Mul(x, Inv.Create(m));
+            var left = new Add(_y, Neg.Create(_c));
+            var right = new Mul(_x, Inv.Create(_m));
 
             var eq = new Equation(left, right);
             Assert.Equal("(y + -c) = (x * 1/m)", eq.ToString());
 
-            var sol = eq.SolveFor(variables[targetName]);
+            var sol = eq.SolveFor(_variablesByName[targetName]);
             Assert.Equal(expectedSolution, sol.ToString());
 
-            x.Assign(4d);
-            m.Assign(3d);
-            c.Assign(2d);
-            y.Assign(10d / 3d);
-            //// solve for y so that we can evaluate all variables - bit of cheating that allows us to modify the above expression a bit in testing
-            //var sol_y = eq.SolveFor(y);
-            //y.Assign(sol_y.RightOperand.Evaluate());
+            _x.Assign(4d);
+            _m.Assign(3d);
+            _c.Assign(2d);
+            _y.Assign(10d / 3d);
 
             Assert.Equal(left.Evaluate(), right.Evaluate(), 8);
             Assert.Equal(sol.LeftOperand.Evaluate(), sol.RightOperand.Evaluate(), 8);
+        }
+
+        [Fact]
+        public void SolveFor_PowerToLog()
+        {
+            var left = _y;
+            var right = new Add(new Pow(_m, _x), _c);
+            var eq = new Equation(left, right);
+            Assert.Equal("y = ((m ^ x) + c)", eq.ToString());
+
+            var sol = eq.SolveFor(_x);
+            Assert.Equal("x = log[m](y + -c)", sol.ToString());
+        }
+
+        [Fact]
+        public void SolveFor_PowerToInversePower()
+        {
+            var left = _y;
+            var right = new Add(new Pow(_m, _x), _c);
+            var eq = new Equation(left, right);
+            Assert.Equal("y = ((m ^ x) + c)", eq.ToString());
+
+            var sol_m = eq.SolveFor(_m);
+            Assert.Equal("m = ((y + -c) ^ -x)", sol_m.ToString());
+        }
+
+        [Fact]
+        public void SolveFor_LogToInversePower()
+        {
+            var left = _y;
+            var right = new Add(new Log(_m, _x), _c);
+            var eq = new Equation(left, right);
+            Assert.Equal("y = (log[m]x + c)", eq.ToString());
+            
+            var sol_m = eq.SolveFor(_m);
+            Assert.Equal("m = (x ^ 1/(y + -c))", sol_m.ToString());
+
+            _y.Assign(4);
+            _m.Assign(2);
+            _x.Assign(8);
+            _c.Assign(1);
+
+            Assert.Equal(2, sol_m.LeftOperand.Evaluate());
+            Assert.Equal(2, sol_m.RightOperand.Evaluate());
+        }
+
+        [Fact]
+        public void SolveFor_LogToPower()
+        {
+            var left = _y;
+            var right = new Add(new Log(_m, _x), _c);
+            var eq = new Equation(left, right);
+            Assert.Equal("y = (log[m]x + c)", eq.ToString());
+
+            var sol_x = eq.SolveFor(_x);
+            Assert.Equal("x = (m ^ (y + -c))", sol_x.ToString());
+            
+            _y.Assign(4);
+            _m.Assign(2);
+            _x.Assign(8);
+            _c.Assign(1);
+
+            Assert.Equal(8, sol_x.LeftOperand.Evaluate());
+            Assert.Equal(8, sol_x.RightOperand.Evaluate());
         }
     }
 }

@@ -111,6 +111,8 @@
     <Compile Include="Execution\RetryableFixture.cs" />
     <Compile Include="MaskTests.cs" />
     <Compile Include="Math\Algebra\EquationTests.cs" />
+    <Compile Include="Math\Algebra\LogTests.cs" />
+    <Compile Include="Math\Algebra\PowTests.cs" />
     <Compile Include="Math\LinearEquationFixture.cs" />
     <Compile Include="Math\MatrixFixture.cs" />
     <Compile Include="Polling\BackOffTests.cs" />

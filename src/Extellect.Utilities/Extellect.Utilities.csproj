@@ -157,9 +157,11 @@
     <Compile Include="Math\Algebra\Constant.cs" />
     <Compile Include="Math\Algebra\Equation.cs" />
     <Compile Include="Math\Algebra\IEvaluable.cs" />
+    <Compile Include="Math\Algebra\Log.cs" />
     <Compile Include="Math\Algebra\Mul.cs" />
     <Compile Include="Math\Algebra\Inv.cs" />
     <Compile Include="Math\Algebra\Neg.cs" />
+    <Compile Include="Math\Algebra\Pow.cs" />
     <Compile Include="Math\Algebra\UnaryOperator.cs" />
     <Compile Include="Math\Algebra\UnassignedVariableException.cs" />
     <Compile Include="Math\Algebra\Variable.cs" />

@@ -1,10 +1,11 @@
-﻿using System;
+﻿#pragma warning disable 1591
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Extellect.Utilities.Math.Algebra
 {
-    class Constant : IEvaluable
+    public class Constant : IEvaluable
     {
         private readonly double _value;
 

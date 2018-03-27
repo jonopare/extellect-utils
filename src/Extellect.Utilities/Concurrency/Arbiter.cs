@@ -20,7 +20,7 @@ namespace Extellect.Utilities.Concurrency
         private static int finished;
         private static ManualResetEvent main;
 
-        [ThreadStaticAttribute]
+        [ThreadStatic]
         private static ManualResetEvent sync;
 
         private static List<ManualResetEvent> all;
@@ -76,7 +76,7 @@ namespace Extellect.Utilities.Concurrency
         {
             if (name == StartGate)
             {
-                if (Arbiter.id != firstToRun)
+                if (id != firstToRun)
                 {
                     Yield(true);
                 }

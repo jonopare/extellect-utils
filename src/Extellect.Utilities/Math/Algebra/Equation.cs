@@ -26,9 +26,11 @@ namespace Extellect.Utilities.Math.Algebra
         /// </summary>
         public Equation SolveFor(Variable target)
         {
-            var results = new List<IEvaluable>();
+            var results = new List<IEvaluable>();            
 
-            Func<BinaryOperator, IEvaluable, IEvaluable> ob = (be, n) => (be.LeftOperand == n || be.LeftOperand == target) ? be.RightOperand : be.LeftOperand;
+            Func<BinaryOperator, IEvaluable, bool> isFoundLeft = (be, n) => (be.LeftOperand == n || be.LeftOperand == target);
+
+            Func<BinaryOperator, IEvaluable, IEvaluable> ob = (be, n) => isFoundLeft(be, n) ? be.RightOperand : be.LeftOperand;
 
             Func<IEvaluable, Action<IList<IEvaluable>>> createFound = otherBranch =>
             {
@@ -53,6 +55,28 @@ namespace Extellect.Utilities.Math.Algebra
                         else if (e is Neg neg)
                         {
                             otherBranch = Neg.Create(otherBranch);
+                        }
+                        else if (e is Pow pow)
+                        {
+                            if (isFoundLeft(pow, next))
+                            {
+                                otherBranch = new Pow(otherBranch, Neg.Create(pow.RightOperand));
+                            }
+                            else
+                            {
+                                otherBranch = new Log(pow.LeftOperand, otherBranch);
+                            }
+                        }
+                        else if (e is Log log)
+                        {
+                            if (isFoundLeft(log, next))
+                            {
+                                otherBranch = new Pow(log.RightOperand, Inv.Create(otherBranch));
+                            }
+                            else
+                            {
+                                otherBranch = new Pow(log.LeftOperand, otherBranch);
+                            }
                         }
                         else
                         {
