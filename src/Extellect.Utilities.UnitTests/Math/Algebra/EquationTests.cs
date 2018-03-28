@@ -98,7 +98,15 @@ namespace Extellect.Utilities.Math.Algebra
             Assert.Equal("y = ((m ^ x) + c)", eq.ToString());
 
             var sol_m = eq.SolveFor(_m);
-            Assert.Equal("m = ((y + -c) ^ -x)", sol_m.ToString());
+            Assert.Equal("m = ((y + -c) ^ 1/x)", sol_m.ToString());
+
+            _y.Assign(9);
+            _m.Assign(2);
+            _x.Assign(3);
+            _c.Assign(1);
+
+            Assert.Equal(left.Evaluate(), right.Evaluate());
+            Assert.Equal(sol_m.LeftOperand.Evaluate(), sol_m.RightOperand.Evaluate());
         }
 
         [Fact]
@@ -139,6 +147,61 @@ namespace Extellect.Utilities.Math.Algebra
 
             Assert.Equal(8, sol_x.LeftOperand.Evaluate());
             Assert.Equal(8, sol_x.RightOperand.Evaluate());
+        }
+
+        [Fact]
+        public void SolveFor_BiggerEquationThanNormal()
+        {
+            var left = _y;
+            var right = new Log(new Constant(3), new Pow(new Mul(_m, Inv.Create(_x)), new Add(new Constant(3), Neg.Create(_c))));
+            
+            var eq = new Equation(left, right);
+            var sol_x = eq.SolveFor(_x);
+
+            _x.Assign(15);
+            _m.Assign(7);
+            _c.Assign(4);
+            _y.Assign(right.Evaluate());
+
+            //var r2 = new Mul(new Mul(_m, new Add(new Constant(3), Neg.Create(_c))), Inv.Create(new Pow(new Constant(3), _y)));
+
+            Assert.Equal(sol_x.LeftOperand.Evaluate(), sol_x.RightOperand.Evaluate());
+
+
+        }
+
+        [Fact]
+        public void SolveFor_BiggerEquationThanNormalButSmallerThanThat()
+        {
+            var left = _y;
+            var right = new Log(new Constant(3), new Mul(_m, Inv.Create(_x)));
+
+            var eq = new Equation(left, right);
+            var sol_x = eq.SolveFor(_x);
+
+            _x.Assign(15);
+            _m.Assign(7);
+            //_c.Assign(3);
+            _y.Assign(right.Evaluate());
+
+            Assert.Equal(_x.Evaluate(), sol_x.RightOperand.Evaluate());
+        }
+
+        [Fact]
+        public void SolveFor_BiggerEquationThanNormalButSmallerThanThatBleh()
+        {
+            var left = _y;
+            var right = new Log(new Constant(3), new Pow(_x, _m/*Inv.Create(_m)*/));
+
+            var eq = new Equation(left, right);
+            var sol_x = eq.SolveFor(_x);
+
+            _x.Assign(15);
+            _m.Assign(7);
+            //_c.Assign(3);
+            _y.Assign(right.Evaluate());
+
+            Assert.Equal(sol_x.LeftOperand.Evaluate(), sol_x.RightOperand.Evaluate(), 10);
         }
     }
 }

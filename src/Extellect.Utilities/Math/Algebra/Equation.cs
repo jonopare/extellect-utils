@@ -60,7 +60,7 @@ namespace Extellect.Utilities.Math.Algebra
                         {
                             if (isFoundLeft(pow, next))
                             {
-                                otherBranch = new Pow(otherBranch, Neg.Create(pow.RightOperand));
+                                otherBranch = new Pow(otherBranch, Inv.Create(pow.RightOperand));
                             }
                             else
                             {
