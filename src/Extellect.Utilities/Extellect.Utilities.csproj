@@ -84,6 +84,7 @@
     <Compile Include="..\SolutionVersionInfo.cs">
       <Link>Properties\SolutionVersionInfo.cs</Link>
     </Compile>
+    <Compile Include="Binary\Biterator.cs" />
     <Compile Include="Caching\ICacheEntry.cs" />
     <Compile Include="Caching\CacheEntry.cs" />
     <Compile Include="Caching\CacheEntryFactory.cs" />
@@ -150,6 +151,7 @@
     <Compile Include="Int32Extensions.cs" />
     <Compile Include="IO\TemporaryFile.cs" />
     <Compile Include="DelegateEqualityComparer.cs" />
+    <Compile Include="IO\TemporaryFileStream.cs" />
     <Compile Include="Logging\LogHelper.cs" />
     <Compile Include="Mask.cs" />
     <Compile Include="Math\Algebra\Add.cs" />
@@ -165,6 +167,7 @@
     <Compile Include="Math\Algebra\UnaryOperator.cs" />
     <Compile Include="Math\Algebra\UnassignedVariableException.cs" />
     <Compile Include="Math\Algebra\Variable.cs" />
+    <Compile Include="Math\Angle.cs" />
     <Compile Include="Math\LinearEquation.cs" />
     <Compile Include="Math\Matrix.cs" />
     <Compile Include="NativeMethods.cs" />

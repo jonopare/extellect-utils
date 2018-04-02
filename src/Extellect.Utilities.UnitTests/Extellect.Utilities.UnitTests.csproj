@@ -94,6 +94,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Binary\BiteratorTests.cs" />
     <Compile Include="Caching\CacheEntryTests.cs" />
     <Compile Include="Collections\DictionaryExtensionsFixture.cs" />
     <Compile Include="Collections\IndexableTests.cs" />
@@ -113,6 +114,7 @@
     <Compile Include="Math\Algebra\EquationTests.cs" />
     <Compile Include="Math\Algebra\LogTests.cs" />
     <Compile Include="Math\Algebra\PowTests.cs" />
+    <Compile Include="Math\AngleUnitTests.cs" />
     <Compile Include="Math\LinearEquationFixture.cs" />
     <Compile Include="Math\MatrixFixture.cs" />
     <Compile Include="Polling\BackOffTests.cs" />
