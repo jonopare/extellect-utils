@@ -40,7 +40,7 @@ namespace Extellect.Utilities.Drawing
 
                 bitmap.UnlockBits(data);
 
-                bitmap.Save(@"C:\Users\parejo\Desktop\hsl.png", ImageFormat.Png);
+                bitmap.Save(@"hsl.png", ImageFormat.Png);
             }
         }
 
