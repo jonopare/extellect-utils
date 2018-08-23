@@ -12,7 +12,14 @@ namespace Extellect.Utilities.Math
     {
         public static double GoalSeek(Func<double, double> func, double target, out double error, double low = double.MinValue, double high = double.MaxValue, int iterations = 100)
         {
-            if (low >= high)
+            return GoalSeek(func, target, out error, (x, y) => x - y, (x, y) => x + y, (x, y) => x - y, x => x / 2, low, high, iterations);
+        }
+
+        public static TGuess GoalSeek<TGuess, TTarget>(Func<TGuess, TTarget> func, TTarget target, out TTarget error, Func<TTarget, TTarget, TTarget> subTarget, Func<TGuess, TGuess, TGuess> add, Func<TGuess, TGuess, TGuess> subGuess, Func<TGuess, TGuess> half, TGuess low, TGuess high, int iterations = 100)
+            where TGuess : IComparable<TGuess>
+            where TTarget : IComparable<TTarget>
+        {
+            if (low.CompareTo(high) >= 0)
             {
                 throw new ArgumentException();
             }
@@ -21,44 +28,45 @@ namespace Extellect.Utilities.Math
                 throw new ArgumentException("Number of iterations must be positive", nameof(iterations));
             }
 
-            var ld = func(low) - target;
-            var hd = func(high) - target;
+            var ld = subTarget(func(low), target);
+            var hd = subTarget(func(high), target);
 
-            if (ld > hd)
+            if (ld.CompareTo(hd) >= 0)
             {
                 var temp = low;
                 low = high;
                 high = temp;
 
-                temp = ld;
+                var td = ld;
                 ld = hd;
-                hd = temp;
+                hd = td;
             }
 
-            Debug.Assert(ld < 0);
-            Debug.Assert(hd > 0);
+            Debug.Assert(ld.CompareTo(hd) < 0);
 
-            error = 0d;
+            error = default(TTarget);
             for (var i = 0; i < iterations; i++)
             {
-                var guess = low + (high - low) / 2;
-                error = func(guess) - target;
+                var guess = add(low, half(subGuess(high, low)));
 
-                if (error == 0d)
+                error = subTarget(func(guess), target);
+
+                var e = error.CompareTo(default(TTarget));
+                if (e == 0)
                 {
                     return guess;
                 }
-                else if (error > 0d)
+                else if (e > 0)
                 {
                     high = guess;
                 }
-                else if (error < 0d)
+                else if (e < 0)
                 {
                     low = guess;
                 }
             }
 
-            return low + (high - low) / 2;
+            return add(low, half(subGuess(high, low)));
         }
     }
 }
