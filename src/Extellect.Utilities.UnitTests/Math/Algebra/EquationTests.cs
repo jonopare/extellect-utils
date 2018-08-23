@@ -203,5 +203,28 @@ namespace Extellect.Utilities.Math.Algebra
 
             Assert.Equal(sol_x.LeftOperand.Evaluate(), sol_x.RightOperand.Evaluate(), 10);
         }
+
+        [Fact]
+        public void SolveFor_Factor()
+        {
+            var left = _y;
+            var right = new Add(_x, new Mul(_x, new Constant(3)));
+
+            var eq = new Equation(left, right);
+            var sol_x = eq.SolveFor(_x);
+
+            // should be clever enough to factor this into
+            // y = x + x         | y = 2 * x
+            // y = x + 3 * x     | y = 4 * x
+            // y = x * x         | y = x ^ 2
+            // y = x * 3 * x     | y = (3 * x) ^ 2
+
+            _x.Assign(15);
+            _m.Assign(7);
+            //_c.Assign(3);
+            _y.Assign(right.Evaluate());
+
+            Assert.Equal(sol_x.LeftOperand.Evaluate(), sol_x.RightOperand.Evaluate(), 10);
+        }
     }
 }

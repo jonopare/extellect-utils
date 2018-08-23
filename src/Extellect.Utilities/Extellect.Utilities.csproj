@@ -171,6 +171,8 @@
     <Compile Include="Math\Angle.cs" />
     <Compile Include="Math\LinearEquation.cs" />
     <Compile Include="Math\Matrix.cs" />
+    <Compile Include="Math\Solver.cs" />
+    <Compile Include="Math\Triplet.cs" />
     <Compile Include="NativeMethods.cs" />
     <Compile Include="Net\CookieAwareWebClient.cs">
       <SubType>Component</SubType>
