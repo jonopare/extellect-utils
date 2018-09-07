@@ -60,7 +60,9 @@ namespace Extellect.Utilities.Math
         public static Matrix Identity(int size)
         {
             if (size <= 0)
+            {
                 throw new ArgumentOutOfRangeException("size", "Value must be positive");
+            }
 
             var identity = new Matrix(size, size);
             for (var s = 0; s < size; s++)
@@ -74,12 +76,12 @@ namespace Extellect.Utilities.Math
         /// <summary>
         /// The number of columns in the matrix
         /// </summary>
-        public int M { get { return _data.GetLength(0); } }
+        public int M => _data.GetLength(0);
 
         /// <summary>
         /// The number of rows in the matrix
         /// </summary>
-        public int N { get { return _data.GetLength(1); } }
+        public int N => _data.GetLength(1);
 
         /// <summary>
         /// 
@@ -89,15 +91,23 @@ namespace Extellect.Utilities.Math
             get
             {
                 if (M != N)
+                {
                     throw new InvalidOperationException();
+                }
                 if (M == 2)
+                {
                     return _data[0, 0] * _data[1, 1] - _data[0, 1] * _data[1, 0];
+                }
                 else if (M == 3)
+                {
                     return _data[0, 0] * Minor(0, 0).Determinant
                         - _data[0, 1] * Minor(0, 1).Determinant
                         + _data[0, 2] * Minor(0, 2).Determinant;
+                }
                 else
+                {
                     throw new NotSupportedException();
+                }
             }
         }
 
@@ -107,9 +117,13 @@ namespace Extellect.Utilities.Math
         public Matrix Minor(int i, int j)
         {
             if (i < 0 || i >= M)
+            {
                 throw new ArgumentOutOfRangeException("i");
+            }
             if (j < 0 || j >= N)
+            {
                 throw new ArgumentOutOfRangeException("j");
+            }
 
             var data = new double[M - 1, N - 1];
 
@@ -117,7 +131,7 @@ namespace Extellect.Utilities.Math
             {
                 for (var n = 0; n < N - 1; n++)
                 {
-                    data[m, n] = this._data[m + (m >= i ? 1 : 0), n + (n >= j ? 1 : 0)];
+                    data[m, n] = _data[m + (m >= i ? 1 : 0), n + (n >= j ? 1 : 0)];
                 }
             }
 
@@ -134,7 +148,7 @@ namespace Extellect.Utilities.Math
             {
                 for (var n = 0; n < N; n++)
                 {
-                    data[n, m] = this._data[m, n];
+                    data[n, m] = _data[m, n];
                 }
             }
 
@@ -150,7 +164,7 @@ namespace Extellect.Utilities.Math
             if (M != other.M || N != other.N)
                 return false;
 
-            matrix = new Matrix(this._data, true);
+            matrix = new Matrix(_data, true);
 
             for (var m = 0; m < M; m++)
             {
@@ -170,7 +184,9 @@ namespace Extellect.Utilities.Math
         {
             matrix = null;
             if (N != other.M)
+            {
                 return false;
+            }
 
             var result = new double[M, other.N];
 
@@ -198,7 +214,9 @@ namespace Extellect.Utilities.Math
         {
             matrix = null;
             if (M != N)
+            {
                 return false;
+            }
             var temp = new double[M, 2 * N];
             var identity = Identity(M);
 
@@ -218,7 +236,9 @@ namespace Extellect.Utilities.Math
                 for (var tm = 0; tm < M; tm++)
                 {
                     if (tm == i)
+                    {
                         continue;
+                    }
 
                     x = temp[tm, i];
                     f = 0 - x;
@@ -294,7 +314,9 @@ namespace Extellect.Utilities.Math
         public bool Equals(Matrix other)
         {
             if (M != other.M || N != other.N)
+            {
                 return false;
+            }
             return _data.Cast<double>().SequenceEqual(other._data.Cast<double>());
         }
 
@@ -303,9 +325,10 @@ namespace Extellect.Utilities.Math
         /// </summary>
         public override bool Equals(object other)
         {
-            var otherMatrix = other as Matrix;
-            if (otherMatrix != null)
+            if (other is Matrix otherMatrix)
+            {
                 return Equals(otherMatrix);
+            }
             return false;
         }
 
@@ -323,7 +346,9 @@ namespace Extellect.Utilities.Math
         public static Matrix operator +(Matrix left, Matrix right)
         {
             if (!left.TryAdd(right, out Matrix result))
+            {
                 throw new InvalidOperationException();
+            }
             return result;
         }
 
@@ -333,7 +358,9 @@ namespace Extellect.Utilities.Math
         public static Matrix operator *(Matrix left, Matrix right)
         {
             if (!left.TryMultiply(right, out Matrix result))
+            {
                 throw new InvalidOperationException();
+            }
             return result;
         }
     }

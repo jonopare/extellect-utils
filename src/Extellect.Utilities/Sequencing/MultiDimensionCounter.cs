@@ -6,28 +6,11 @@ using System.Reflection;
 
 namespace Extellect.Utilities
 {
-    public struct Range
-    {
-        private int _minValue;
-        private int _maxValue;
-        public Range(int minValue, int maxValue)
-        {
-            if (minValue > maxValue)
-            {
-                throw new ArgumentOutOfRangeException();
-            }
-            _minValue = minValue;
-            _maxValue = maxValue;
-        }
-        public int MinValue { get { return _minValue; } }
-        public int MaxValue { get { return _maxValue; } }
-    }
-
     public class MultiDimensionCounter
     {
-        private Range[] _ranges;
+        private Range<int>[] _ranges;
         private int[] _values;
-        public MultiDimensionCounter(params Range[] ranges)
+        public MultiDimensionCounter(params Range<int>[] ranges)
         {
             _ranges = ranges;
             _values = new int[_ranges.Length];

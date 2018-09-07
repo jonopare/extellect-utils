@@ -169,9 +169,17 @@
     <Compile Include="Math\Algebra\UnassignedVariableException.cs" />
     <Compile Include="Math\Algebra\Variable.cs" />
     <Compile Include="Math\Angle.cs" />
+    <Compile Include="Math\Bezier.cs" />
+    <Compile Include="Math\BinomialCoefficient.cs" />
+    <Compile Include="Math\BoxMuller.cs" />
+    <Compile Include="Math\DistributionFunction.cs" />
+    <Compile Include="Math\Gaussian.cs" />
+    <Compile Include="Math\IDistributionFunction.cs" />
     <Compile Include="Math\LinearEquation.cs" />
+    <Compile Include="Math\MathExpression.cs" />
     <Compile Include="Math\Matrix.cs" />
     <Compile Include="Math\Solver.cs" />
+    <Compile Include="Math\TransformationMatrix.cs" />
     <Compile Include="Math\Triplet.cs" />
     <Compile Include="NativeMethods.cs" />
     <Compile Include="Net\CookieAwareWebClient.cs">
@@ -185,6 +193,8 @@
     <Compile Include="Reflection\ReflectionExtensions.cs" />
     <Compile Include="Remoting\Streamable.cs" />
     <Compile Include="Sequencing\EnumerableExtensions.cs" />
+    <Compile Include="Sequencing\EnumerableIterable.cs" />
+    <Compile Include="Sequencing\FuncIterable.cs" />
     <Compile Include="Sequencing\Identity.cs" />
     <Compile Include="Leasing\ILease.cs" />
     <Compile Include="Leasing\Leasable.cs" />
@@ -195,10 +205,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sequencing\ArithmeticSequence.cs" />
     <Compile Include="Sequencing\GenericSequenceGenerator.cs" />
+    <Compile Include="Sequencing\IIterable.cs" />
     <Compile Include="Sequencing\ISequenceGenerator.cs" />
+    <Compile Include="Sequencing\IterableExtensions.cs" />
     <Compile Include="Sequencing\ListComprehension.cs" />
     <Compile Include="Sequencing\MultiDimensionCounter.cs" />
     <Compile Include="Sequencing\NextInSequence.cs" />
+    <Compile Include="Sequencing\Range.cs" />
     <Compile Include="Services\AdditionalTimeEventArgs.cs" />
     <Compile Include="Services\ConsoleServiceBase.cs">
       <SubType>Component</SubType>
