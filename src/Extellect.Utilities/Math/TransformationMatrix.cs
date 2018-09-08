@@ -91,7 +91,7 @@ namespace Extellect.Utilities.Math
             return new Triplet(
                 value.X * _matrix[0, 0] + value.Y * _matrix[0, 1] + _matrix[2, 0],
                 value.Y * _matrix[1, 1] + value.X * _matrix[1, 0] + _matrix[2, 1],
-                0);
+                value.Z);
         }
     }
 }
