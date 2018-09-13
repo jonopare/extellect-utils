@@ -17,7 +17,7 @@ namespace Extellect.Utilities.Math
         /// <param name="n"></param>
         /// <param name="r"></param>
         /// <returns></returns>
-        public static int Combinations(int n, int r)
+        public static long Combinations(int n, int r)
         {
             if (n < 1 || r < 0 || r > n)
             {
@@ -31,11 +31,23 @@ namespace Extellect.Utilities.Math
             {
                 return 1;
             }
+            else if (r == 1)
+            {
+                return n;
+            }
+            //if (n >= 18) // int
+            if (n >= 30) // long, you could probably go further with ulong or double
+            {
+                throw new ArgumentOutOfRangeException(nameof(n), "Maximum value is 18 before operation results in overflow");
+            }
             else
             {
-                var numerator = Enumerable.Range(1 + n - r, r).Aggregate((x, y) => x * y);
-                var denominator = Enumerable.Range(1, r).Aggregate((x, y) => x * y);
-                return numerator / denominator;
+                checked
+                {
+                    var numerator = Enumerable.Range(1 + n - r, r).Aggregate(1L, (x, y) => x * y);
+                    var denominator = Enumerable.Range(1, r).Aggregate(1L, (x, y) => x * y);
+                    return numerator / denominator;
+                }
             }
         }
     }

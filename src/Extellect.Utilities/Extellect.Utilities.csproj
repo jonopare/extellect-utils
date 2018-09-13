@@ -172,6 +172,7 @@
     <Compile Include="Math\Bezier.cs" />
     <Compile Include="Math\BinomialCoefficient.cs" />
     <Compile Include="Math\BoxMuller.cs" />
+    <Compile Include="Math\Complex.cs" />
     <Compile Include="Math\DistributionFunction.cs" />
     <Compile Include="Math\Gaussian.cs" />
     <Compile Include="Math\IDistributionFunction.cs" />

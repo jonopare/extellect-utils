@@ -12,7 +12,7 @@ namespace Extellect.Utilities.Math
     public class Bezier
     {
         private readonly Triplet[] _points;
-        private readonly int[] _weights;
+        private readonly long[] _weights;
 
         /// <summary>
         /// 

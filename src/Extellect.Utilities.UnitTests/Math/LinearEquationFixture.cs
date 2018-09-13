@@ -6,7 +6,6 @@ using Xunit;
 
 namespace Extellect.Utilities.Math
 {
-    
     public class LinearEquationFixture
     {
         [Fact]
@@ -23,9 +22,8 @@ namespace Extellect.Utilities.Math
                     { 8 }, 
                     { -3 } 
                 });
-            
-            Matrix result;
-            if (!LinearEquation.TrySolve(abcd, ef, out result))
+
+            if (!LinearEquation.TrySolve(abcd, ef, out Matrix result))
             {
                 Assert.True(false);
             }
@@ -56,8 +54,7 @@ namespace Extellect.Utilities.Math
                     { 2 }
                 });
 
-            Matrix result;
-            if (!LinearEquation.TrySolve(abcd, ef, out result))
+            if (!LinearEquation.TrySolve(abcd, ef, out Matrix result))
             {
                 Assert.True(false);
             }

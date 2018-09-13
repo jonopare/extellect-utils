@@ -26,7 +26,7 @@ namespace Extellect.Utilities.Math
         /// </summary>
         public Matrix(double[,] data)
             : this(data, true)
-        {   
+        {
         }
 
         /// <summary>
@@ -55,6 +55,26 @@ namespace Extellect.Utilities.Math
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        public Matrix(double[] data, int rows, int columns, bool isByRow = false)
+        {
+            if (data.Length != rows * columns)
+            {
+                throw new ArgumentException();
+            }
+
+            _data = isByRow ? new double[rows, columns] : new double[columns, rows];
+
+            Buffer.BlockCopy(data, 0, _data, 0, data.Length * sizeof(double));
+
+            if (!isByRow)
+            {
+                _data = Transpose(_data);
+            }
+        }
+
+        /// <summary>
         /// Constructs the identity matrix of the specified size
         /// </summary>
         public static Matrix Identity(int size)
@@ -72,14 +92,26 @@ namespace Extellect.Utilities.Math
             return identity;
         }
 
+        /// <summary>
+        /// Constructs a matrix of basis vectors
+        /// </summary>
+        public static Matrix Diagonal(double[] values)
+        {
+            var result = Identity(values.Length);
+            for (var i = 0; i < values.Length; i++)
+            {
+                result[i, i] = values[i];
+            }
+            return result;
+        }
 
         /// <summary>
-        /// The number of columns in the matrix
+        /// Gets the number of rows in the matrix
         /// </summary>
         public int M => _data.GetLength(0);
 
         /// <summary>
-        /// The number of rows in the matrix
+        /// Gets the number of columns in the matrix
         /// </summary>
         public int N => _data.GetLength(1);
 
@@ -118,11 +150,11 @@ namespace Extellect.Utilities.Math
         {
             if (i < 0 || i >= M)
             {
-                throw new ArgumentOutOfRangeException("i");
+                throw new ArgumentOutOfRangeException(nameof(i));
             }
             if (j < 0 || j >= N)
             {
-                throw new ArgumentOutOfRangeException("j");
+                throw new ArgumentOutOfRangeException(nameof(j));
             }
 
             var data = new double[M - 1, N - 1];
@@ -139,20 +171,37 @@ namespace Extellect.Utilities.Math
         }
 
         /// <summary>
+        /// Note parameter order is a bit odd if you're used to X,Y,Width,Height
+        /// but that's because we think of vertical axis first in MxN matrices.
+        /// </summary>
+        public Matrix Submatrix(int top, int left, int height, int width)
+        {
+            var data = new double[height, width];
+
+            Plane.Write(_data, top, left, data, 0, 0, width, height);
+
+            return new Matrix(data, false);
+        }
+
+        /// <summary>
         /// Gets the transpose of this matrix
         /// </summary>
         public Matrix Transpose()
         {
-            var data = new double[N, M];
-            for (var m = 0; m < M; m++)
+            return new Matrix(Transpose(_data), false);
+        }
+
+        private static double[,] Transpose(double[,] data)
+        {
+            var transposed = new double[data.GetLength(1), data.GetLength(0)];
+            for (var m = 0; m < data.GetLength(0); m++)
             {
-                for (var n = 0; n < N; n++)
+                for (var n = 0; n < data.GetLength(1); n++)
                 {
-                    data[n, m] = _data[m, n];
+                    transposed[n, m] = data[m, n];
                 }
             }
-
-            return new Matrix(data, false);
+            return transposed;
         }
 
         /// <summary>
@@ -161,8 +210,11 @@ namespace Extellect.Utilities.Math
         public bool TryAdd(Matrix other, out Matrix matrix)
         {
             matrix = null;
+
             if (M != other.M || N != other.N)
+            {
                 return false;
+            }
 
             matrix = new Matrix(_data, true);
 
@@ -178,11 +230,37 @@ namespace Extellect.Utilities.Math
         }
 
         /// <summary>
+        /// Subtracts another matrix from this matrix. Both matrices must have the same dimensions.
+        /// </summary>
+        public bool TrySubtract(Matrix other, out Matrix matrix)
+        {
+            matrix = null;
+
+            if (M != other.M || N != other.N)
+            {
+                return false;
+            }
+
+            matrix = new Matrix(_data, true);
+
+            for (var m = 0; m < M; m++)
+            {
+                for (var n = 0; n < N; n++)
+                {
+                    matrix[m, n] -= other[m, n];
+                }
+            }
+
+            return true;
+        }
+
+        /// <summary>
         /// Tries to multiply two matrices. Returns true if the matrices can be multiplied; otherwise false.
         /// </summary>
         public bool TryMultiply(Matrix other, out Matrix matrix)
         {
             matrix = null;
+
             if (N != other.M)
             {
                 return false;
@@ -207,21 +285,37 @@ namespace Extellect.Utilities.Math
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        public bool TryAugment(Matrix other, out Matrix result)
+        {
+            if (M != other.M)
+            {
+                result = null;
+                return false;
+            }
+            var temp = new double[M, N + other.N];
+            Plane.Write(_data, 0, 0, temp, 0, 0, N, M);
+            Plane.Write(other._data, 0, 0, temp, 0, N, other.N, M);
+            result = new Matrix(temp, false);
+            return true;
+        }
+
+        /// <summary>
         /// Tries to invert the matrix. Returns true if the inversion succeeds; otherwise false.
         /// The inverted Matrix is set in the out parameter.
         /// </summary>
         public bool TryInvert(out Matrix matrix)
         {
             matrix = null;
-            if (M != N)
+            if (M != N || Determinant == 0)
             {
                 return false;
             }
-            var temp = new double[M, 2 * N];
-            var identity = Identity(M);
 
-            Plane.Write(_data, 0, 0, temp, 0, 0, M, N);
-            Plane.Write(identity._data, 0, 0, temp, 0, N, M, N);
+            _ = TryAugment(Identity(M), out Matrix augmented);
+
+            var temp = augmented._data;
 
             for (var i = 0; i < M; i++)
             {
@@ -257,6 +351,124 @@ namespace Extellect.Utilities.Math
             matrix = new Matrix(result, false);
 
             return true;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void Echelon()
+        {
+            if (N - M != 1)
+            {
+                // for input, we want a square matrix augmented with a single column
+                throw new InvalidOperationException();
+            }
+
+            // Rules:
+            // 1. swap rows
+            // 2. multiply a row by a non-zero scalar
+            // 3. add one row to a scalar multiple of another
+
+            // TODO: swap rows if any of the diagonal values has a zero
+
+            for (var i = 0; i < M - 1; i++)
+            {
+                for (var m = i + 1; m < M; m++)
+                {
+                    var scale = _data[m, i] / _data[i, i];
+                    for (var n = 0; n < N; n++)
+                    {
+                        _data[m, n] -= _data[i, n] * scale;
+                    }
+                }
+            }
+
+            // matrix is now in echelon form (also called triangular form)
+        }
+
+        /// <summary>
+        /// https://en.wikipedia.org/wiki/Gaussian_elimination
+        /// </summary>
+        public void ReducedRowEchelon()
+        {
+            if (N - M != 1)
+            {
+                // for input, we want a square matrix augmented with a single column
+                throw new InvalidOperationException();
+            }
+
+            if (!IsTriangular)
+            {
+                Echelon();
+            }
+
+            for (var i = M - 1; i > 0; i--)
+            {
+                for (var m = i - 1; m >= 0; m--)
+                {
+                    var scale = _data[m, i] / _data[i, i];
+                    for (var n = 0; n < N; n++)
+                    {
+                        _data[m, n] -= _data[i, n] * scale;
+                    }
+                }
+            }
+
+            for (var i = 0; i < M; i++)
+            {
+                _data[i, N - 1] /= _data[i, i];
+                _data[i, i] = 1;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool IsTriangular
+        {
+            get
+            {
+                for (var m = 1; m < M; m++)
+                {
+                    for (var n = 0; n < m; n++)
+                    {
+                        if (_data[m, n] != 0d)
+                        {
+                            return false;
+                        }
+                    }
+                }
+                return true;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public IEnumerable<Complex> Eigenvalues
+        {
+            get
+            {
+                if (M != N || M != 2)
+                {
+                    throw new NotImplementedException();
+                }
+                //λ2−λ(a+d)+(a×d)−(c×b)=0
+                var b = 0 - _data[0, 0] - _data[1, 1];
+                var c = _data[0, 0] * _data[1, 1] - _data[1, 0] * _data[0, 1];
+                var d = b * b - 4 * c;
+                var s = System.Math.Sqrt(System.Math.Abs(d));
+                if (System.Math.Sign(d) < 0)
+                {
+                    yield return new Complex(-b / 2, s / 2);
+                    yield return new Complex(-b / 2, -s / 2);
+                }
+                else
+                {
+                    yield return new Complex((s - b) / 2, 0);
+                    yield return new Complex((0 - s - b) / 2, 0);
+                }
+            }
         }
 
         /// <summary>
@@ -353,6 +565,18 @@ namespace Extellect.Utilities.Math
         }
 
         /// <summary>
+        /// Subtracts one matrix from another
+        /// </summary>
+        public static Matrix operator -(Matrix left, Matrix right)
+        {
+            if (!left.TrySubtract(right, out Matrix result))
+            {
+                throw new InvalidOperationException();
+            }
+            return result;
+        }
+
+        /// <summary>
         /// Multiplies two matrices
         /// </summary>
         public static Matrix operator *(Matrix left, Matrix right)
@@ -362,6 +586,30 @@ namespace Extellect.Utilities.Math
                 throw new InvalidOperationException();
             }
             return result;
+        }
+
+        /// <summary>
+        /// Multiplies a matrix with a scalar
+        /// </summary>
+        public static Matrix operator *(double left, Matrix right)
+        {
+            var result = new Matrix(right);
+            for (var m = 0; m < result.M; m++)
+            {
+                for (var n = 0; n < result.N; n++)
+                {
+                    result[m, n] *= left;
+                }
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// Multiplies a matrix with a scalar
+        /// </summary>
+        public static Matrix operator *(Matrix left, double right)
+        {
+            return right * left;
         }
     }
 }

@@ -121,6 +121,7 @@
     <Compile Include="Math\BezierTests.cs" />
     <Compile Include="Math\BinomialCoefficientTests.cs" />
     <Compile Include="Math\BoxMullerTests.cs" />
+    <Compile Include="Math\ComplexTests.cs" />
     <Compile Include="Math\CosDistributionFunctionTests.cs" />
     <Compile Include="Math\DistributionFunctionTestHelper.cs" />
     <Compile Include="Math\GaussianTests.cs" />
