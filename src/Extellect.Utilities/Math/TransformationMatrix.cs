@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 namespace Extellect.Utilities.Math
 {
     /// <summary>
-    /// 
+    /// Linear transformation matrix helper for 2D transformations, using a 3D matrix internally 
+    /// as done in the PDF specification.
     /// </summary>
     public class TransformationMatrix
     {
