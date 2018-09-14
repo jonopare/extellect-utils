@@ -9,6 +9,14 @@ namespace Extellect.Utilities.Math
     /// <summary>
     /// Linear transformation matrix helper for 2D transformations, using a 3D matrix internally 
     /// as done in the PDF specification.
+    /// 
+    /// The PDF "Tm" command has just six arguments:
+    /// 2 for scale,
+    /// 2 for skew, and
+    /// 2 for translation
+    /// 
+    /// It does not expose the entire matrix, so the basis of the third axis cannot be changed
+    /// and is always represented by the unit vector in the matrix.
     /// </summary>
     public class TransformationMatrix
     {
@@ -85,7 +93,9 @@ namespace Extellect.Utilities.Math
         }
 
         /// <summary>
-        /// 
+        /// Warning: this should only be applied to a 2D vector
+        /// as it doesn't actually manipulate the third axis: it's only
+        /// there to make the calculation more efficient.
         /// </summary>
         public Triplet ApplyTo(Triplet value)
         {
