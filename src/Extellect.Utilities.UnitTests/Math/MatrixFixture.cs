@@ -82,7 +82,7 @@ namespace Extellect.Utilities.Math
             Matrix inverse;
             if (!matrix.TryInvert(out inverse))
             {
-                Assert.True(false);
+                Assert.False(true);
             }
             var expected = new Matrix(
                 new double[,] {
@@ -174,7 +174,7 @@ namespace Extellect.Utilities.Math
             Matrix result;
             if (!a.TryAdd(b, out result))
             {
-                Assert.True(false);
+                Assert.False(true);
             }
 
             var expected = new Matrix(
@@ -291,6 +291,17 @@ namespace Extellect.Utilities.Math
             Assert.Equal(6, d.Determinant);
         }
 
+        [Theory]
+        [InlineData(0, false)]
+        [InlineData(1, true)]
+        [InlineData(0.5, false)]
+        public void IsIdentity(double value, bool expected)
+        {
+            var d = Matrix.Diagonal(Enumerable.Repeat(value, 5).ToArray());
+
+            Assert.Equal(expected, d.IsIdentity);
+        }
+
         [Fact]
         public void TryAugment()
         {
@@ -346,7 +357,7 @@ namespace Extellect.Utilities.Math
         [Theory]
         [InlineData(8d, "3;1")]
         [InlineData(-2d, "3;-9")]
-        public void Eigenvectors(double λ, string expected)
+        public void Eigenvectors_2D(double λ, string expected)
         {
             var a = new Matrix(new[] { 7d, 3d, 3d, -1d }, 2, 2, true);
             var λi = Matrix.Identity(2) * λ;
@@ -354,47 +365,57 @@ namespace Extellect.Utilities.Math
             var det = diff.Determinant;
             Assert.Equal(0d, det);
 
-            var x = new Matrix(new[] { 0d, 0d }, 2, 1, true);
-            if (!LinearEquation.TrySolve(diff, x, out Matrix solution))
-            {
-                Assert.False(true);
-            }
+            var solution = diff.Eigenvectors(λ)
+                .Single();
 
             Assert.Equal(expected, solution.ToString());
 
             Assert.Equal((λ * solution).ToString(), (a * solution).ToString()); 
         }
 
+        //[Theory]
+        //[InlineData(1, "0,-3,2;1,0,0")]
+        //public void Eigenvectors_3D(double λ, string expected)
+        //{
+        //    var a = new Matrix(new double[,] { { 1, 2, 3 }, { 0, 1, 0 }, { 0, 0, 1 } });
+        //    var λi = Matrix.Identity(a.N) * λ;
+        //    var diff = a - λi;
+        //    var det = diff.Determinant;
+        //    Assert.Equal(0d, det);
+
+        //    var solution = diff.Eigenvectors(λ)
+        //        .Single();
+
+        //    Assert.Equal(expected, solution.ToString());
+
+        //    Assert.Equal((λ * solution).ToString(), (a * solution).ToString());
+        //}
+
         [Theory]
-        [InlineData(7, 3, 3, -1, "Re=-2,Im=0;Re=8,Im=0")]
-        [InlineData(3, 1, 0, 2, "Re=2,Im=0;Re=3,Im=0")]
-        [InlineData(2, 2, 1, 3, "Re=1,Im=0;Re=4,Im=0")]
-        [InlineData(2, 0, 0, 2, "Re=2,Im=0")]
-        [InlineData(1, 1, 0, 1, "Re=1,Im=0")]
-        [InlineData(0.5, -1, -1, 0.5, "Re=-0.5,Im=0;Re=1.5,Im=0")]
-        [InlineData(0, -1, 1, 0, "Re=0,Im=-1;Re=0,Im=1")]
+        [InlineData(7, 3, 3, -1, "-2;8")]
+        [InlineData(3, 1, 0, 2, "2;3")]
+        [InlineData(2, 2, 1, 3, "1;4")]
+        [InlineData(2, 0, 0, 2, "2")]
+        [InlineData(1, 1, 0, 1, "1")]
+        [InlineData(0.5, -1, -1, 0.5, "-0.5;1.5")]
+        [InlineData(0, -1, 1, 0, "")]
         public void Eigenvalues_2D(double a, double b, double c, double d, string expected)
         {
             var m = new Matrix(new[] { a, b, c, d }, 2, 2, true);
 
             var eigenvalues = m.Eigenvalues
                 .Distinct()
-                .OrderBy(x => x.Re)
-                .ThenBy(x => x.Im)
+                .OrderBy(x => x)
                 .ToList();
 
-            var actual = string.Join(";", eigenvalues
-                .Select(x => $"Re={x.Re},Im={x.Im}"));
+            var actual = string.Join(";", eigenvalues);
 
             Assert.Equal(expected, actual);
 
-            if (!eigenvalues.Any(x => x.Im != 0))
+            foreach (var eigenvalue in eigenvalues)
             {
-                foreach (var eigenvalue in eigenvalues)
-                {
-                    var lambdaIdentity = Matrix.Diagonal(Enumerable.Repeat(eigenvalue.Re, 2).ToArray());
-                    Assert.Equal(0, (m - lambdaIdentity).Determinant);
-                }
+                var lambdaIdentity = Matrix.Diagonal(Enumerable.Repeat(eigenvalue, 2).ToArray());
+                Assert.Equal(0, (m - lambdaIdentity).Determinant);
             }
         }
     }

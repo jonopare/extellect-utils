@@ -47,7 +47,7 @@ namespace Extellect.Utilities.Collections
         {
             var key = "b";
 
-            var value = _dictionary.GetValueOrDefault(key, () => { Assert.True(false); return 0; });
+            var value = _dictionary.GetValueOrDefault(key, () => { Assert.False(true); return 0; });
 
             Assert.Equal(2, value);
         }

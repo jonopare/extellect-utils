@@ -443,9 +443,9 @@ namespace Extellect.Utilities.Math
         }
 
         /// <summary>
-        /// 
+        /// Gets the real eigenvalues (eigenvalues with non-zero imaginary parts are ignored).
         /// </summary>
-        public IEnumerable<Complex> Eigenvalues
+        public IEnumerable<double> Eigenvalues
         {
             get
             {
@@ -457,16 +457,84 @@ namespace Extellect.Utilities.Math
                 var b = 0 - _data[0, 0] - _data[1, 1];
                 var c = _data[0, 0] * _data[1, 1] - _data[1, 0] * _data[0, 1];
                 var d = b * b - 4 * c;
-                var s = System.Math.Sqrt(System.Math.Abs(d));
-                if (System.Math.Sign(d) < 0)
+                if (System.Math.Sign(d) >= 0)
                 {
-                    yield return new Complex(-b / 2, s / 2);
-                    yield return new Complex(-b / 2, -s / 2);
+                    var s = System.Math.Sqrt(d);
+                    yield return (s - b) / 2;
+                    yield return (0 - s - b) / 2;
                 }
-                else
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool IsIdentity
+        {
+            get
+            {
+                if (M != N)
                 {
-                    yield return new Complex((s - b) / 2, 0);
-                    yield return new Complex((0 - s - b) / 2, 0);
+                    return false;
+                }
+                for (var m = 0; m < M; m++)
+                {
+                    for (var n = 0; n < N; n++)
+                    {
+                        if (_data[m, n] != ((m == n) ? 1 : 0))
+                        {
+                            return false;
+                        }
+                    }
+                }
+                return true;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public IEnumerable<Matrix> Eigenvectors(double eigenvalue)
+        {
+            if (M != N || M != 2)
+            {
+                throw new NotImplementedException();
+            }
+
+            var rhs = new Matrix(M, 1);
+            if (TryAugment(rhs, out Matrix augmented))
+            {
+                augmented.Echelon();
+
+                var zeroes = Enumerable.Range(0, augmented.M)
+                    .Where(x => augmented[x, x] == 0d);
+
+                // by definition, the multiplication of matrix and eigenvector must result in a single 
+                // non-zero vector?
+
+                if (zeroes.Any())
+                {
+                    // we don't have a unique solution because two or more of the rows were the same line
+
+                    // TODO: this next bit is not correct for all sitations
+
+                    var firstNonZero = Enumerable.Range(0, augmented.M)
+                        .Where(x => augmented[x, x] != 0d)
+                        .First();
+
+                    if (augmented[firstNonZero, augmented.N - 1] != 0)
+                    {
+                        throw new InvalidOperationException();
+                    }
+
+                    var result = augmented.Submatrix(firstNonZero, 0, 1, augmented.N - 1);
+
+                    if (result.N != 2)
+                    {
+                        throw new InvalidOperationException();
+                    }
+
+                    yield return new Matrix(new[] { result[0, 1], 0 - result[0, 0] }, 2, 1, true);
                 }
             }
         }

@@ -24,52 +24,24 @@ namespace Extellect.Utilities.Math
             {
                 return false;
             }
-
+            
             if (abcd.TryInvert(out Matrix inverse))
             {
+                // only square invertible (e.g. non-zero determinant) matrices will reach here
                 return inverse.TryMultiply(ef, out result);
             }
-            else if (ef.N == 1 && abcd.TryAugment(ef, out Matrix augmented))
+            else if (ef.N == 1 && abcd.M == abcd.N && abcd.TryAugment(ef, out Matrix augmented))
             {
-                augmented.Echelon();
+                // presumably this branch will not execute until a singular matrix is passed as abcd
+                // at which point we won't be able to perform a reduced row echelon anyway
+                // because the rows would be linearly dependent. so i question the value of having this here...
 
-                var zeroes = Enumerable.Range(0, augmented.M)
-                    .Where(x => augmented[x, x] == 0d);
+                augmented.ReducedRowEchelon();
 
-                if (zeroes.Any())
-                {
-                    // we don't have a unique solution because two or more of the rows were the same line
+                result = augmented.Submatrix(0, augmented.N - 1, augmented.M, 1);
 
-                    // TODO: this next bit is not correct for all sitations
-
-                    var firstNonZero = Enumerable.Range(0, augmented.M)
-                        .Where(x => augmented[x, x] != 0d)
-                        .First();
-
-                    if (augmented[firstNonZero, augmented.N - 1] != 0)
-                    {
-                        throw new InvalidOperationException();
-                    }
-
-                    result = augmented.Submatrix(firstNonZero, 0, 1, augmented.N - 1);
-
-                    if (result.N != 2)
-                    {
-                        throw new InvalidOperationException();
-                    }
-
-                    result = new Matrix(new[] { result[0, 1], 0 - result[0, 0]}, 2, 1, true);
-
-                    return true;
-                }
-                else
-                {
-                    augmented.ReducedRowEchelon();
-
-                    result = augmented.Submatrix(0, augmented.N - 1, augmented.M, 1);
-
-                    return true;
-                }
+                return augmented.Submatrix(0, 0, augmented.M, augmented.N - 1)
+                    .IsIdentity;
             }
             else
             {   
