@@ -47,6 +47,8 @@ namespace Extellect.Utilities
             return true;
         }
 
+        public int[] Current => _values;
+
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
