@@ -69,6 +69,32 @@ namespace Extellect.Utilities.Diagnostics
                 items[key].Stop();
             }
         }
+
+        public static T Wrap<T>(string key, Func<T> expression)
+        {
+            Start(key);
+            try
+            {
+                return expression();
+            }
+            finally
+            {
+                Stop(key);
+            }
+        }
+
+        public static void Wrap(string key, Action statement)
+        {
+            Start(key);
+            try
+            {
+                statement();
+            }
+            finally
+            {
+                Stop(key);
+            }
+        }
         
         public static void Clear()
         {

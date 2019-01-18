@@ -108,6 +108,7 @@
     <Compile Include="Data\CsvBaseTests.cs" />
     <Compile Include="Data\FileDataReaderTests.cs" />
     <Compile Include="Data\LikeTests.cs" />
+    <Compile Include="Diagnostics\TimmyTests.cs" />
     <Compile Include="Drawing\HslTests.cs" />
     <Compile Include="EnumExtensionsTests.cs" />
     <Compile Include="Execution\MapReduceFixture.cs" />
