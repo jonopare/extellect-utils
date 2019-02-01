@@ -89,15 +89,10 @@
     <Compile Include="Caching\CacheEntry.cs" />
     <Compile Include="Caching\CacheEntryFactory.cs" />
     <Compile Include="Caching\ICacheEntryFactory.cs" />
-    <Compile Include="CLI\ArgumentAttribute.cs" />
-    <Compile Include="CLI\ArgumentParser.cs" />
-    <Compile Include="CLI\Arguments.cs" />
-    <Compile Include="CLI\ArgumentValidationException.cs" />
     <Compile Include="CLI\ConsoleControl.cs" />
     <Compile Include="CLI\ConsoleCtrlHandler.cs" />
     <Compile Include="CLI\ControlEventArgs.cs" />
     <Compile Include="CLI\CtrlTypes.cs" />
-    <Compile Include="CLI\IArguments.cs" />
     <Compile Include="CLI\IConsoleControl.cs" />
     <Compile Include="Clock.cs" />
     <Compile Include="Collections\BlockingQueue.cs" />
