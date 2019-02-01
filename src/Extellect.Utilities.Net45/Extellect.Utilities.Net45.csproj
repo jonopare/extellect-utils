@@ -1,0 +1,226 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{6B520D2B-C9E7-41CF-8E95-6CAD913592BD}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Extellect.Utilities</RootNamespace>
+    <AssemblyName>Extellect.Utilities</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkProfile />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\Extellect.Utilities.xml</DocumentationFile>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\SolutionInfo.cs">
+      <Link>Properties\SolutionInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\SolutionVersionInfo.cs">
+      <Link>Properties\SolutionVersionInfo.cs</Link>
+    </Compile>
+    <Compile Include="Binary\Biterator.cs" />
+    <Compile Include="CLI\ConsoleControl.cs" />
+    <Compile Include="CLI\ConsoleCtrlHandler.cs" />
+    <Compile Include="CLI\ControlEventArgs.cs" />
+    <Compile Include="CLI\CtrlTypes.cs" />
+    <Compile Include="CLI\IConsoleControl.cs" />
+    <Compile Include="Concurrency\Arbiter.cs" />
+    <Compile Include="Data\Like.cs" />
+    <Compile Include="Data\ObjectReader.cs" />
+    <Compile Include="Data\CsvBase.cs" />
+    <Compile Include="Data\CsvReader.cs" />
+    <Compile Include="Data\DataRecordExtensions.cs" />
+    <Compile Include="Data\FileDataReader.cs" />
+    <Compile Include="Data\IBinaryReader.cs" />
+    <Compile Include="Data\IBinaryWriter.cs" />
+    <Compile Include="Data\IdentityJoinBase.cs" />
+    <Compile Include="Data\ObjectDataReader.cs" />
+    <Compile Include="Data\ObjectWriter.cs" />
+    <Compile Include="Diagnostics\MiniDump.cs" />
+    <Compile Include="Diagnostics\MINIDUMP_TYPE.cs" />
+    <Compile Include="Drawing\Hsl.cs" />
+    <Compile Include="Drawing\Imaging\Ironbow.cs" />
+    <Compile Include="Drawing\Imaging\Rainbow.cs" />
+    <Compile Include="Instrumentation\FailSafePerformanceCounter.cs" />
+    <Compile Include="Instrumentation\FailSafePerformanceCounterFactory.cs" />
+    <Compile Include="Instrumentation\IPerformanceCounter.cs" />
+    <Compile Include="Instrumentation\IPerformanceCounterFactory.cs" />
+    <Compile Include="IO\TemporaryFile.cs" />
+    <Compile Include="IO\TemporaryFileStream.cs" />
+    <Compile Include="Logging\LogHelper.cs" />
+    <Compile Include="Math\Algebra\Add.cs" />
+    <Compile Include="Math\Algebra\BinaryOperator.cs" />
+    <Compile Include="Math\Algebra\Constant.cs" />
+    <Compile Include="Math\Algebra\Equation.cs" />
+    <Compile Include="Math\Algebra\IEvaluable.cs" />
+    <Compile Include="Math\Algebra\Log.cs" />
+    <Compile Include="Math\Algebra\Mul.cs" />
+    <Compile Include="Math\Algebra\Inv.cs" />
+    <Compile Include="Math\Algebra\Neg.cs" />
+    <Compile Include="Math\Algebra\Pow.cs" />
+    <Compile Include="Math\Algebra\UnaryOperator.cs" />
+    <Compile Include="Math\Algebra\UnassignedVariableException.cs" />
+    <Compile Include="Math\Algebra\Variable.cs" />
+    <Compile Include="Math\Angle.cs" />
+    <Compile Include="Math\Bezier.cs" />
+    <Compile Include="Math\BinomialCoefficient.cs" />
+    <Compile Include="Math\BoxMuller.cs" />
+    <Compile Include="Math\DistributionFunction.cs" />
+    <Compile Include="Math\IDistributionFunction.cs" />
+    <Compile Include="Math\LinearEquation.cs" />
+    <Compile Include="Math\MathExpression.cs" />
+    <Compile Include="Math\Matrix.cs" />
+    <Compile Include="Math\Solver.cs" />
+    <Compile Include="Math\TransformationMatrix.cs" />
+    <Compile Include="Math\Triplet.cs" />
+    <Compile Include="NativeMethods.cs" />
+    <Compile Include="Net\CookieAwareWebClient.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Net\SocketExtensions.cs" />
+    <Compile Include="Remoting\Streamable.cs" />
+    <Compile Include="Sequencing\EnumerableExtensions.cs" />
+    <Compile Include="Sequencing\EnumerableIterable.cs" />
+    <Compile Include="Sequencing\FuncIterable.cs" />
+    <Compile Include="Sequencing\Identity.cs" />
+    <Compile Include="Leasing\ILease.cs" />
+    <Compile Include="Leasing\Leasable.cs" />
+    <Compile Include="Leasing\Lease.cs" />
+    <Compile Include="Leasing\LeaseManager.cs" />
+    <Compile Include="Logging\ConsoleColorSettings.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sequencing\ArithmeticSequence.cs" />
+    <Compile Include="Sequencing\GenericSequenceGenerator.cs" />
+    <Compile Include="Sequencing\IIterable.cs" />
+    <Compile Include="Sequencing\ISequenceGenerator.cs" />
+    <Compile Include="Sequencing\IterableExtensions.cs" />
+    <Compile Include="Sequencing\ListComprehension.cs" />
+    <Compile Include="Sequencing\MultiDimensionCounter.cs" />
+    <Compile Include="Sequencing\NextInSequence.cs" />
+    <Compile Include="Sequencing\Range.cs" />
+    <Compile Include="Services\AdditionalTimeEventArgs.cs" />
+    <Compile Include="Services\ConsoleServiceBase.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Streaming\IStreamServer.cs" />
+    <Compile Include="Streaming\SimpleStreamServer.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="SystemTypes\SystemTypes.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>SystemTypes.txt</LastGenOutput>
+    </Content>
+    <Content Include="SystemTypes\SystemTypes.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SystemTypes.tt</DependentUpon>
+    </Content>
+    <Content Include="SystemTypes\SystemTypes.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Extellect.Utilities.nuspec">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Extellect.Utilities\Extellect.Utilities.csproj">
+      <Project>{c8544707-7cf0-4690-9b47-70fe6a64e9d6}</Project>
+      <Name>Extellect.Utilities</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
