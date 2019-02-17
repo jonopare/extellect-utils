@@ -1,7 +1,6 @@
 ﻿using Microsoft.Glee;
 using Microsoft.Glee.Splines;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
@@ -17,47 +16,44 @@ namespace Extellect.AutomaticGraphLayout
 {
     public class Painter
     {
-        private Font _font;
+        private readonly Font _font;
         private GleeGraph _gleeGraph;
 
-        public void Paint<T>(Digraph<T> dependencies, Func<T, string> nameSelector)
+        public Painter()
         {
             _font = new Font("Segoe UI", 12, FontStyle.Regular);
-
-            using (var bitmap = new Bitmap(800, 600))
-            {
-                using (var graphics = Graphics.FromImage(bitmap))
-                {
-                    graphics.CompositingQuality = CompositingQuality.HighQuality;
-                    graphics.SmoothingMode = SmoothingMode.HighQuality;
-                    graphics.TextRenderingHint = TextRenderingHint.AntiAlias;
-                    var graphicsAdapter = new GdiPlusGraphicsAdapter(graphics);
-                    _gleeGraph = CreateAndLayoutGraph(graphicsAdapter, dependencies, nameSelector);
-                    DrawFromGraph(graphicsAdapter, new RectangleF(0, 0, bitmap.Width, bitmap.Height));
-                }
-                bitmap.Save(@"output.png", ImageFormat.Png);
-            }
-
-            using (var document = new PdfDocument())
-            {
-                document.Info.Title = "GLEE2PDF";
-                document.Info.Author = "Jonathan Pare";
-
-                document.Info.Subject = "Demonstration of GLEE to PDF generation";
-                document.Info.Keywords = "PDFsharp, GLEE";
-
-                var page = document.AddPage();
-                page.Orientation = PageOrientation.Landscape;
-                using (var graphicsAdapter = new PdfSharpGraphicsAdapter(XGraphics.FromPdfPage(page, XGraphicsUnit.Millimeter)))
-                {
-                    _gleeGraph = CreateAndLayoutGraph(graphicsAdapter, dependencies, nameSelector);
-                    DrawFromGraph(graphicsAdapter, new RectangleF(0, 0, (float)page.Width.Millimeter, (float)page.Height.Millimeter));
-                }
-                document.Save(@"output.pdf");
-            }
         }
 
-        private void DrawFromGraph(IGraphicsAdapter graphics, RectangleF r)
+        //public void Paint<T>(Digraph<T> dependencies, Func<T, string> nameSelector)
+        //{
+        //    //using (var bitmap = new Bitmap(800, 600))
+        //    //{
+                
+        //    //    bitmap.Save(@"output.png", ImageFormat.Png);
+        //    //}
+
+        //    //using (var document = new PdfDocument())
+        //    //{
+        //    //    document.Info.Title = "GLEE2PDF";
+        //    //    document.Info.Author = "Jonathan Pare";
+
+        //    //    document.Info.Subject = "Demonstration of GLEE to PDF generation";
+        //    //    document.Info.Keywords = "PDFsharp, GLEE";
+
+        //    //    var page = document.AddPage();
+        //    //    page.Orientation = PageOrientation.Landscape;
+
+        //    //    page.Paint(dependencies, nameSelector);
+                
+        //    //    document.Save(@"output.pdf");
+        //    //}
+        //}
+
+        //public void Paint<T>(IGraphicsAdapter graphicsAdapter, Digraph<T> dependencies, Func<T, string> nameSelector)
+        //{
+        //}
+
+        internal void DrawFromGraph(IGraphicsAdapter graphics, RectangleF r)
         {
             SetGraphicsTransform(graphics, r);
             Pen pen = new Pen(Brushes.Black);
@@ -81,10 +77,10 @@ namespace Extellect.AutomaticGraphLayout
 
                 var g0 = (float)(gr.Left + gr.Right) / 2;
                 var g1 = (float)(gr.Top + gr.Bottom) / 2;
-                
+
                 var c0 = (r.Left + r.Right) / 2;
                 var c1 = (r.Top + r.Bottom) / 2;
-                
+
                 var dx = c0 - scale * g0;
                 var dy = c1 - scale * g1;
 
@@ -194,13 +190,11 @@ namespace Extellect.AutomaticGraphLayout
             return new DPoint((int)point.X, (int)point.Y);
         }
 
-        private GleeGraph CreateAndLayoutGraph<T>(IGraphicsAdapter graphics, Digraph<T> dependencies, Func<T, string> nameSelector)
+        internal void CreateAndLayoutGraph<T>(IGraphicsAdapter graphics, Digraph<T> dependencies, Func<T, string> nameSelector)
         {
-            var graph = dependencies.ToGraph(graphics, _font, nameSelector);
+            _gleeGraph = dependencies.ToGraph(graphics, _font, nameSelector);
 
-            graph.CalculateLayout();
-
-            return graph;
+            _gleeGraph.CalculateLayout();
         }
     }
 }

@@ -7,7 +7,7 @@
     <ProjectGuid>{C1BC6D5A-0A16-4BC0-A8A7-21DF0D1CF2BC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Extellect</RootNamespace>
+    <RootNamespace>Extellect.AutomaticGraphLayout</RootNamespace>
     <AssemblyName>Extellect.AutomaticGraphLayout</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -70,10 +70,12 @@
     <Compile Include="..\SolutionVersionInfo.cs">
       <Link>Properties\SolutionVersionInfo.cs</Link>
     </Compile>
+    <Compile Include="BitmapExtensions.cs" />
     <Compile Include="Digraph.cs" />
     <Compile Include="DigraphEdge.cs" />
     <Compile Include="GdiPlusGraphicsAdapter.cs" />
     <Compile Include="IGraphicsAdapter.cs" />
+    <Compile Include="PdfPageExtensions.cs" />
     <Compile Include="PdfSharpGraphicsAdapter.cs" />
     <Compile Include="Painter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

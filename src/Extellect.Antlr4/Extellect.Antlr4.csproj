@@ -8,7 +8,7 @@
     <ProjectGuid>{97D330B1-8E16-449D-AA88-CC58EEC255EE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Extellect</RootNamespace>
+    <RootNamespace>Extellect.Antlr4</RootNamespace>
     <AssemblyName>Extellect.Antlr4</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
