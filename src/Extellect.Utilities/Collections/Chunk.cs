@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Extellect.Utilities
+namespace Extellect
 {
     // A Chunk is a contiguous group of one or more source elements that have the same key. A Chunk 
     // has a key and a list of ChunkItem objects, which are copies of the elements in the source sequence.

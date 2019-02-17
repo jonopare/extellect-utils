@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Extellect.Utilities.Execution
+namespace Extellect.Execution
 {
     public class Retryable
     {

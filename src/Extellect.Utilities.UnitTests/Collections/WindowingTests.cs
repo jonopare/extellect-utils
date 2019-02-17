@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Xunit;
-using Extellect.Utilities.Collections;
+using Extellect.Collections;
 using System.IO;
 
-namespace Extellect.Utilities.Collections
+namespace Extellect.Collections
 {
     
     public class WindowingTests

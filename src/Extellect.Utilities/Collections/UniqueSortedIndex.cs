@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Extellect.Utilities.Collections
+namespace Extellect.Collections
 {
     public class UniqueSortedIndex<TKey, TValue> : ICollection<TValue>, IIndex<TKey, TValue> where TKey: IComparable<TKey>
     {

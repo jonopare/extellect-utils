@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Extellect.Utilities.Polling
+namespace Extellect.Polling
 {
     /// <summary>
     /// Interface that allows for a blocking type delay to be inserted into the execution flow.

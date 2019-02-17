@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 
-namespace Extellect.Utilities.Collections
+namespace Extellect.Collections
 {
     
     public class DictionaryExtensionsFixture

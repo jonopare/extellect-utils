@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Extellect.Utilities.Testing\Extellect.Utilities.Testing.csproj" />
+    <ProjectReference Include="..\Extellect.Testing\Extellect.Testing.csproj" />
     <ProjectReference Include="..\Extellect.Utilities\Extellect.Utilities.csproj" />
   </ItemGroup>
 

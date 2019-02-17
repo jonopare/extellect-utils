@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Extellect.Utilities.CLI
+namespace Extellect.CLI
 {
     /// <summary>
     /// Base class from which to define custom type-safe classes that hold command line

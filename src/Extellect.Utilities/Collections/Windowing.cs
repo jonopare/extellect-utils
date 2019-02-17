@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 
-namespace Extellect.Utilities.Collections
+namespace Extellect.Collections
 {
     /// <summary>
     /// Exposes extension methods that facilitate querying windows within sequences and streams.

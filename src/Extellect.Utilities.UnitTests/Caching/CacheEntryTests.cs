@@ -2,7 +2,7 @@
 using System;
 using Xunit;
 
-namespace Extellect.Utilities.Caching
+namespace Extellect.Caching
 {
     public class CacheEntryTests
     {

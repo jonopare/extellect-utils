@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Extellect.Utilities.Collections
+namespace Extellect.Collections
 {
     /// <summary>
     /// Systematic generation of all permutations.

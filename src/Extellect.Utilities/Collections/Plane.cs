@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Extellect.Utilities.Collections
+namespace Extellect.Collections
 {
     /// <summary>
     /// I didn't have a great name for this class.

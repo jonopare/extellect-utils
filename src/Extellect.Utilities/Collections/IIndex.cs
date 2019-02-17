@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Extellect.Utilities.Collections
+namespace Extellect.Collections
 {
     /// <summary>
     /// Abstracts the access to a set of key/value pairs in the way that could be useful as an index.

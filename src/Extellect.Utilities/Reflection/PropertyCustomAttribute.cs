@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Extellect.Utilities.Reflection
+namespace Extellect.Reflection
 {
     /// <summary>
     /// A data structure that hold a property and its 

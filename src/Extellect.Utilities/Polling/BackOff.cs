@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 
-namespace Extellect.Utilities.Polling
+namespace Extellect.Polling
 {
     /// <summary>
     /// Frequently when polling, I find the need to back off because a resource isn't ready.

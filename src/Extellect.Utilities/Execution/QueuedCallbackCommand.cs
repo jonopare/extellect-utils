@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Extellect.Utilities.Collections;
+using Extellect.Collections;
 
-namespace Extellect.Utilities.Execution
+namespace Extellect.Execution
 {
     /// <summary>
     /// An action that will be executed later.

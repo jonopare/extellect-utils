@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Extellect.Utilities.Diagnostics
+namespace Extellect.Diagnostics
 {
     /// <summary>
     /// Not quite the same use case as SW; decide which one you want to use.

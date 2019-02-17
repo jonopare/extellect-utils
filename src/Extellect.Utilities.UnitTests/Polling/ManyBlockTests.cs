@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Xunit;
-using Extellect.Utilities.Testing;
+using Extellect.Testing;
 
-namespace Extellect.Utilities.Polling
+namespace Extellect.Polling
 {
     
     public class ManyBlockTests

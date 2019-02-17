@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 //using System.Threading.Tasks.Dataflow;
 
-namespace Extellect.Utilities.Execution
+namespace Extellect.Execution
 {
     /// <summary>
     /// A silly little class to enable proof-of-concept work with the MapReduce pattern.

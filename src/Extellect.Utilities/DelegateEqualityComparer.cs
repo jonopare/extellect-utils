@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Extellect.Utilities
+namespace Extellect
 {
     public class DelegateEqualityComparer<T> : IEqualityComparer<T>
     {

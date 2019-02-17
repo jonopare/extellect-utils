@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Extellect.Utilities
+namespace Extellect
 {
     /// <summary>
     /// This enumeration allows us to declare which part of a DateTime object we are interested in.

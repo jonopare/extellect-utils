@@ -3,9 +3,9 @@ using System.Text;
 using System.Collections.Generic;
 using System.Linq;
 using Xunit;
-using Extellect.Utilities.Testing;
+using Extellect.Testing;
 
-namespace Extellect.Utilities.Execution
+namespace Extellect.Execution
 {
     
     public class MapReduceFixture

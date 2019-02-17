@@ -2,9 +2,9 @@
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
-using Extellect.Utilities.Reflection;
+using Extellect.Reflection;
 
-namespace Extellect.Utilities
+namespace Extellect
 {
     /// <summary>
     /// Static class containing helpers and extension methods for Enums. 

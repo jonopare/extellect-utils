@@ -5,7 +5,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 
-namespace Extellect.Utilities.Diagnostics
+namespace Extellect.Diagnostics
 {
     /// <summary>
     /// Thread-safe-(ish?) string-keyed stopwatches for non-interrupting timing. Use the Items iterator once completed to read back the logs.

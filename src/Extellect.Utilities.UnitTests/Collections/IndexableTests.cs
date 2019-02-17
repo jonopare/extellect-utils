@@ -3,9 +3,9 @@ using System.Text;
 using System.Collections.Generic;
 using System.Linq;
 using Xunit;
-using Extellect.Utilities.Collections;
+using Extellect.Collections;
 
-namespace Extellect.Utilities.Collections
+namespace Extellect.Collections
 {
     
     public class IndexableTests

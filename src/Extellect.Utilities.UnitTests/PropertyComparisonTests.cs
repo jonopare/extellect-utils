@@ -1,8 +1,8 @@
 ﻿using System;
 using Xunit;
-using Extellect.Utilities.Testing;
+using Extellect.Testing;
 
-namespace Extellect.Utilities
+namespace Extellect
 {
     
     public class PropertyComparisonTests

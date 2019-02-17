@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Xunit;
 
-namespace Extellect.Utilities.Polling
+namespace Extellect.Polling
 {
     internal class TestBlock : IBlockable
     {

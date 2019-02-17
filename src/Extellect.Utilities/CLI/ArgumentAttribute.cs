@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Extellect.Utilities.CLI
+namespace Extellect.CLI
 {
     /// <summary>
     /// This custom attribute allows you to define the name of a command line argument,

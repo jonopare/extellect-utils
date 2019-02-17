@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Extellect.Utilities.Collections;
+using Extellect.Collections;
 using Xunit;
 
-namespace Extellect.Utilities
+namespace Extellect
 {
     
     public class PermutationTests

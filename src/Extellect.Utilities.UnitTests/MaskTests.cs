@@ -1,7 +1,7 @@
 ﻿using System;
 using Xunit;
 
-namespace Extellect.Utilities
+namespace Extellect
 {
     public class MaskTests
     {

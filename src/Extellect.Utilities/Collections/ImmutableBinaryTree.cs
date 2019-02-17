@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Extellect.Utilities.Collections
+namespace Extellect.Collections
 {
     /// <summary>
     /// Represents an immutable binary tree.

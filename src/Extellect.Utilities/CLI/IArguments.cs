@@ -1,4 +1,4 @@
-﻿namespace Extellect.Utilities.CLI
+﻿namespace Extellect.CLI
 {
     /// <summary>
     /// Base interface from which to define custom type-safe classes that hold command line

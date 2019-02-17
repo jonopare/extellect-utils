@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Extellect.Utilities.Collections;
+using Extellect.Collections;
 
-namespace Extellect.Utilities.Execution
+namespace Extellect.Execution
 {
     /// <summary>
     /// This delegate accepts some kind of state, as well as a queue onto which further

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Extellect.Utilities
+namespace Extellect
 {
     /// <summary>
     /// Abstracts the access to DateTime.Now and DateTime.UtcNow

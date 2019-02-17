@@ -7,7 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Extellect.Utilities.Diagnostics
+namespace Extellect.Diagnostics
 {
     public class TimmyTests
     {

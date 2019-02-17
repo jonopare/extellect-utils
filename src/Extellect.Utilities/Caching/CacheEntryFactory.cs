@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Extellect.Utilities.Caching
+namespace Extellect.Caching
 {
     public class CacheEntryFactory<T> : ICacheEntryFactory<T>
     {

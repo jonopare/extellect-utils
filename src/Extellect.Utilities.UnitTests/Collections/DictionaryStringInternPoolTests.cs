@@ -2,7 +2,7 @@
 using Xunit;
 using System.Diagnostics;
 
-namespace Extellect.Utilities.Collections
+namespace Extellect.Collections
 {
     
     public class DictionaryStringInternPoolTests
