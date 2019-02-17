@@ -7,9 +7,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{AB3BEB54
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{07B12758-D12A-41C6-BE50-4B1FFAD18B23}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extellect.Reactive", "Extellect.Reactive\Extellect.Reactive.csproj", "{66E150E9-B92D-4CB1-B8F1-CB3E60F5FF24}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Extellect.Utilities", "Extellect.Utilities\Extellect.Utilities.csproj", "{C8544707-7CF0-4690-9B47-70FE6A64E9D6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extellect.Reactive", "Extellect.Reactive\Extellect.Reactive.csproj", "{66E150E9-B92D-4CB1-B8F1-CB3E60F5FF24}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Extellect.Utilities.UnitTests", "Extellect.Utilities.UnitTests\Extellect.Utilities.UnitTests.csproj", "{4942D00C-BEAB-4747-8884-5C6170048A5A}"
 EndProject
@@ -26,6 +26,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extellect.Excel", "Extellect.Excel\Extellect.Excel.csproj", "{A127F5FF-6FB7-440D-A344-A982700395BA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extellect.Sql", "Extellect.Sql\Extellect.Sql.csproj", "{66526CFC-EE8B-47BE-B676-AB42F047F009}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extellect.Utilities.Framework.UnitTests", "Extellect.Utilities.Framework.UnitTests\Extellect.Utilities.Framework.UnitTests.csproj", "{FA4D0EBC-9673-443D-9B33-19080034CAD6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extellect.Utilities.Framework", "Extellect.Utilities.Framework\Extellect.Utilities.Framework.csproj", "{F5EF807C-CDE0-42F6-91C0-C876906BB85B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -73,6 +77,14 @@ Global
 		{66526CFC-EE8B-47BE-B676-AB42F047F009}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{66526CFC-EE8B-47BE-B676-AB42F047F009}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{66526CFC-EE8B-47BE-B676-AB42F047F009}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA4D0EBC-9673-443D-9B33-19080034CAD6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA4D0EBC-9673-443D-9B33-19080034CAD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA4D0EBC-9673-443D-9B33-19080034CAD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA4D0EBC-9673-443D-9B33-19080034CAD6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5EF807C-CDE0-42F6-91C0-C876906BB85B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5EF807C-CDE0-42F6-91C0-C876906BB85B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5EF807C-CDE0-42F6-91C0-C876906BB85B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5EF807C-CDE0-42F6-91C0-C876906BB85B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -80,6 +92,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{4942D00C-BEAB-4747-8884-5C6170048A5A} = {07B12758-D12A-41C6-BE50-4B1FFAD18B23}
 		{E7888B09-730C-4FF2-89C8-F9129E8951BA} = {07B12758-D12A-41C6-BE50-4B1FFAD18B23}
+		{FA4D0EBC-9673-443D-9B33-19080034CAD6} = {07B12758-D12A-41C6-BE50-4B1FFAD18B23}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C79E1513-D06A-4A20-9047-7344D6961EAD}

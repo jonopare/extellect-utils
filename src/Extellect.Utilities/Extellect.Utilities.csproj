@@ -1,68 +1,13 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp2.1;net45</TargetFrameworks>
-    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="SystemTypes\SystemTypes.tt" />
-    <None Remove="SystemTypes\SystemTypes.txt" />
-    <None Remove="SystemTypes\SystemTypes.xml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Include="..\SolutionInfo.cs" Link="Properties\SolutionInfo.cs" />
-    <Compile Include="..\SolutionVersionInfo.cs" Link="Properties\SolutionVersionInfo.cs" />
-  </ItemGroup>
-
-  <!-- .NET Standard 2.0 references, compilation flags and build options -->
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'netcoreapp2.1'">
-    <DefineConstants>NETCORE</DefineConstants>
-  </PropertyGroup>
-
-
-  <!-- .NET 4.5 references, compilation flags and build options -->
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'net45'">
-    <DefineConstants>NET45</DefineConstants>
-  </PropertyGroup>
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net45' ">
-    <Reference Include="mscorlib" />
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.ServiceProcess" />
-    <Reference Include="System.Security" />
-    <Reference Include="System.Xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="SystemTypes\SystemTypes.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-    </Content>
-    <Content Include="SystemTypes\SystemTypes.txt">
-      <DependentUpon>SystemTypes.tt</DependentUpon>
-    </Content>
-    <Content Include="SystemTypes\SystemTypes.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="log4net" Version="2.0.8" />
-  </ItemGroup>
-  
-  <ItemGroup>
-    <Compile Update="Net\CookieAwareWebClient.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Update="Services\ConsoleServiceBase.cs">
-      <SubType>Component</SubType>
-    </Compile>
-  </ItemGroup>
-  
-  <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp2.1'">
-    <PackageReference Include="System.Drawing.Common">
-      <Version>4.5.1</Version>
-    </PackageReference>
+    <Compile Remove="Leasing\**" />
+    <EmbeddedResource Remove="Leasing\**" />
+    <None Remove="Leasing\**" />
   </ItemGroup>
 
 </Project>

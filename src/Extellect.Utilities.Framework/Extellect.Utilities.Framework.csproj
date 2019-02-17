@@ -4,15 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A127F5FF-6FB7-440D-A344-A982700395BA}</ProjectGuid>
+    <ProjectGuid>{F5EF807C-CDE0-42F6-91C0-C876906BB85B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Extellect</RootNamespace>
-    <AssemblyName>Extellect.Excel</AssemblyName>
+    <RootNamespace>Extellect.Utilities.Framework</RootNamespace>
+    <AssemblyName>Extellect.Utilities.Framework</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -32,15 +31,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EPPlus, Version=4.5.3.1, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
-      <HintPath>..\packages\EPPlus.4.5.3.1\lib\net40\EPPlus.dll</HintPath>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
     </Reference>
-    <Reference Include="PresentationCore" />
     <Reference Include="System" />
-    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -49,11 +45,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\SolutionVersionInfo.cs">
-      <Link>Properties\SolutionVersionInfo.cs</Link>
-    </Compile>
-    <Compile Include="Data\EPPlusExtensions.cs" />
-    <Compile Include="Data\ExcelLoader.cs" />
+    <Compile Include="Drawing\Hsl.cs" />
+    <Compile Include="Drawing\Imaging\Ironbow.cs" />
+    <Compile Include="Drawing\Imaging\Rainbow.cs" />
+    <Compile Include="Leasing\ILease.cs" />
+    <Compile Include="Leasing\Leasable.cs" />
+    <Compile Include="Leasing\Lease.cs" />
+    <Compile Include="Leasing\LeaseManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -61,7 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Extellect.Utilities\Extellect.Utilities.csproj">
-      <Project>{2c2f860a-3e01-462b-86e3-f7ad2e6c73ce}</Project>
+      <Project>{c8544707-7cf0-4690-9b47-70fe6a64e9d6}</Project>
       <Name>Extellect.Utilities</Name>
     </ProjectReference>
   </ItemGroup>
