@@ -1,13 +1,13 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <RootNamespace>Extellect</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Leasing\**" />
-    <EmbeddedResource Remove="Leasing\**" />
-    <None Remove="Leasing\**" />
+    <Compile Include="..\SolutionVersionInfo.cs" Link="Properties\SolutionVersionInfo.cs" />
   </ItemGroup>
 
 </Project>

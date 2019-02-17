@@ -1,21 +1,20 @@
 #pragma warning disable 1591
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading;
-using log4net;
+using Extellect.Logging;
 
 namespace Extellect.Leasing
 {
     public class LeaseManager<TKey, TValue> : IDisposable
     {
-        private readonly ILog log;
+        private readonly IBasicLog log;
         private readonly TimeSpan renewal;
         private readonly TimeSpan cleanUpInterval;
         private readonly Dictionary<TKey, Leasable<TValue>> items;
-        private System.Threading.Timer timer;
+        private Timer timer;
 
-        public LeaseManager(TimeSpan renewal, TimeSpan cleanUpInterval, ILog log = null)
+        public LeaseManager(TimeSpan renewal, TimeSpan cleanUpInterval, IBasicLog log = null)
         {
             items = new Dictionary<TKey, Leasable<TValue>>();
             this.renewal = renewal;
@@ -118,7 +117,7 @@ namespace Extellect.Leasing
             }
             catch (InvalidOperationException exception)
             {
-                log.Error(exception);
+                log.Error("Failed to expire items", exception);
             }
         }
 

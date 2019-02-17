@@ -48,10 +48,6 @@
     <Compile Include="Drawing\Hsl.cs" />
     <Compile Include="Drawing\Imaging\Ironbow.cs" />
     <Compile Include="Drawing\Imaging\Rainbow.cs" />
-    <Compile Include="Leasing\ILease.cs" />
-    <Compile Include="Leasing\Leasable.cs" />
-    <Compile Include="Leasing\Lease.cs" />
-    <Compile Include="Leasing\LeaseManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

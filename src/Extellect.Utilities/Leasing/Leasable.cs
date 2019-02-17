@@ -2,36 +2,27 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using log4net;
 
 namespace Extellect.Leasing
 {
     public class Leasable<T> : ILease
     {
-        //private readonly ILog log = LogManager.GetLogger(typeof(Leasable<T>));
-        private T item;
         private Lease lease;
-        private Action<T> expiry;
+        private readonly Action<T> expiry;
 
         public Leasable(T item, Lease lease, Action<T> expiry)
         {
-            this.item = item;
+            Item = item;
             this.lease = lease;
             this.expiry = expiry;
         }
 
         public void Expire()
         {
-            if (expiry != null)
-            {
-                expiry(item);
-            }
+            expiry?.Invoke(Item);
         }
 
-        public T Item
-        {
-            get { return item; }
-        }
+        public T Item { get; }
 
         #region ILease Members
 
