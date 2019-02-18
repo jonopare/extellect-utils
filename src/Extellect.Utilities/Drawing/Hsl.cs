@@ -1,4 +1,5 @@
 ﻿#pragma warning disable 1591
+#if NETFULL
 using System;
 using System.Drawing;
 
@@ -85,3 +86,4 @@ namespace Extellect.Drawing
         }
     }
 }
+#endif

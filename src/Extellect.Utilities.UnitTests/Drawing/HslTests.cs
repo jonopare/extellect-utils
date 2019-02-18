@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NETFULL
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -128,3 +129,4 @@ namespace Extellect.Drawing
         }
     }
 }
+#endif
