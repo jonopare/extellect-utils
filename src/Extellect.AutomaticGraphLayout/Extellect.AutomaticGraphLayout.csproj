@@ -71,8 +71,7 @@
       <Link>Properties\SolutionVersionInfo.cs</Link>
     </Compile>
     <Compile Include="BitmapExtensions.cs" />
-    <Compile Include="Digraph.cs" />
-    <Compile Include="DigraphEdge.cs" />
+    <Compile Include="DigraphExtensions.cs" />
     <Compile Include="GdiPlusGraphicsAdapter.cs" />
     <Compile Include="IGraphicsAdapter.cs" />
     <Compile Include="PdfPageExtensions.cs" />
@@ -82,6 +81,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Extellect.Utilities\Extellect.Utilities.csproj">
+      <Project>{c8544707-7cf0-4690-9b47-70fe6a64e9d6}</Project>
+      <Name>Extellect.Utilities</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,4 +1,5 @@
 ﻿using Extellect.AutomaticGraphLayout;
+using Extellect.Collections;
 using System;
 using System.Collections.Generic;
 using System.Drawing;

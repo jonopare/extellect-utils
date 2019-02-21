@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<PerformanceObject name="Processor">
+  <PerformanceCounter name="% Processor Time">
+    <PerformanceInstance name="_Total"/>
+  </PerformanceCounter>
+</PerformanceObject>

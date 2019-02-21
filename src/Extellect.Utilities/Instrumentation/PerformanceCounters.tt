@@ -1,0 +1,83 @@
+﻿<#@	assembly name="System.Xml.dll" #>
+<#@	import namespace="System" #>
+<#@	import namespace="System.Collections.Generic" #>
+<#@	import namespace="System.IO" #>
+<#@	import namespace="System.Xml" #>
+<#@ template hostspecific="true" #>
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Xml;
+#if NETFULL
+public static class PerformanceCounters
+{
+	private static Dictionary<int, PerformanceCounter> counters = new Dictionary<int, PerformanceCounter>();
+
+<# 
+	string path = Host.ResolvePath(@"PerformanceCounters.xml");
+	if (File.Exists(path))
+	{
+		XmlDocument document = new XmlDocument();
+		document.Load(path);
+		int counterId = 0;
+		foreach (XmlNode node in document.SelectNodes("/PerformanceObject/PerformanceCounter"))
+		{
+			counterId++;
+#>
+	public static PerformanceCounter <#= CounterPropertyNameFrom(node) #>
+	{
+		get 
+		{
+			PerformanceCounter counter = null;
+			if (!counters.TryGetValue(<#= counterId #>, out counter))
+			{
+				counter = new PerformanceCounter(@"<#= ObjectNameFrom(node) #>", @"<#= CounterNameFrom(node) #>", @"<#= InstanceNameFrom(node) #>");
+				counters[<#= counterId #>] = counter;
+			}
+			return counter;
+		}
+	}
+<#
+		}
+	 }
+#>
+}
+#endif
+<#+
+	private string CounterPropertyNameFrom(XmlNode node)
+	{
+		string counterName = node.Attributes["name"].Value;
+		return ConvertToCSharpIdentifier(counterName);
+	}
+	
+	private string InstanceNameFrom(XmlNode node)
+	{
+		XmlNode instanceNode = node.SelectSingleNode("PerformanceInstance");
+		string instanceName = instanceNode == null ? string.Empty : instanceNode.Attributes["name"].Value;
+		return instanceName;
+	}
+	
+	private string CounterNameFrom(XmlNode node)
+	{
+		string counterName = node.Attributes["name"].Value;
+		return counterName;
+	}
+	
+	private string ObjectNameFrom(XmlNode node)
+	{
+		string objectName = node.ParentNode.Attributes["name"].Value;
+		return objectName;
+	}
+	
+	private string ConvertToCSharpIdentifier(string input)
+	{
+		Dictionary<string, string> replacements = new Dictionary<string, string>();
+		replacements.Add(" ", "");
+		replacements.Add("%", "Percent");
+		foreach (KeyValuePair<string, string> pair in replacements)
+		{
+			input = input.Replace(pair.Key, pair.Value);
+		}
+		return input;
+	}
+#>

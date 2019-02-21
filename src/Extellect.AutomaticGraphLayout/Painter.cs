@@ -11,6 +11,7 @@ using PdfSharp.Pdf;
 using PdfSharp.Drawing;
 using System.Drawing.Text;
 using PdfSharp;
+using Extellect.Collections;
 
 namespace Extellect.AutomaticGraphLayout
 {
@@ -73,7 +74,7 @@ namespace Extellect.AutomaticGraphLayout
                 //var scale = Math.Max(sx, sy);
 
                 //var rotate = 0d;
-                var scale = Math.Min(sx, sy);
+                var scale = System.Math.Min(sx, sy);
 
                 var g0 = (float)(gr.Left + gr.Right) / 2;
                 var g1 = (float)(gr.Top + gr.Bottom) / 2;
@@ -134,7 +135,7 @@ namespace Extellect.AutomaticGraphLayout
 
             GPoint s = new GPoint(-dir.Y, dir.X);
 
-            s *= h.Length * ((float)Math.Tan(arrowAngle * 0.5f * (Math.PI / 180.0)));
+            s *= h.Length * ((float)System.Math.Tan(arrowAngle * 0.5f * (System.Math.PI / 180.0)));
 
             points = new PointF[] { GleePointToDrawingPoint(start + s), GleePointToDrawingPoint(end), GleePointToDrawingPoint(start - s) };
 

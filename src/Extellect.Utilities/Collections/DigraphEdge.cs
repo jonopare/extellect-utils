@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Extellect.AutomaticGraphLayout
+namespace Extellect.Collections
 {
     public class DigraphEdge<T> : Tuple<T, T>
     {

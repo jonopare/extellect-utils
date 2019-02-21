@@ -1,4 +1,5 @@
 ﻿using Extellect.AutomaticGraphLayout;
+using Extellect.Collections;
 using PdfSharp.Drawing;
 using PdfSharp.Pdf;
 using System;
