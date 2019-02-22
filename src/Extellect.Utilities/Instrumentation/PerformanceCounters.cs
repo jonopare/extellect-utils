@@ -1,8 +1,8 @@
-﻿using System;
+﻿#if NETFULL
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Xml;
-#if NETFULL
 public static class PerformanceCounters
 {
 	private static Dictionary<int, PerformanceCounter> counters = new Dictionary<int, PerformanceCounter>();

@@ -13,7 +13,7 @@ namespace Extellect.Data
     /// <summary>
     /// A simple way to load test data from Excel
     /// </summary>
-    public class ExcelLoader : ILoader, IDisposable
+    public class EPPlusLoader : ILoader, IDisposable
     {
         private class Index
         {
@@ -29,7 +29,7 @@ namespace Extellect.Data
         /// 
         /// </summary>
         /// <param name="stream"></param>
-        public ExcelLoader(Stream stream)
+        public EPPlusLoader(Stream stream)
         {
             this.stream = stream;
             try

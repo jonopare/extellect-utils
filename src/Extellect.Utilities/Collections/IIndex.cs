@@ -23,7 +23,7 @@ namespace Extellect.Collections
         /// <summary>
         /// Returns true iff the index contains the specified key.
         /// </summary>
-        bool Contains(TKey key);
+        bool ContainsKey(TKey key);
     }
 
 

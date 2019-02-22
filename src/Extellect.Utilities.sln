@@ -27,6 +27,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extellect.Excel", "Extellec
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extellect.Sql", "Extellect.Sql\Extellect.Sql.csproj", "{66526CFC-EE8B-47BE-B676-AB42F047F009}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extellect.Excel.EPPlus", "Extellect.Excel.EPPlus\Extellect.Excel.EPPlus.csproj", "{3D7BD68C-3B17-4A2C-BC9B-7CE67B8F411C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extellect.Excel.IntegrationTests", "Extellect.Excel.IntegrationTests\Extellect.Excel.IntegrationTests.csproj", "{B3A916B2-D963-412C-B0D8-01FE0AC717DE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -73,6 +77,14 @@ Global
 		{66526CFC-EE8B-47BE-B676-AB42F047F009}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{66526CFC-EE8B-47BE-B676-AB42F047F009}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{66526CFC-EE8B-47BE-B676-AB42F047F009}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D7BD68C-3B17-4A2C-BC9B-7CE67B8F411C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D7BD68C-3B17-4A2C-BC9B-7CE67B8F411C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D7BD68C-3B17-4A2C-BC9B-7CE67B8F411C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D7BD68C-3B17-4A2C-BC9B-7CE67B8F411C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3A916B2-D963-412C-B0D8-01FE0AC717DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3A916B2-D963-412C-B0D8-01FE0AC717DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3A916B2-D963-412C-B0D8-01FE0AC717DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3A916B2-D963-412C-B0D8-01FE0AC717DE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -80,6 +92,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{4942D00C-BEAB-4747-8884-5C6170048A5A} = {07B12758-D12A-41C6-BE50-4B1FFAD18B23}
 		{E7888B09-730C-4FF2-89C8-F9129E8951BA} = {07B12758-D12A-41C6-BE50-4B1FFAD18B23}
+		{B3A916B2-D963-412C-B0D8-01FE0AC717DE} = {07B12758-D12A-41C6-BE50-4B1FFAD18B23}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C79E1513-D06A-4A20-9047-7344D6961EAD}

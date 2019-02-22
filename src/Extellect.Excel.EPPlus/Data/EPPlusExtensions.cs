@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using OfficeOpenXml;
 using System.Reflection;
+using Extellect.Reflection;
 
 namespace Extellect.Data
 {
@@ -41,11 +42,7 @@ namespace Extellect.Data
                     continue;
                 }
 
-                var propertyType = property.PropertyType;
-                if (propertyType.IsGenericType && propertyType.GetGenericTypeDefinition() == typeof(Nullable<>))
-                {
-                    propertyType = propertyType.GetGenericArguments()[0];
-                }
+                var propertyType = property.PropertyType.GetNullableUnderlyingType();
 
                 propertyTypes[columnID - 1] = propertyType;
             }

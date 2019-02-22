@@ -19,6 +19,9 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>PerformanceCounters.cs</LastGenOutput>
     </None>
+    <None Update="SystemTypes\SystemTypes.tt">
+      <Generator></Generator>
+    </None>
   </ItemGroup>
   
   <ItemGroup>
