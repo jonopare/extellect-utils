@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net461</TargetFramework>
     <IsPackable>false</IsPackable>
+    <RootNamespace>Extellect.Utilities</RootNamespace>
   </PropertyGroup>
   
   <PropertyGroup Condition=" '$(TargetFramework)' == 'net461' ">
