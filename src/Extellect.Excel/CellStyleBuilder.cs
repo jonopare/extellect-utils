@@ -62,14 +62,15 @@ namespace Extellect
             _cellStyleInitializerByProperty = new Dictionary<string, Action<XSSFCellStyle, string>>
             {
                 { "data-format", (cellStyle, arg) => cellStyle.SetDataFormat(DataFormat(DataFormatString(arg))) },
-                { "border-top-color", (cellStyle, arg) => cellStyle.SetBottomBorderColor(Color(NormalizeColor(arg))) },
-                { "border-right-color", (cellStyle, arg) => cellStyle.SetBottomBorderColor(Color(NormalizeColor(arg))) },
+                { "border-top-color", (cellStyle, arg) => cellStyle.SetTopBorderColor(Color(NormalizeColor(arg))) },
+                { "border-right-color", (cellStyle, arg) => cellStyle.SetRightBorderColor(Color(NormalizeColor(arg))) },
                 { "border-bottom-color", (cellStyle, arg) => cellStyle.SetBottomBorderColor(Color(NormalizeColor(arg))) },
-                { "border-left-color", (cellStyle, arg) => cellStyle.SetBottomBorderColor(Color(NormalizeColor(arg))) },
-                { "border-top-style", (cellStyle, arg) => cellStyle.BorderBottom = BorderStyle(arg) },
-                { "border-right-style", (cellStyle, arg) => cellStyle.BorderBottom = BorderStyle(arg) },
+                { "border-left-color", (cellStyle, arg) => cellStyle.SetLeftBorderColor(Color(NormalizeColor(arg))) },
+                { "border-top-style", (cellStyle, arg) => cellStyle.BorderTop = BorderStyle(arg) },
+                { "border-right-style", (cellStyle, arg) => cellStyle.BorderRight = BorderStyle(arg) },
                 { "border-bottom-style", (cellStyle, arg) => cellStyle.BorderBottom = BorderStyle(arg) },
-                { "border-left-style", (cellStyle, arg) => cellStyle.BorderBottom = BorderStyle(arg) },
+                { "border-left-style", (cellStyle, arg) => cellStyle.BorderLeft = BorderStyle(arg) },
+                { "border-diagonal", (cellStyle, arg) => cellStyle.BorderDiagonal = BorderDiagonal(arg) },
                 { "fill-foreground-color", (cellStyle, arg) => cellStyle.SetFillForegroundColor(Color(NormalizeColor(arg))) },
                 { "fill-background-color", (cellStyle, arg) => cellStyle.SetFillBackgroundColor(Color(NormalizeColor(arg))) },
                 { "fill-pattern", (cellStyle, arg) => cellStyle.FillPattern = FillPattern(arg) },
@@ -153,7 +154,7 @@ namespace Extellect
                 // HACK: workaround for NPOI issue
                 if (declaration.Property.StartsWith("border-") && !hasBorderHack)
                 {
-                    _cellStyleInitializerByProperty["border-diagonal"](cellStyle, "thin");
+                    _cellStyleInitializerByProperty["border-diagonal"](cellStyle, "Backward");
                     hasBorderHack = true;
                 }
 
@@ -163,7 +164,7 @@ namespace Extellect
 
             if (hasBorderHack)
             {
-                _cellStyleInitializerByProperty["border-diagonal"](cellStyle, "none");
+                _cellStyleInitializerByProperty["border-diagonal"](cellStyle, "None");
             }
         }
 
@@ -212,6 +213,11 @@ namespace Extellect
                 _colorCache.Add(color, result);
             }
             return result;
+        }
+
+        private static BorderDiagonal BorderDiagonal(string borderDiagonal)
+        {
+            return Enum.TryParse(borderDiagonal, true, out BorderDiagonal result) ? result : throw new NotSupportedException();
         }
 
         private static BorderStyle BorderStyle(string borderStyle)
