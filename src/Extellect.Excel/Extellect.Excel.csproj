@@ -65,6 +65,7 @@
     <Compile Include="..\SolutionVersionInfo.cs">
       <Link>Properties\SolutionVersionInfo.cs</Link>
     </Compile>
+    <Compile Include="CellStyleBuilder.cs" />
     <Compile Include="Data\NpoiExtensions.cs" />
     <Compile Include="Data\NpoiLoader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
