@@ -5,22 +5,43 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace Extellect
 {
     public class CellStyleBuilder
     {
+        private class Declaration : Tuple<string, string>
+        {
+            private readonly static Regex _declarationRegex = new Regex(@"^(?<property>[^:]+):\s*(?<value>.+)$");
+
+            public static Declaration Parse(string declaration)
+            {
+                var match = _declarationRegex.Match(declaration);
+                if (!match.Success)
+                {
+                    throw new NotSupportedException();
+                }
+                return new Declaration(match.Groups["property"].Value, match.Groups["value"].Value);
+            }
+
+            public Declaration(string property, string value)
+                : base(property, value)
+            {
+            }
+
+            public string Property => Item1;
+            public string Value => Item2;
+        }
+
+
         internal readonly static Regex _rgbColorRegex = new Regex(@"^rgb\((?<red>\d+),(?<green>\d+),(?<blue>\d+)\)$");
         internal readonly static Regex _colorRegex = new Regex(@"(?<name>black|silver|gray|white|maroon|red|purple|fuchsia|green|lime|olive|yellow|navy|blue|teal|aqua)|(?<hex>#(?<hexRed>[0-9A-Fa-f]{2})(?<hexGreen>[0-9A-Fa-f]{2})(?<hexBlue>[0-9A-Fa-f]{2}))|(?<rgb>rgb\((?<red>\d+)\s*,\s*(?<green>\d+)\s*,\s*(?<blue>\d+)\))");
 
         private readonly XSSFWorkbook _workbook;
         private readonly IBasicLog _basicLog;
-        private readonly Dictionary<string, Action<XSSFCellStyle>> _cellStyleInitializerByRule;
-        private readonly Dictionary<string, Action<XSSFFont>> _fontInitializerByRule;
-        private readonly Dictionary<string, string> _dataFormatByRule;
+        private readonly Dictionary<string, Action<XSSFCellStyle, string>> _cellStyleInitializerByProperty;
+        private readonly Dictionary<string, Action<XSSFFont, string>> _fontInitializerByProperty;
         private readonly Dictionary<string, string[]> _ruleSets;
         private readonly Dictionary<string, XSSFCellStyle> _cellStyleCache;
         private readonly Dictionary<string, XSSFFont> _fontCache;
@@ -32,35 +53,40 @@ namespace Extellect
         {
             _workbook = workbook;
             _basicLog = basicLog;
-            _dataFormatByRule = new Dictionary<string, string>
+            _fontInitializerByProperty = new Dictionary<string, Action<XSSFFont, string>>
             {
-                { "data-format: number", "_ * #,##0_ ; * -#,##0_ ;_ * \"-\"_ ;_ @_ " } ,
-                { "data-format: money", "#,##0.00" },
-                { "data-format: date", "yyyy-MM-dd" },
-                { "data-format: datetime", "yyyy-MM-dd HH:mm:ss" },
-                { "data-format: percent", "0.00%" },
+                { "font-weight", (font, arg) => font.IsBold = arg == "bold" },
+                { "font-style", (font, arg) => font.IsItalic = arg == "italic" },
+                { "color", (font, arg) => font.SetColor(Color(NormalizeColor(arg))) },
             };
-            _fontInitializerByRule = new Dictionary<string, Action<XSSFFont>>
+            _cellStyleInitializerByProperty = new Dictionary<string, Action<XSSFCellStyle, string>>
             {
-                { "font-weight: bold", font => font.IsBold = true },
-                { "font-style: italic", font => font.IsItalic = true },
-                { "color: red", font => font.SetColor(Color(NormalizeColor("red"))) },
+                { "data-format", (cellStyle, arg) => cellStyle.SetDataFormat(DataFormat(DataFormatString(arg))) },
+                { "border-top-color", (cellStyle, arg) => cellStyle.SetBottomBorderColor(Color(NormalizeColor(arg))) },
+                { "border-right-color", (cellStyle, arg) => cellStyle.SetBottomBorderColor(Color(NormalizeColor(arg))) },
+                { "border-bottom-color", (cellStyle, arg) => cellStyle.SetBottomBorderColor(Color(NormalizeColor(arg))) },
+                { "border-left-color", (cellStyle, arg) => cellStyle.SetBottomBorderColor(Color(NormalizeColor(arg))) },
+                { "border-top-style", (cellStyle, arg) => cellStyle.BorderBottom = BorderStyle(arg) },
+                { "border-right-style", (cellStyle, arg) => cellStyle.BorderBottom = BorderStyle(arg) },
+                { "border-bottom-style", (cellStyle, arg) => cellStyle.BorderBottom = BorderStyle(arg) },
+                { "border-left-style", (cellStyle, arg) => cellStyle.BorderBottom = BorderStyle(arg) },
+                { "fill-foreground-color", (cellStyle, arg) => cellStyle.SetFillForegroundColor(Color(NormalizeColor(arg))) },
+                { "fill-background-color", (cellStyle, arg) => cellStyle.SetFillBackgroundColor(Color(NormalizeColor(arg))) },
+                { "fill-pattern", (cellStyle, arg) => cellStyle.FillPattern = FillPattern(arg) },
+                { "text-indent", (cellStyle, arg) => cellStyle.Indention = short.Parse(arg) },
+                { "text-align", (cellStyle, arg) => cellStyle.Alignment = HorizontalAlignment(arg) },
+                { "vertical-align", (cellStyle, arg) => cellStyle.VerticalAlignment = VerticalAlignment(arg) },
             };
-            _cellStyleInitializerByRule = new Dictionary<string, Action<XSSFCellStyle>>
-            {
-                { "border-bottom: double red", cs => { cs.BorderBottom = BorderStyle.Double; cs.SetBottomBorderColor(Color(NormalizeColor("red"))); } },
-            };
-            _ruleSets = new Dictionary<string, string[]>
-            {
-                { "italic", new[] { "font-style: italic" } },
-                { "bold", new[] { "font-weight: bold" } },
-                { "red", new[] { "color: red" } },
-                { "money", new [] { "data-format: money" } },
-            };
+            _ruleSets = new Dictionary<string, string[]>();
             _cellStyleCache = new Dictionary<string, XSSFCellStyle>();
             _fontCache = new Dictionary<string, XSSFFont>();
             _colorCache = new Dictionary<string, XSSFColor>();
             _dataFormatCache = new Dictionary<string, short>();
+        }
+
+        public void AddRuleSet(string ruleSetName, params string[] declarations)
+        {
+            _ruleSets.Add(ruleSetName, declarations);
         }
 
         public XSSFCellStyle CellStyle(params string[] ruleSetNames)
@@ -78,85 +104,70 @@ namespace Extellect
                 _basicLog?.Debug($"Cell style not found in cache. Creating: {cellStyleKey}");
                 cellStyle = (XSSFCellStyle)_workbook.CreateCellStyle();
 
-                var cellStyleRules = new List<string>();
-                var fontRules = new List<string>();
-                var dataFormatRules = new List<string>();
+                var cellStyleDeclarations = new List<Declaration>();
+                var fontDeclarations = new List<Declaration>();
 
-                ExtractRules(ruleSetNames, cellStyleRules, fontRules, dataFormatRules);
+                ExtractRules(ruleSetNames, cellStyleDeclarations, fontDeclarations);
 
-                ApplyCellStyleRules(cellStyle, cellStyleRules);
-                ApplyFontRules(cellStyle, fontRules);
-                ApplyDataFormatRules(cellStyle, dataFormatRules);
+                ApplyCellStyleRules(cellStyle, cellStyleDeclarations);
+                ApplyFontRules(cellStyle, fontDeclarations);
 
                 _cellStyleCache.Add(cellStyleKey, cellStyle);
             }
             return cellStyle;
         }
 
-        private void ExtractRules(IEnumerable<string> ruleSetNames, List<string> cellStyleRules, List<string> fontRules, List<string> dataFormatRules)
+        private void ExtractRules(IEnumerable<string> ruleSetNames, List<Declaration> cellStyleDeclarations, List<Declaration> fontDeclarations)
         {
             foreach (var ruleSetName in ruleSetNames)
             {
-                if (!_ruleSets.TryGetValue(ruleSetName, out var rules))
+                if (!_ruleSets.TryGetValue(ruleSetName, out var declarations))
                 {
                     _basicLog?.Debug($"Rule set not found: {ruleSetName}");
                     continue;
                 }
-                foreach (var rule in rules)
+                foreach (var declaration in declarations.Select(Declaration.Parse))
                 {
-                    if (_cellStyleInitializerByRule.ContainsKey(rule))
+                    if (_cellStyleInitializerByProperty.ContainsKey(declaration.Property))
                     {
-                        cellStyleRules.Add(rule);
+                        cellStyleDeclarations.Add(declaration);
                     }
-                    else if (_fontInitializerByRule.ContainsKey(rule))
+                    else if (_fontInitializerByProperty.ContainsKey(declaration.Property))
                     {
-                        fontRules.Add(rule);
-                    }
-                    else if (_dataFormatByRule.ContainsKey(rule))
-                    {
-                        dataFormatRules.Add(rule);
+                        fontDeclarations.Add(declaration);
                     }
                     else
                     {
-                        _basicLog?.Debug($"Rule handler not found");
+                        _basicLog?.Debug($"Declaration property handler not found");
                     }
                 }
             }
         }
 
-        private void ApplyCellStyleRules(XSSFCellStyle cellStyle, List<string> cellStyleRules)
+        private void ApplyCellStyleRules(XSSFCellStyle cellStyle, List<Declaration> cellStyleDeclarations)
         {
             var hasBorderHack = false;
 
-            foreach (var rule in cellStyleRules)
+            foreach (var declaration in cellStyleDeclarations)
             {
                 // HACK: workaround for NPOI issue
-                if (rule.StartsWith("border-") && !hasBorderHack)
+                if (declaration.Property.StartsWith("border-") && !hasBorderHack)
                 {
-                    _cellStyleInitializerByRule["border-diagonal: thin"](cellStyle);
+                    _cellStyleInitializerByProperty["border-diagonal"](cellStyle, "thin");
                     hasBorderHack = true;
                 }
 
-                _basicLog?.Debug($"Initializing cell style: {rule}");
-                _cellStyleInitializerByRule[rule](cellStyle);
+                _basicLog?.Debug($"Initializing cell style: {declaration}");
+                _cellStyleInitializerByProperty[declaration.Property](cellStyle, declaration.Value);
             }
 
             if (hasBorderHack)
             {
-                _cellStyleInitializerByRule["border-diagonal: none"](cellStyle);
+                _cellStyleInitializerByProperty["border-diagonal"](cellStyle, "none");
             }
         }
 
-        private void ApplyDataFormatRules(XSSFCellStyle cellStyle, List<string> dataFormatRules)
-        {
-            foreach (var rule in dataFormatRules)
-            {
-                _basicLog?.Debug($"Setting data format: {rule}");
-                cellStyle.SetDataFormat(DataFormat(_dataFormatByRule[rule]));
-            }
-        }
-
-        private void ApplyFontRules(XSSFCellStyle cellStyle, List<string> fontRules)
+        private void ApplyFontRules(XSSFCellStyle cellStyle, List<Declaration> fontRules)
         {
             if (fontRules.Any())
             {
@@ -167,10 +178,10 @@ namespace Extellect
                     _basicLog?.Debug($"Font not found in cache. Creating: {fontKey}");
                     font = (XSSFFont)_workbook.CreateFont();
                     font.FontHeightInPoints = 11;
-                    foreach (var rule in fontRules)
+                    foreach (var declaration in fontRules)
                     {
-                        _basicLog?.Debug($"Initializing font: {rule}");
-                        _fontInitializerByRule[rule](font);
+                        _basicLog?.Debug($"Initializing font: {declaration}");
+                        _fontInitializerByProperty[declaration.Property](font, declaration.Value);
                     }
                     _fontCache.Add(fontKey, font);
                 }
@@ -203,7 +214,46 @@ namespace Extellect
             return result;
         }
 
-        internal IEnumerable<string> Atomize(string declaration)
+        private static BorderStyle BorderStyle(string borderStyle)
+        {
+            return Enum.TryParse(borderStyle, true, out BorderStyle result) ? result : throw new NotSupportedException();
+        }
+
+        private static FillPattern FillPattern(string fillPattern)
+        {
+            return Enum.TryParse(fillPattern, true, out FillPattern result) ? result : throw new NotSupportedException();
+        }
+
+        private static HorizontalAlignment HorizontalAlignment(string horizontalAlignment)
+        {
+            return Enum.TryParse(horizontalAlignment, true, out HorizontalAlignment result) ? result : throw new NotSupportedException();
+        }
+
+        private static VerticalAlignment VerticalAlignment(string verticalAlignment)
+        {
+            return Enum.TryParse(verticalAlignment, true, out VerticalAlignment result) ? result : throw new NotSupportedException();
+        }
+
+        private static string DataFormatString(string name)
+        {
+            switch (name)
+            {
+                case "number":
+                    return "_ * #,##0_ ; * -#,##0_ ;_ * \"-\"_ ;_ @_ ";
+                case "money":
+                    return "#,##0.00";
+                case "date":
+                    return "yyyy-MM-dd";
+                case "datetime":
+                    return "yyyy-MM-dd HH:mm:ss";
+                case "percent":
+                    return "0.00%";
+                default:
+                    return name;
+            }
+        }
+
+        internal static IEnumerable<string> Atomize(string declaration)
         {
             yield break;
         }
@@ -245,7 +295,7 @@ namespace Extellect
             else if (colorMatch.Groups["hex"].Success)
             {
                 var hexBytes = ParseHex(colorMatch.Groups["hexRed"].Value, colorMatch.Groups["hexGreen"].Value, colorMatch.Groups["hexBlue"].Value);
-                return $"rgb({hexBytes[0]},{hexBytes[1]},{hexBytes[2]})";;
+                return $"rgb({hexBytes[0]},{hexBytes[1]},{hexBytes[2]})"; ;
             }
             else if (colorMatch.Groups["rgb"].Success)
             {
