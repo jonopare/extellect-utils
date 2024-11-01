@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+		<AssemblyName>Extellect.Core</AssemblyName>
+		<RootNamespace>Extellect</RootNamespace>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<PackageId>Extellect.Core</PackageId>
+		<!--<Version>2.0.0</Version>-->
+		<!--<Version Condition=" '$(PackageVersion)' == '' ">2.0.0</Version>
+		<Version Condition=" '$(PackageVersion)' != '' ">$(PackageVersion)</Version>-->
+		<!--<PackageVersion>$(Version)</PackageVersion>-->
+		<PackageVersion>2.0.0</PackageVersion>
+		<Description>A free library of helpful classes that were - at the time of writing - missing from the major libraries such as Microsoft .NET, Spring.NET and log4net. Times have changed, quite a few of the original files made their way into the actual .NET BCL, and this Core package is shrinking.</Description>
+		<PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Compile Include="..\SolutionInfo.cs" Link="Properties\SolutionInfo.cs"></Compile>
+		<Compile Include="..\SolutionVersionInfo.cs" Link="Properties\SolutionVersionInfo.cs"></Compile>
+	</ItemGroup>
+
+</Project>
