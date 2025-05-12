@@ -121,5 +121,36 @@ namespace Extellect.Drawing
                 bitmap.UnlockBits(data);
             }
         }
+
+        public Tile Crop(Rectangle bounds)
+        {
+            if (bounds.Left < 0 || bounds.Left + bounds.Width > Width)
+                throw new ArgumentException();
+            if (bounds.Top < 0 || bounds.Top + bounds.Height > Height)
+                throw new ArgumentException();
+            var tile = new Tile(bounds.Width, bounds.Height);
+            for (var dy = 0; dy < bounds.Height; dy++)
+            {
+                var sy = bounds.Top + dy;
+                for (var dx = 0; dx < bounds.Width; dx++)
+                {
+                    var sx = bounds.Left + dx;
+                    tile[dx, dy] = this[sx, sy];
+                }
+            }
+            return tile;
+        }
+
+        public Color this[int x, int y]
+        {
+            get
+            {
+                return GetPixel(x, y);
+            }
+            set
+            {
+                SetPixel(x, y, value);
+            }
+        }
     }
 }

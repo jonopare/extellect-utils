@@ -15,7 +15,7 @@
 		<!--<Version Condition=" '$(PackageVersion)' == '' ">2.0.0</Version>
 		<Version Condition=" '$(PackageVersion)' != '' ">$(PackageVersion)</Version>-->
 		<!--<PackageVersion>$(Version)</PackageVersion>-->
-		<PackageVersion>2.0.0</PackageVersion>
+		<PackageVersion>2.1.1</PackageVersion>
 		<Description>A free library of helpful types that were - at the time of writing - missing from the major libraries such as Microsoft .NET, Spring.NET and log4net. Times have changed, quite a few of the original files made their way into the actual .NET BCL, and this Core package is shrinking.</Description>
 		<PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
 	</PropertyGroup>
