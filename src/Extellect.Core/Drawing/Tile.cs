@@ -30,7 +30,7 @@ namespace Extellect.Drawing
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private int IndexOf(int x, int y)
+        public int IndexOf(int x, int y)
         {
             if (x < 0 || x >= Width)
                 throw new ArgumentOutOfRangeException(nameof(x));
