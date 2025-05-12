@@ -2,7 +2,7 @@
 using System.Drawing.Imaging;
 using System.Runtime.Versioning;
 
-namespace Extellect.Drawing.Imaging
+namespace Extellect.Drawing
 {
     /// <summary>
     /// Collection of colors from a Rainbow palette (similar to some infrared cameras)

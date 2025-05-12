@@ -1,5 +1,6 @@
 ﻿using System.Drawing;
 using System.Drawing.Imaging;
+using System.Numerics;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 
@@ -44,83 +45,83 @@ namespace Extellect.Drawing
         public void Red_RoundTrip_Red()
         {
             var expected = Color.FromArgb(255, 0, 0);
-            var hsl = expected.ToHsl();
+            var hsl = expected.ToHslVector();
             Assert.Equal(expected.ToArgb(),
-                Hsl.FromHsl(hsl.Item1, hsl.Item2, hsl.Item3).ToArgb());
+                Hsl.FromHsl(hsl.X, hsl.Y, hsl.Z).ToArgb());
         }
 
         [Fact]
         public void Green_RoundTrip_Green()
         {
             var expected = Color.FromArgb(0, 255, 0);
-            var hsl = expected.ToHsl();
+            var hsl = expected.ToHslVector();
             Assert.Equal(expected.ToArgb(),
-                Hsl.FromHsl(hsl.Item1, hsl.Item2, hsl.Item3).ToArgb());
+                Hsl.FromHsl(hsl.X, hsl.Y, hsl.Z).ToArgb());
         }
 
         [Fact]
         public void Blue_RoundTrip_Blue()
         {
             var expected = Color.FromArgb(0, 0, 255);
-            var hsl = expected.ToHsl();
+            var hsl = expected.ToHslVector();
             Assert.Equal(expected.ToArgb(),
-                Hsl.FromHsl(hsl.Item1, hsl.Item2, hsl.Item3).ToArgb());
+                Hsl.FromHsl(hsl.X, hsl.Y, hsl.Z).ToArgb());
         }
 
         [Fact]
         public void Red()
         {
-            var hsl = Color.FromArgb(255, 0, 0).ToHsl();
-            Assert.Equal(new Tuple<float, float, float>(0, 1, 0.5f), hsl);
+            var hsl = Color.FromArgb(255, 0, 0).ToHslVector();
+            Assert.Equal(new Vector3(0, 1, 0.5f), hsl);
         }
 
         [Fact]
         public void Yellow()
         {
-            var hsl = Color.FromArgb(255, 255, 0).ToHsl();
-            Assert.Equal(new Tuple<float, float, float>(1 / 6f, 1, 0.5f), hsl);
+            var hsl = Color.FromArgb(255, 255, 0).ToHslVector();
+            Assert.Equal(new Vector3(1 / 6f, 1, 0.5f), hsl);
         }
 
         [Fact]
         public void Green()
         {
-            var hsl = Color.FromArgb(0, 255, 0).ToHsl();
-            Assert.Equal(new Tuple<float, float, float>(1 / 3f, 1, 0.5f), hsl);
+            var hsl = Color.FromArgb(0, 255, 0).ToHslVector();
+            Assert.Equal(new Vector3(1 / 3f, 1, 0.5f), hsl);
         }
 
         [Fact]
         public void Cyan()
         {
-            var hsl = Color.FromArgb(0, 255, 255).ToHsl();
-            Assert.Equal(new Tuple<float, float, float>(1 / 2f, 1, 0.5f), hsl);
+            var hsl = Color.FromArgb(0, 255, 255).ToHslVector();
+            Assert.Equal(new Vector3(1 / 2f, 1, 0.5f), hsl);
         }
 
         [Fact]
         public void Blue()
         {
-            var hsl = Color.FromArgb(0, 0, 255).ToHsl();
-            Assert.Equal(new Tuple<float, float, float>(2 / 3f, 1, 0.5f), hsl);
+            var hsl = Color.FromArgb(0, 0, 255).ToHslVector();
+            Assert.Equal(new Vector3(2 / 3f, 1, 0.5f), hsl);
         }
 
         [Fact]
         public void Magenta()
         {
-            var hsl = Color.FromArgb(255, 0, 255).ToHsl();
-            Assert.Equal(new Tuple<float, float, float>(5 / 6f, 1, 0.5f), hsl);
+            var hsl = Color.FromArgb(255, 0, 255).ToHslVector();
+            Assert.Equal(new Vector3(5 / 6f, 1, 0.5f), hsl);
         }
 
         [Fact]
         public void White()
         {
-            var hsl = Color.FromArgb(255, 255, 255).ToHsl();
-            Assert.Equal(new Tuple<float, float, float>(0, 0, 1), hsl);
+            var hsl = Color.FromArgb(255, 255, 255).ToHslVector();
+            Assert.Equal(new Vector3(0, 0, 1), hsl);
         }
 
         [Fact]
         public void Black()
         {
-            var hsl = Color.FromArgb(0, 0, 0).ToHsl();
-            Assert.Equal(new Tuple<float, float, float>(0, 0, 0), hsl);
+            var hsl = Color.FromArgb(0, 0, 0).ToHslVector();
+            Assert.Equal(new Vector3(0, 0, 0), hsl);
         }
     }
 }

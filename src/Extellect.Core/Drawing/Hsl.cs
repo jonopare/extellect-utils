@@ -1,11 +1,11 @@
-﻿#pragma warning disable 1591
-using System.Drawing;
+﻿using System.Drawing;
+using System.Numerics;
 
 namespace Extellect.Drawing
 {
     public static class Hsl
     {
-        public static Tuple<float, float, float> ToHsl(this Color color)
+        public static Vector3 ToHslVector(Color color)
         {
             var r = color.R / 255f;
             var g = color.G / 255f;
@@ -41,7 +41,7 @@ namespace Extellect.Drawing
                 }
                 h /= 6;
             }
-            return new Tuple<float, float, float>(h, s, l);
+            return new Vector3(h, s, l);
         }
 
         public static Color FromHsl(float h, float s, float l)
@@ -80,7 +80,6 @@ namespace Extellect.Drawing
                 return p + (q - p) * (2 / 3f - t) * 6;
             else
                 return p;
-
         }
     }
 }
