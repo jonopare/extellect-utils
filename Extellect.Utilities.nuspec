@@ -12,7 +12,7 @@
 These types are intended to increase your productivity by letting you reuse something that somebody else has already written and unit tested</description>
     <summary>Extellect utility classes</summary>
     <dependencies>
-      <dependency id="log4net" version="2.0.10" />
+      <dependency id="log4net" version="3.3.2" />
     </dependencies>
   </metadata>
 </package>
