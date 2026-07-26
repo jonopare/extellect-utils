@@ -17,6 +17,8 @@
     <RepositoryUrl>$(PackageRepositoryUrl)</RepositoryUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>
 	<PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <Copyright>Copyright © 2026 jono.pare</Copyright>
+    <PackageTags>json;utility;dotnet</PackageTags>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
