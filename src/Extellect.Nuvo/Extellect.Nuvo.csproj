@@ -16,6 +16,7 @@
     <Description>A handful of .NET 8 components with potential for reuse.</Description>
     <RepositoryUrl>$(PackageRepositoryUrl)</RepositoryUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+	<PackageLicenseFile>LICENSE</PackageLicenseFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
@@ -29,6 +30,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="README.md" Pack="true" PackagePath="" />
+	<None Include="LICENSE" Pack="true" PackagePath="" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.1" />
