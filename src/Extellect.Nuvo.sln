@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36616.10 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extellect.Nuvo", "Extellect.Nuvo\Extellect.Nuvo.csproj", "{3A704915-4F88-5238-1EA0-92D95A7DEF80}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extellect.Nuvo.UnitTests", "Extellect.Nuvo.UnitTests\Extellect.Nuvo.UnitTests.csproj", "{5E8E6BAC-2906-59A5-57F1-542A4F524E7B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3A704915-4F88-5238-1EA0-92D95A7DEF80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A704915-4F88-5238-1EA0-92D95A7DEF80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A704915-4F88-5238-1EA0-92D95A7DEF80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A704915-4F88-5238-1EA0-92D95A7DEF80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E8E6BAC-2906-59A5-57F1-542A4F524E7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E8E6BAC-2906-59A5-57F1-542A4F524E7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E8E6BAC-2906-59A5-57F1-542A4F524E7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E8E6BAC-2906-59A5-57F1-542A4F524E7B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0308A933-58F2-4BC6-AB6C-4A2D9723A603}
+	EndGlobalSection
+EndGlobal

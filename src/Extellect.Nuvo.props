@@ -1,0 +1,8 @@
+<Project>
+  <PropertyGroup>
+    <PackageVersion>1.15.0</PackageVersion>
+    <PackageAuthors>jono.pare</PackageAuthors>
+    <PackageCompany>Extellect</PackageCompany>
+    <PackageRepositoryUrl>https://github.com/jonopare/extellect-utils/</PackageRepositoryUrl>
+  </PropertyGroup>
+</Project>
